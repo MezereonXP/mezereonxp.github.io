@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为$I$ 则其中每一个像素点的灰度值为$I(x,y)$ 我们利用简单的线性变换可以得到： $I(x,y)^=kI(x,y)+b$ 取$k=1,b=16$可以得到    这里给出关键代码 123456original = imread(strcat(strcat(&apos;resource\&apos;,name),&apos;.b">
+<meta name="description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为$I$ 则其中每一个像素点的灰度值为$I(x,y)$ 我们利用简单的线性变换可以得到： $I(x,y)^=kI(x,y)+b$ 取$k=1,b=16$可以得到    &amp;lt; !–more–&amp;gt; 这里给出关键代码 123456original = imread(strcat(strcat(&apos;res">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图像增强的几个方法以及Matlab代码">
 <meta property="og:url" content="http://yoursite.com/2018/07/06/原-图像增强的几个方法以及Matlab代码/index.html">
 <meta property="og:site_name" content="MyBlog">
-<meta property="og:description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为$I$ 则其中每一个像素点的灰度值为$I(x,y)$ 我们利用简单的线性变换可以得到： $I(x,y)^=kI(x,y)+b$ 取$k=1,b=16$可以得到    这里给出关键代码 123456original = imread(strcat(strcat(&apos;resource\&apos;,name),&apos;.b">
+<meta property="og:description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为$I$ 则其中每一个像素点的灰度值为$I(x,y)$ 我们利用简单的线性变换可以得到： $I(x,y)^=kI(x,y)+b$ 取$k=1,b=16$可以得到    &amp;lt; !–more–&amp;gt; 这里给出关键代码 123456original = imread(strcat(strcat(&apos;res">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/qkbqr6vm63.png">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/o05khpgona.png">
@@ -98,10 +98,10 @@
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/i23j6xa959.png">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/me1a45r0z7.png">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/f2fua1o891.png">
-<meta property="og:updated_time" content="2018-10-05T03:30:30.473Z">
+<meta property="og:updated_time" content="2018-10-05T09:08:28.232Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图像增强的几个方法以及Matlab代码">
-<meta name="twitter:description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为$I$ 则其中每一个像素点的灰度值为$I(x,y)$ 我们利用简单的线性变换可以得到： $I(x,y)^=kI(x,y)+b$ 取$k=1,b=16$可以得到    这里给出关键代码 123456original = imread(strcat(strcat(&apos;resource\&apos;,name),&apos;.b">
+<meta name="twitter:description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为$I$ 则其中每一个像素点的灰度值为$I(x,y)$ 我们利用简单的线性变换可以得到： $I(x,y)^=kI(x,y)+b$ 取$k=1,b=16$可以得到    &amp;lt; !–more–&amp;gt; 这里给出关键代码 123456original = imread(strcat(strcat(&apos;res">
 <meta name="twitter:image" content="https://ask.qcloudimg.com/http-save/2616258/qkbqr6vm63.png">
 
 
@@ -321,6 +321,7 @@
 <p><img src="https://ask.qcloudimg.com/http-save/2616258/qkbqr6vm63.png" alt="Alt text"></p>
 <p><img src="https://ask.qcloudimg.com/http-save/2616258/o05khpgona.png" alt="Alt text"></p>
 <p><img src="https://ask.qcloudimg.com/http-save/2616258/kt8u4o1kx3.png" alt="Alt text"></p>
+<p>&lt; !–more–&gt;</p>
 <p>这里给出关键代码</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">original = imread(strcat(strcat(<span class="string">'resource\',name),'</span>.bmp'));</span><br><span class="line">transformed = LinearFunction(original, <span class="number">1</span>, <span class="number">16</span>);</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">imshow(transformed)</span><br><span class="line">title(<span class="string">'线性变换后的图像'</span>)</span><br><span class="line">imwrite(transformed,strcat(strcat(<span class="string">'result\',name),'</span>(linear).jpg'))</span><br></pre></td></tr></table></figure>
 <h3 id="2-直方图均衡变换"><a href="#2-直方图均衡变换" class="headerlink" title="2. 直方图均衡变换"></a>2. 直方图均衡变换</h3><p>这种方法通常用来增加许多图像的全局对比度，尤其是当图像的有用数据的对比度相当接近的时候。通过这种方法，亮度可以更好地在直方图上分布。这样就可以用于增强局部的对比度而不影响整体的对比度，直方图均衡化通过有效地扩展常用的亮度来实现这种功能。</p>
