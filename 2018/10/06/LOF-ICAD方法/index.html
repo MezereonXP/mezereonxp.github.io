@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java,时序数据,异常检测," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据的异常检测是一个难题, 面临许多挑战, 其中包括:  定义一个正常表现的范围是比较困难的, 异常值和正常值有时候边界并不是特别明显 某些恶意行为会伪装成正常值, 难以发现 大多数领域的正常行为只能在一段时间内有效, 对于未来的普适性并不是很高 对于异常的概念会由于应用的不同而不同 缺少带有标记的数据 数据的噪声可能有较大的影响  分析异常数据有多种方案, 包括:  基于分类的手段 基于最近邻算">
+<meta name="keywords" content="java,时序数据,异常检测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="教你用java实现时序数据异常检测(1)LOF-ICAD方法">
+<meta property="og:url" content="https://mezereonxp.github.io/2018/10/06/LOF-ICAD方法/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="数据的异常检测是一个难题, 面临许多挑战, 其中包括:  定义一个正常表现的范围是比较困难的, 异常值和正常值有时候边界并不是特别明显 某些恶意行为会伪装成正常值, 难以发现 大多数领域的正常行为只能在一段时间内有效, 对于未来的普适性并不是很高 对于异常的概念会由于应用的不同而不同 缺少带有标记的数据 数据的噪声可能有较大的影响  分析异常数据有多种方案, 包括:  基于分类的手段 基于最近邻算">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-1691df13ef51485f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-4620910dbe2c0713.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-83613c89decf80a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-d1fed0fc5b5e63cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-b9e0baef2e943745.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-d4e8785fdba44866.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-8ceddc91c23b7aae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-06a191efe2fd0313.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-05T16:51:01.269Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="教你用java实现时序数据异常检测(1)LOF-ICAD方法">
+<meta name="twitter:description" content="数据的异常检测是一个难题, 面临许多挑战, 其中包括:  定义一个正常表现的范围是比较困难的, 异常值和正常值有时候边界并不是特别明显 某些恶意行为会伪装成正常值, 难以发现 大多数领域的正常行为只能在一段时间内有效, 对于未来的普适性并不是很高 对于异常的概念会由于应用的不同而不同 缺少带有标记的数据 数据的噪声可能有较大的影响  分析异常数据有多种方案, 包括:  基于分类的手段 基于最近邻算">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2601951-1691df13ef51485f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mezereonxp.github.io/2018/10/06/LOF-ICAD方法/"/>
+
+
+
+
+
+  <title>教你用java实现时序数据异常检测(1)LOF-ICAD方法 | MyBlog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MyBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">share something</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mezereonxp.github.io/2018/10/06/LOF-ICAD方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mezereon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">教你用java实现时序数据异常检测(1)LOF-ICAD方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-06T00:49:55+08:00">
+                2018-10-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据挖掘/" itemprop="url" rel="index">
+                    <span itemprop="name">数据挖掘</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>数据的异常检测是一个难题, 面临许多挑战, 其中包括:</p>
+<ul>
+<li>定义一个正常表现的范围是比较困难的, 异常值和正常值有时候边界并不是特别明显</li>
+<li>某些恶意行为会伪装成正常值, 难以发现</li>
+<li>大多数领域的正常行为只能在一段时间内有效, 对于未来的普适性并不是很高</li>
+<li>对于异常的概念会由于应用的不同而不同</li>
+<li>缺少带有标记的数据</li>
+<li>数据的噪声可能有较大的影响</li>
+</ul>
+<p>分析异常数据有多种方案, 包括:</p>
+<ul>
+<li>基于分类的手段</li>
+<li>基于最近邻算法</li>
+<li>基于聚类</li>
+<li>基于统计方法</li>
+<li>基于信息理论</li>
+<li>基于特征理论</li>
+</ul>
+<p>我们这次着重介绍的是时序数据的异常检测, 我们来讨论讨论LOF方法, 并且给出相应的代码实现</p>
+<h3 id="1-LOF方法简介"><a href="#1-LOF方法简介" class="headerlink" title="1. LOF方法简介"></a>1. LOF方法简介</h3><blockquote>
+<p>该方法源自于论文<strong>Conformalized density- and distance-based anomaly detection in time-series data</strong></p>
+</blockquote>
+<p>LOF方法也就是<strong>Local Outlier Factor</strong>的缩写<br>首先我们需要引入一些符号:<br><strong>k</strong>: 类似于KNN中的k, 代表第k个相邻的<br><strong>dist(a,b)</strong>: 表示a和b之间的距离, 可以是几何距离, 也可以是曼哈顿距离等</p>
+<p>LOF方法使用对于第k个邻居的反向平均距离(<strong>Inverted average distance</strong>)来进行一个密度的测量, 我们记作loc_dens<br><img src="https://upload-images.jianshu.io/upload_images/2601951-1691df13ef51485f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="密度的测量"></p>
+<p>同时我们给出其中的reach_dist<br><img src="https://upload-images.jianshu.io/upload_images/2601951-4620910dbe2c0713.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="reach_dist"><br>其中NN_k(x)是x的第k个近邻, 而reach_dist是为了当x和o彼此靠近的时候减少统计波动</p>
+<p>我们计算出密度之后, 就要利用该密度和其他近邻的点进行比较, 进而我们就可以计算出异常程度的分数, 记为LOF, 按如下方法进行计算:<br><img src="https://upload-images.jianshu.io/upload_images/2601951-83613c89decf80a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="LOF"></p>
+<p>如果LOF越大则说明异常程度越高</p>
+<h3 id="2-LOF-ICAD方法"><a href="#2-LOF-ICAD方法" class="headerlink" title="2. LOF-ICAD方法"></a>2. LOF-ICAD方法</h3><p>基于LOF方法, 论文给出了一种特征抽取的方法, 进一步提高了精度<br>这里直接给出算法的细节:</p>
+<h4 id="输入"><a href="#输入" class="headerlink" title="输入:"></a>输入:</h4><ul>
+<li><strong>窗口长度L</strong></li>
+<li><strong>合适的训练集合的大小T</strong></li>
+<li><strong>修正集合的大小C</strong></li>
+<li><strong>时间序列(x1, … , x(T+C+L-1))</strong></li>
+<li><strong>测试的值x(T+C+L)</strong></li>
+<li><strong>密度测量NCM</strong></li>
+</ul>
+<h4 id="输出-异常分数p-从0到1"><a href="#输出-异常分数p-从0到1" class="headerlink" title="输出(异常分数p, 从0到1):"></a>输出(异常分数p, 从0到1):</h4><p>步骤:</p>
+<ol>
+<li>将时间序列(x1, … , x(T+C+L-1))映射到矩阵X, 其中矩阵X是L x (T+C)的矩阵<br>举个例子, 比如对于时间序列(1, 2, 3, 4, 5, 6), T=2, C=2, L=3<br>则生成X矩阵为<br>1, 2, 3, 4<br>2, 3, 4, 5<br>3, 4, 5, 6</li>
+<li>将矩阵X划分成训练矩阵X(T)(L x T大小)以及修正矩阵X(C)(L x C大小)<br>如上述例子, X(T)为:<br>1, 2<br>2, 3<br>3, 4</li>
+<li>计算NCM值(α1, …, αC)对于修正矩阵X(C)的每一行(应该会有L行)<br><img src="https://upload-images.jianshu.io/upload_images/2601951-d1fed0fc5b5e63cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="NCM"><br>具体的NCM值的计算也就是LOF的计算方式得到</li>
+<li>对序列最后的x(T+C+L-1)计算NCM值<br><img src="https://upload-images.jianshu.io/upload_images/2601951-b9e0baef2e943745.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="计算序列末尾的NCM"></li>
+<li>计算异常程度分数p<br><img src="https://upload-images.jianshu.io/upload_images/2601951-d4e8785fdba44866.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="p的计算"></li>
+</ol>
+<p>如果p的分数特别高, 则异常程度相应地越高</p>
+<h3 id="3-Java实现"><a href="#3-Java实现" class="headerlink" title="3. Java实现"></a>3. Java实现</h3><p>首先给出LOF算法的实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">package LOF;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Local Outlier Factor</span><br><span class="line"> *</span><br><span class="line"> * @author mezereon E-mail:mezereon@gmail.com</span><br><span class="line"> * @since 18-4-12</span><br><span class="line"> */</span><br><span class="line">public class LOF &#123;</span><br><span class="line"></span><br><span class="line">  private int k;</span><br><span class="line"></span><br><span class="line">  public LOF(int k) &#123;</span><br><span class="line">    this.k = k;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 返回异常程度的分数， 越接近1则越异常</span><br><span class="line">   *</span><br><span class="line">   * @param knn 输入一个时序数据生成的旋转矩阵</span><br><span class="line">   * @param x 输入测试的序列</span><br><span class="line">   */</span><br><span class="line">  public double getLOF(double[][] knn, double[] x) &#123;</span><br><span class="line">    double sum = 0;</span><br><span class="line">    for (double[] o : knn) &#123;</span><br><span class="line">      sum += getLocDens(knn, o) / getLocDens(knn, x);</span><br><span class="line">    &#125;</span><br><span class="line">    return sum / k;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 获取local density</span><br><span class="line">   *</span><br><span class="line">   * @param knn 输入一个时序数据生成的旋转矩阵</span><br><span class="line">   * @param x 输入测试的序列</span><br><span class="line">   */</span><br><span class="line">  public double getLocDens(double[][] knn, double[] x) &#123;</span><br><span class="line">    double[] nnk = findKthPoint(knn, x);</span><br><span class="line"></span><br><span class="line">    double sum = 0;</span><br><span class="line">    for (double[] o : knn) &#123;</span><br><span class="line">      sum += reachDist(o, x, nnk);</span><br><span class="line">    &#125;</span><br><span class="line">    return sum / k;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 找到第k个相似的序列</span><br><span class="line">   *</span><br><span class="line">   * @param knn 输入一个时序数据生成的旋转矩阵</span><br><span class="line">   * @param x 输入测试的序列</span><br><span class="line">   */</span><br><span class="line">  public double[] findKthPoint(double[][] knn, double[] x) &#123;</span><br><span class="line"></span><br><span class="line">    ArrayList list = new ArrayList();</span><br><span class="line">    for (int i = 0; i &lt; knn.length; i++) &#123;</span><br><span class="line">      list.add(knn[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    int index = 0;</span><br><span class="line">    double minDist = dist(knn[0], x);</span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; k; i++) &#123;</span><br><span class="line">      index = 0;</span><br><span class="line">      minDist = dist((double[]) list.get(0), x);</span><br><span class="line">      for (int j = 0; j &lt; list.size(); j++) &#123;</span><br><span class="line">        if (minDist &gt; dist((double[]) list.get(j), x)) &#123;</span><br><span class="line">          minDist = dist((double[]) list.get(j), x);</span><br><span class="line">          index = j;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      if (i != k - 1) &#123;</span><br><span class="line">        list.remove(index);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return (double[]) list.get(index);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 返回与相似序列的距离比较之下的较大值</span><br><span class="line">   *</span><br><span class="line">   * @param o 输入序列</span><br><span class="line">   * @param x 测试序列</span><br><span class="line">   * @param nnk 第k相似的序列</span><br><span class="line">   */</span><br><span class="line">  public double reachDist(double[] o, double[] x, double[] nnk) &#123;</span><br><span class="line">    return Math.max(dist(o, x), dist(nnk, x));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 返回序列之间的欧几里德距离</span><br><span class="line">   *</span><br><span class="line">   * @param nnk 第k相似的序列</span><br><span class="line">   * @param x 测试序列</span><br><span class="line">   */</span><br><span class="line">  private double dist(double[] nnk, double[] x) &#123;</span><br><span class="line"></span><br><span class="line">    double sum = 0;</span><br><span class="line">    for (int i = 0; i &lt; nnk.length; i++) &#123;</span><br><span class="line">      sum += (nnk[i] - x[i]) * (nnk[i] - x[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return Math.sqrt(sum);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public int getK() &#123;</span><br><span class="line">    return k;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setK(int k) &#123;</span><br><span class="line">    this.k = k;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>给出LOF-ICAD的实现<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">package LOF;</span><br><span class="line"></span><br><span class="line">import Tool.DetectTool;</span><br><span class="line">import Util.MatrixUtil;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author mezereon E-mail:mezereon@gmail.com</span><br><span class="line"> * @since 18-4-26</span><br><span class="line"> */</span><br><span class="line">public class LOFDetectTool implements DetectTool &#123;</span><br><span class="line"></span><br><span class="line">  private int T;// 时间序列用来训练的长度</span><br><span class="line">  private int L;// 时间序列的所利用的窗口长度</span><br><span class="line">  private int K = 1;//  LOF算法中的k值, 默认设置为1, 也就是取历史最相似的序列进行预测</span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * LOF检测工具的构造方法</span><br><span class="line">   *</span><br><span class="line">   * @param T 时间序列用来训练的长度</span><br><span class="line">   * @param L 时间序列的所利用的窗口长度</span><br><span class="line">   */</span><br><span class="line">  public LOFDetectTool(int T, int L) &#123;</span><br><span class="line">    this.T = T;</span><br><span class="line">    this.L = L;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  /**</span><br><span class="line">   * 利用LOF进行时间序列分析</span><br><span class="line">   * 打印最后一段窗口的异常分数, 越接近1则越异常</span><br><span class="line">   */</span><br><span class="line">  public void timeSeriesAnalyse(double[] series) &#123;</span><br><span class="line"></span><br><span class="line">    // 利用T和L, 以及时间序列生成测试矩阵</span><br><span class="line">    double[][] mat = MatrixUtil.getMat(series, T, series.length - T - L + 1, L);</span><br><span class="line"></span><br><span class="line">    //一个窗口大小的测试序列, 默认是原序列中最后窗口大小的序列</span><br><span class="line">    double[] test = MatrixUtil.getTestSeries(series, series.length - L - 1, L);;</span><br><span class="line"></span><br><span class="line">    double[][] matC = MatrixUtil.getMatC(mat, T, series.length - T - L + 1, L);</span><br><span class="line">    double[][] matT = MatrixUtil.getMatT(mat, T, series.length - T - L + 1, L);</span><br><span class="line"></span><br><span class="line">    LOF lof = new LOF(K);</span><br><span class="line"></span><br><span class="line">    double[] ncmForC = new double[matC.length];</span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; matC.length; i++) &#123;</span><br><span class="line">      ncmForC[i] = lof.getLOF(matT, matC[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    double ncmForTest = lof.getLOF(matT, test);</span><br><span class="line">    double count = 0;</span><br><span class="line">    for (double x : ncmForC) &#123;</span><br><span class="line">      if (ncmForTest &lt;= x) &#123;</span><br><span class="line">        count++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    count /= matC.length;</span><br><span class="line">    System.out.println(&quot;Anomaly Score is &quot;+count);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>给出具体的Test类<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class LOFDetectToolTest &#123;</span><br><span class="line"></span><br><span class="line">  public double[] testData;</span><br><span class="line">  @Before</span><br><span class="line">  public void setUp() throws Exception &#123;</span><br><span class="line">    testData = FileTool.getData(&quot;data.json&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Test</span><br><span class="line">  public void timeSeriesAnalyse() throws Exception &#123;</span><br><span class="line">    LOFDetectTool lofDetectTool = new LOFDetectTool(200, 50);</span><br><span class="line">    lofDetectTool.timeSeriesAnalyse(testData);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-测试"><a href="#4-测试" class="headerlink" title="4. 测试"></a>4. 测试</h3><p><img src="https://upload-images.jianshu.io/upload_images/2601951-8ceddc91c23b7aae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="测试序列1"><br>对于上图序列计算得到的窗口异常分数为0.007092198<br>我们给它加一个峰值<br><img src="https://upload-images.jianshu.io/upload_images/2601951-06a191efe2fd0313.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="测试序列2"><br>得到的窗口异常分数为0.950354609</p>
+<p>源码以及测试数据我已经放到github了<br>地址为<a href="https://github.com/MezereonXP/AnomalyDetectTool" target="_blank" rel="noopener">https://github.com/MezereonXP/AnomalyDetectTool</a><br>其中包括自己编写的多种异常检测的工具类, 欢迎使用<br>希望大家多多Star, 有什么问题可以提issue给我, 或者发邮件到我的邮箱 mezereonxp@gmail.com</p>
+<p>下一篇, 将会介绍利用指数平滑进行异常检测的方法</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+            <a href="/tags/时序数据/" rel="tag"># 时序数据</a>
+          
+            <a href="/tags/异常检测/" rel="tag"># 异常检测</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/06/软件测试方法课程笔记(3)/" rel="next" title="软件测试方法课程笔记(3)">
+                <i class="fa fa-chevron-left"></i> 软件测试方法课程笔记(3)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Mezereon" />
+            
+              <p class="site-author-name" itemprop="name">Mezereon</p>
+              <p class="site-description motion-element" itemprop="description">With Saber</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MezereonXP" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/202fe3605b6d" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_34206952" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-LOF方法简介"><span class="nav-number">1.</span> <span class="nav-text">1. LOF方法简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-LOF-ICAD方法"><span class="nav-number">2.</span> <span class="nav-text">2. LOF-ICAD方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#输入"><span class="nav-number">2.1.</span> <span class="nav-text">输入:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出-异常分数p-从0到1"><span class="nav-number">2.2.</span> <span class="nav-text">输出(异常分数p, 从0到1):</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Java实现"><span class="nav-number">3.</span> <span class="nav-text">3. Java实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-测试"><span class="nav-number">4.</span> <span class="nav-text">4. 测试</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mezereon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
