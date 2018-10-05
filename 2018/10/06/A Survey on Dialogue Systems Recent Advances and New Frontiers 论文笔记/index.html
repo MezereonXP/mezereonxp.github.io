@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="笔记,NLP,对话系统," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="A Survey on Dialogue Systems: Recent Advances and New Frontiers 论文笔记1. 摘要对话系统受到越来越多人的关注, 深度学习的兴起也带动了一系列研究的发展, 深度学习能够利用大量的数据和少量的人工处理来学习有意义的特征表达以及回答的生成策略, 该文章将现有的对话系统划分成了面向任务的模型和非面向任务的模型, 给出了现有各个研究观点以及可">
+<meta name="keywords" content="笔记,NLP,对话系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何搭建一个对话系统">
+<meta property="og:url" content="https://mezereonxp.github.io/2018/10/06/A Survey on Dialogue Systems Recent Advances and New Frontiers 论文笔记/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="A Survey on Dialogue Systems: Recent Advances and New Frontiers 论文笔记1. 摘要对话系统受到越来越多人的关注, 深度学习的兴起也带动了一系列研究的发展, 深度学习能够利用大量的数据和少量的人工处理来学习有意义的特征表达以及回答的生成策略, 该文章将现有的对话系统划分成了面向任务的模型和非面向任务的模型, 给出了现有各个研究观点以及可">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://ol3p4szw6.bkt.clouddn.com/Pipeline.jpg">
+<meta property="og:image" content="http://ol3p4szw6.bkt.clouddn.com/table.jpg">
+<meta property="og:updated_time" content="2018-10-05T16:47:17.450Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何搭建一个对话系统">
+<meta name="twitter:description" content="A Survey on Dialogue Systems: Recent Advances and New Frontiers 论文笔记1. 摘要对话系统受到越来越多人的关注, 深度学习的兴起也带动了一系列研究的发展, 深度学习能够利用大量的数据和少量的人工处理来学习有意义的特征表达以及回答的生成策略, 该文章将现有的对话系统划分成了面向任务的模型和非面向任务的模型, 给出了现有各个研究观点以及可">
+<meta name="twitter:image" content="http://ol3p4szw6.bkt.clouddn.com/Pipeline.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mezereonxp.github.io/2018/10/06/A Survey on Dialogue Systems Recent Advances and New Frontiers 论文笔记/"/>
+
+
+
+
+
+  <title>如何搭建一个对话系统 | MyBlog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MyBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">share something</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mezereonxp.github.io/2018/10/06/A Survey on Dialogue Systems Recent Advances and New Frontiers 论文笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mezereon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何搭建一个对话系统</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-06T00:44:10+08:00">
+                2018-10-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自然语言处理/" itemprop="url" rel="index">
+                    <span itemprop="name">自然语言处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="A-Survey-on-Dialogue-Systems-Recent-Advances-and-New-Frontiers-论文笔记"><a href="#A-Survey-on-Dialogue-Systems-Recent-Advances-and-New-Frontiers-论文笔记" class="headerlink" title="A Survey on Dialogue Systems: Recent Advances and New Frontiers 论文笔记"></a>A Survey on Dialogue Systems: Recent Advances and New Frontiers 论文笔记</h1><h3 id="1-摘要"><a href="#1-摘要" class="headerlink" title="1. 摘要"></a>1. 摘要</h3><p>对话系统受到越来越多人的关注, 深度学习的兴起也带动了一系列研究的发展, 深度学习能够利用大量的数据和少量的人工处理来学习有意义的特征表达以及回答的生成策略, 该文章将现有的对话系统划分成了<strong>面向任务的模型</strong>和<strong>非面向任务的模型</strong>, 给出了现有各个研究观点以及可能的研究方向, 介绍了深度学习如何在典型的算法中发挥作用</p>
+<h3 id="2-介绍"><a href="#2-介绍" class="headerlink" title="2. 介绍"></a>2. 介绍</h3><p>面向任务的系统目标是帮助用户完成特定的任务(找产品, 预定饭店等).<br>面向任务的系统广泛的应用方式是将对话作为管道<img src="http://ol3p4szw6.bkt.clouddn.com/Pipeline.jpg" alt="@管道 | center"></p>
+<p>系统一开始接受人类的信息, 然后用一个内部状态来表示, 然后在对话的状态下通过某些规则采取一些动作, 最后这个动作被转换成自然语言</p>
+<p>虽然语言理解是利用统计模型处理的, 但是大多数对话系统还在使用人工特征或者固定规则的对于状态或者动作的表达, 目的检测和位置填充, 这样不仅耗时, 昂贵而且对于跨领域的使用也出现了限制.</p>
+<p>最近许多基于深度学习的算法被开发出来用于缓解在高维的分布形式下学习特征表达的问题, 并且在这方面做出了卓越的成果.</p>
+<p>另外, 希望建立端到端的面向任务的对话系统,  将传统的管道系统扩展状态空间的表达,  帮助生成那些有注解的特定任务的全集之外的对话.</p>
+<p>非面向任务的系统主要是做出一些合理回答或者娱乐性质, 比如闲聊机器人, 对于该类系统, 有以下方法:</p>
+<ol>
+<li>基于序列到序列的生成模型, 在对话中生成一些合适的回应</li>
+<li>基于检索的方法, 从语料库里面去寻找合适的回应</li>
+</ol>
+<p>本篇文章将给出1的研究进展, 讨论一下2的可能的研究方向, 在下面的章节会回顾一下面向任务的系统, 包括管道系统以及端到端的, 介绍一些神经生成方法, 包括流行的模型以及多人研究的主题, 并且给出基于搜索方法的细节, 最后进行总结以及给出部分方向.</p>
+<h3 id="3-面向任务的对话系统"><a href="#3-面向任务的对话系统" class="headerlink" title="3. 面向任务的对话系统"></a>3. 面向任务的对话系统</h3><p>主要是针对管道以及端到端方法的回顾</p>
+<h4 id="3-1-管道方法"><a href="#3-1-管道方法" class="headerlink" title="3.1 管道方法"></a>3.1 管道方法</h4><p>管道方法包括四个关键部分:</p>
+<ul>
+<li>语言理解(NLU): 也就是自然语言理解, 解析用户的话语到预定义的语义槽</li>
+<li>对话状态跟踪: 管理每一轮的输入以及对话的历史, 输出当前的对话状态</li>
+<li>对话决策学习: 基于当前的对话状态来学习下一个动作</li>
+<li>自然语言生成(NLG): 把所选择的动作和其表义相对应, 生成相应的回答</li>
+</ul>
+<h5 id="3-1-1-语言理解"><a href="#3-1-1-语言理解" class="headerlink" title="3.1.1 语言理解"></a>3.1.1 语言理解</h5><p>给定一句话, 自然语言理解将它映射到语义槽, 这个语义槽是事先通过不同的情景定义好的, 给出一个表格<br><img src="http://ol3p4szw6.bkt.clouddn.com/table.jpg" alt="@Table| center"></p>
+<p>这个表格中, 对New York识别出来是特定的地点作为槽的值, 地点和意图都是特定的</p>
+<p>这里有两种类型的表达方式:</p>
+<ol>
+<li>语言水平类别, 比如用户意图或者语言类别</li>
+<li>文字水平信息抽取, 比如实体识别或者槽的填充</li>
+</ol>
+<p>目标检测表现为检测一个用户的意图, 它将话语分类到一个预定义的意图, 深度学习成功应用到意图检测当中</p>
+<blockquote>
+<p><strong>[10] L. Deng, G. Tur, X. He, and D. Hakkani-Tur. Use of kernel deep convex networks and end-to-end learning for spoken language understanding. In Spoken Language Technology Workshop (SLT), 2012 IEEE, pages 210–215. IEEE, 2012.</strong><br><strong>[73] G. Tur, L. Deng, D. Hakkani-T¨ur, and X. He. Towards deeper understanding: Deep convex networks for semantic utterance classification. In Acoustics, Speech and Signal Processing (ICASSP), 2012 IEEE International Conference on, pages 5045–5048. IEEE, 2012.</strong><br><strong>[99] D. Yann, G. Tur, D. Hakkani-Tur, and L. Heck. Zeroshot learning and clustering for semantic utterance classification using deep learning, 2014. </strong></p>
+</blockquote>
+<p>特别的, 有用CNN来抽取询问向量表示作为询问分类的特征</p>
+<blockquote>
+<p><strong>[19] H. B. Hashemi, A. Asiaee, and R. Kraft. Query intent detection using convolutional neural networks.</strong></p>
+</blockquote>
+<p>基于CNN的分类框架有点类似于</p>
+<blockquote>
+<p><strong>[22] P.-S. Huang, X. He, J. Gao, L. Deng, A. Acero, and L. Heck. Learning deep structured semantic models for web search using clickthrough data. In Proceedings of the 22nd ACM international conference on Conference on information &amp; knowledge management, pages 2333–2338. ACM, 2013.</strong><br><strong>[64] Y. Shen, X. He, J. Gao, L. Deng, and G. Mesnil. Learning semantic representations using convolutional neural networks for web search. In Proceedings of the 23rd International Conference on World Wide Web, pages 373–374. ACM, 2014.</strong></p>
+</blockquote>
+<p>当然, 类别或者是域的分类也有用比较相似的方法.<br>对于口语理解来说, 槽的填充(Slot Filling)是另一个具有挑战的问题, 不像意图检测, 槽填充通常被定义为序列标记问题, 单词在序列中具有语义的标记. 输入是一个单词序列, 输出也是一个序列, 这个序列是槽的序列或者是概念(concept)ID的序列, 对于每一个词都有一个对应的槽或者概念ID</p>
+<p>有使用深度置信网络来进行实现的</p>
+<blockquote>
+<p><strong>[10] L. Deng, G. Tur, X. He, and D. Hakkani-Tur. Use of kernel deep convex networks and end-to-end learning for spoken language understanding. In Spoken Language Technology Workshop (SLT), 2012 IEEE, pages 210–215. IEEE, 2012. </strong><br><strong>[11] A. Deoras and R. Sarikaya. Deep belief network based semantic taggers for spoken language understanding. 2013. </strong></p>
+</blockquote>
+<p>效果上比使用条件随机场(CRF)的要更加好</p>
+<p>还有使用RNN来进行实现的</p>
+<blockquote>
+<p><strong>[41] G. Mesnil, X. He, L. Deng, and Y. Bengio. Investigation of recurrent-neural-network architectures and learning methods for spoken language understanding. Interspeech, 2013.</strong><br><strong>[56] R. Sarikaya, G. E. Hinton, and B. Ramabhadran. Deep belief nets for natural language call-routing. In IEEE International Conference on Acoustics, Speech and Signal Processing, pages 5680–5683, 2011.</strong><br><strong>[100] K. Yao, B. Peng, Y. Zhang, D. Yu, G. Zweig, and Y. Shi. Spoken language understanding using long short-term memory neural networks. pages 189 – 194, 2014.</strong><br><strong>[102] K. Yao, G. Zweig, M. Y. Hwang, Y. Shi, and D. Yu. Recurrent neural networks for language understanding. In Interspeech, 2013</strong></p>
+</blockquote>
+<p>通过NLU所生成的语义表达, 将会使用对话管理模块进行处理, 典型的对话管理模块包含两个部分:</p>
+<ul>
+<li>对话状态跟踪</li>
+<li>决策学习</li>
+</ul>
+<h5 id="3-1-2-对话状态跟踪"><a href="#3-1-2-对话状态跟踪" class="headerlink" title="3.1.2 对话状态跟踪"></a>3.1.2 对话状态跟踪</h5><p>对话跟踪状态是核心组件,以确保一个对话系统的健壮性.</p>
+<blockquote>
+<p><strong>其目的在于根据多轮对话来确定用户的目的</strong></p>
+</blockquote>
+<p>每一轮对话都会估计用户的目标, 一个对话状态$H_t$表示直到时间t时候的对话状态的表示, 这种经典的状态结构通常叫做槽填充(Slot Filling)或者语义框架(Semantic Frame)</p>
+<p>传统的方法在许多商业的实现中运用的很广泛, 通常是通过人工的规则去选择一些近似的回答, 这样的基于规则的系统容易产生错误而且结果大多数不是很正确</p>
+<p>一个统计的对话系统维持着一个在多种关于真实状态的假设下的分布, 面临着噪声和模糊的问题</p>
+<p>在对话状态跟踪挑战(DSTC)中, 每一轮对话中, 对于槽都有相应的概率分布的形式<br>各种统计方法,包括手工规则的健壮集合, 条件随机场, 最大熵模型和web风格排名方法出现在对话挑战(DSTC)中</p>
+<p>最近, [20]在信念追踪中引入了深度学习, 它使用滑动窗口输出任意数量可能值的概率分布序列</p>
+<blockquote>
+<p><strong>[20] M. Henderson, B. Thomson, and S. Young. Deep neural network approach for the dialog state tracking challenge. In Proceedings of the SIGDIAL 2013 Conference, pages 467–471, 2013.</strong></p>
+</blockquote>
+<p>虽然这个只在一个领域进行训练, 但却可以轻易的迁移到另外一个领域.</p>
+<p>还有其他人开发了multi-domain RNN 对话状态跟踪模型,  它一开始使用了所有有效的数据来训练一个非常一般的信念追踪模型, 并且使每个领域的一般模型专门化, 学习特殊领域的行为.</p>
+<blockquote>
+<p><strong>[48] N. Mrkˇsi´c, D. O S´eaghdha, B. Thomson, M. Gasic, P.- ´ H. Su, D. Vandyke, T.-H. Wen, and S. Young. Multidomain dialog state tracking using recurrent neural networks. In Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing (Volume 2: Short Papers), pages 794–799, Beijing, China, July 2015. Association for Computational Linguistics</strong></p>
+</blockquote>
+<p>[49] 提出了一种神经信念跟踪器(NBT)来检测槽-值对(slot-value pairs), 它将用户输入之前的系统对话行为, 用户话语本身以及它需要作出的一个候选槽-值对作为输入做出决定, 然后在所有候选槽-值对上迭代以确定哪些刚才已经被用户表达了.</p>
+<blockquote>
+<p><strong>[49] N. Mrkˇsi´c, D. O S´eaghdha, T.-H. Wen, B. Thomson, ´ and S. Young. Neural belief tracker: Data-driven dialogue state tracking. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 1777–1788, Vancouver, Canada, July 2017. Association for Computational Linguistics.</strong></p>
+</blockquote>
+<h5 id="3-1-3-策略学习"><a href="#3-1-3-策略学习" class="headerlink" title="3.1.3 策略学习"></a>3.1.3 策略学习</h5><p>以来自状态跟踪器的状态表示作为条件, 策略学习就是去生成下一个有用的系统动作.<br>监督学习或者是强化学习, 都可以用来优化策略学习</p>
+<blockquote>
+<p><strong>[9] H. Cuayhuitl, S. Keizer, and O. Lemon. Strategic dialogue management via deep reinforcement learning. arxiv.org, 2015. </strong></p>
+</blockquote>
+<p>通常采用基于规则的agent来预热系统</p>
+<blockquote>
+<p><strong>[98] Z. Yan, N. Duan, P. Chen, M. Zhou, J. Zhou, and Z. Li. Building task-oriented dialogue systems for online shopping, 2017.</strong></p>
+</blockquote>
+<p>然后, 有监督的学习被基于规则生成的动作所引导, 在线上购物场景中, 如果对话状态是”推荐”的话, 那么”推荐”动作就会被触发, 系统将会在产品数据库中进行产品的搜索. 如果对话状态是”比较”的话, 系统将会比较目标产品/品牌.</p>
+<p>对话策略能够被使用强化学习进一步的端到端的训练, 进而针对最后的表现制订出策略, [9]应用了深度强化学习在策略交流上,  同时的学习特征表达和对话策略, 该系统的表现优于随机的, 基于规则的和基于监督的方法.</p>
+<h5 id="3-1-4-自然语言生成"><a href="#3-1-4-自然语言生成" class="headerlink" title="3.1.4 自然语言生成"></a>3.1.4 自然语言生成</h5><p>自然语言生成模块就是将抽象的对话动作转变为自然语言表达.<br>一个好的生成器应该依赖于以下几个因素:</p>
+<ul>
+<li>充分性</li>
+<li>流畅性</li>
+<li>可读性</li>
+<li>变化性</li>
+</ul>
+<p>NLG的传统方法是执行句子规划, 它将输入的语义符号映射到话语表示的中介形式, 比如树形或者模板, 然后将中间结构转换成最后的表达, 通过surface realization实现最后的回应.</p>
+<blockquote>
+<p><strong>[69] A. Stent, R. Prasad, and M. Walker. Trainable sentence planning for complex information presentation in spoken dialog systems. In Proceedings of the 42nd annual meeting on association for computational linguistics, page 79. Association for Computational Linguistics, 2004. </strong></p>
+</blockquote>
+<p>也有使用神经网络方法, 基于LSTM和RNNLM类似的结构来进行NLG.</p>
+<blockquote>
+<p><strong>[42] T. Mikolov, M. Karafi´at, L. Burget, J. Cernock`y, and S. Khudanpur. Recurrent neural network based language model. In Interspeech, volume 2, page 3, 2010</strong><br><strong>[81] T.-H. Wen, M. Gasic, D. Kim, N. Mrksic, P.-H. Su, D. Vandyke, and S. Young. Stochastic language generation in dialogue using recurrent neural networks with convolutional sentence reranking. In Proceedings of the 16th Annual Meeting of the Special Interest Group on Discourse and Dialogue, pages 275–284, Prague, Czech Republic, September 2015. Association for Computational Linguistics. </strong></p>
+</blockquote>
+<p>这个对话动作类型和它的槽-值对转换成one hot 控制向量, 作为额外的输入, 这样就可以保证生成的话语代表了预期的意义</p>
+<p>[81]使用一个前向的RNN生成器以及一个CNN的重评分模块, 一个后向的RNN重评分模块.</p>
+<p>所有的子模块都被联合优化, 进而生成以所需的对话动作为条件的语句, 为了处理slot信息在surface realization中省略和重复的问题, [82] 使用一个额外的控制单元来导向对话动作.</p>
+<blockquote>
+<p><strong>[82] T.-H. Wen, M. Gasic, N. Mrkˇsi´c, P.-H. Su, D. Vandyke, and S. Young. Semantically conditioned lstm-based natural language generation for spoken dialogue systems. In Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing, pages 1711–1721, Lisbon, Portugal, September 2015. Association for Computational Linguistics.</strong></p>
+</blockquote>
+<p>[72]扩展了这个方法, 通过用门控制LSTM的输入token向量对应相应的对话动作, 接着[83]通过多种适应性步骤扩展成多领域的模型.</p>
+<blockquote>
+<p><strong>[72] V. K. Tran and L. M. Nguyen. Semantic refinement gru-based neural language generation for spoken dialogue systems. In PACLING, 2017.</strong></p>
+<p><strong>[83] T.-H. Wen, M. Gaˇsi´c, N. Mrkˇsi´c, L. M. RojasBarahona, P.-H. Su, D. Vandyke, and S. Young. Multidomain neural network language generation for spoken dialogue systems. In Proceedings of the 2016 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, pages 120–129, San Diego, California, June 2016. Association for Computational Linguistics.</strong></p>
+</blockquote>
+<p>[110]采用一个基于LSTM的编码器-解码器结构来合并问题信息, 语义槽值和对话动作类型, 来生成正确的答案, 它使用了注意力机制来关注以解码器当前的解码状态为条件的关键的信息, 将对话动作编码成Embedding向量, 基于神经网络的模型能够生成多样的回答对应不同对话动作类型.</p>
+<blockquote>
+<p><strong>[110] H. Zhou, M. Huang, and X. Zhu. Context-aware natural language generation for spoken dialogue systems. In COLING, pages 2032–2041, 2016. </strong></p>
+</blockquote>
+<p>[14]也给出了一个基于序列到序列的方法的自然语言生成器, 能够被训练成通过对话动作类型生成自然语言字符串和深度句法依存树结构一样</p>
+<blockquote>
+<p><strong>[14] O. Duˇsek and F. Jurcicek. Sequence-to-sequence generation for spoken dialogue via deep syntax trees and strings. In Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers), pages 45–51, Berlin, Germany, August 2016. Association for Computational Linguistics.</strong></p>
+</blockquote>
+<p>[13]在用户的表达和回应之前进行了扩展, 这使得模型会随着用户说话的方式而改变, 提供了适于上下文的回应</p>
+<blockquote>
+<p><strong>[13] O. Duˇsek and F. Jurcicek. A context-aware natural language generator for dialogue systems. In Proceedings of the 17th Annual Meeting of the Special Interest Group on Discourse and Dialogue, pages 185–190, Los Angeles, September 2016. Association for Computational Linguistics.</strong></p>
+</blockquote>
+<h4 id="3-2-端到端方法"><a href="#3-2-端到端方法" class="headerlink" title="3.2 端到端方法"></a>3.2 端到端方法</h4><p>尽管在传统的面向任务对话系统中有很多的特定领域的人工处理方法, 但很难去适应新的领域.<br>传统的面向任务的管道方法有两个限制:</p>
+<ul>
+<li>一个是信用分配问题，其中最终用户的反馈很难传播到每个上游模块</li>
+<li>第二个是过程相互依赖, 一个组件的输入依赖于另一个组件的输出</li>
+</ul>
+<p>当一个组件适应一个新的环境或者使用新的数据进行训练, 所有的其他组件需要通过保证全局优化方法来进行适应</p>
+<p>槽和特征也会相应的改变, 这个操作需要人的重要的影响, 随着这几年端到端神经生成网络模型的增加, 许多都是试着构造一个对于面向任务的对话系统的端到端可训练框架. 当我们谈及非面向任务系统的时候, 我们会谈及更多的细节.</p>
+<p>除了传统的管道模型, 端到端模型使用一个简单的模块并且和结构化外部数据库进行交互</p>
+<p>[84]和[4]介绍了一种基于网络的端到端的可训练的面向任务的对话系统, 它们将对话系统学习看作是学习一种从对话历史到对话回应的映射, 应用编码器-解码器模型来训练整个系统</p>
+<blockquote>
+<p><strong>[4] A. Bordes, Y. L. Boureau, and J. Weston. Learning end-to-end goal-oriented dialog. 2017. </strong><br><strong>[84] T.-H. Wen, D. Vandyke, N. Mrkˇsi´c, M. Gasic, L. M. Rojas Barahona, P.-H. Su, S. Ultes, and S. Young. A network-based end-to-end trainable task-oriented dialogue system. In Proceedings of the 15th Conference of the European Chapter of the Association for Computational Linguistics: Volume 1, Long Papers, pages 438–449, Valencia, Spain, April 2017. Association for Computational Linguistics.</strong></p>
+</blockquote>
+<p>然而在有监督样式下的训练的系统, 不仅需要大量的数据, 而且可能缺少在训练数据中对于对话控制的探究<br>[107]首次提出了端到端的强化学习方法用于联合训练对话管理中的对话状态跟踪以及策略学习, 进而更为鲁棒性地优化系统动作</p>
+<blockquote>
+<p><strong>[107] T. Zhao and M. Eskenazi. Towards end-to-end learning for dialog state tracking and management using deep reinforcement learning. In Proceedings of the 17th Annual Meeting of the Special Interest Group on Discourse and Dialogue, pages 1–10, Los Angeles, September 2016. Association for Computational Linguistics. </strong></p>
+</blockquote>
+<p>在对话之中, agent询问用户Yes/No问题来找到正确的答案, 这个方法当应用于面向任务的对话问题(猜测用户想的有名的人)时看起来似乎有希望, </p>
+<p>[36]训练了一个端到端的系统作为一个任务完成神经对话系统, 其目的也就是完成一个任务, 比如预定电影票</p>
+<blockquote>
+<p><strong>[36] X. Li, Y.-N. Chen, L. Li, and J. Gao. End-to-end taskcompletion neural dialogue systems. arXiv preprint arXiv:1703.01008, 2017.</strong></p>
+</blockquote>
+<p>面向任务的系统通常需要询问超出知识的范围, 之前的系统通过生成一个符号化询问到知识库基于它们的属性来搜索, 其中对输入执行语义解析, 进而构建代表agent关于用户目标的信念的符号查询([84; 90; 36]), 这个方法有两个缺点:</p>
+<ol>
+<li>遍历搜索的结果并不能带有任何关于语义分析的不确定性的信息</li>
+<li>遍历的操作不可微分, 因此分析器和对话策略分离地进行训练, 这样一旦系统被部署, 在线的端到端学习就会变得很困难</li>
+</ol>
+<p>[15] 通过基于关注的可重用键值检索机制对现有的循环网络体系结构进行了扩展, 该机制受知识库的条目限制, 其受关键值记忆网络[44]启发.</p>
+<blockquote>
+<p><strong>[15] M. Eric and C. D. Manning. Key-value retrieval networks for task-oriented dialogue. arXiv preprint arXiv:1705.05414, 2017. </strong><br><strong>[44] A. Miller, A. Fisch, J. Dodge, A.-H. Karimi, A. Bordes, and J. Weston. Key-value memory networks for directly reading documents. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, pages 1400–1409, Austin, Texas, November 2016. Association for Computational Linguistics.</strong></p>
+</blockquote>
+<p>[12]将符号化查询替换成在指示用户感兴趣的条目的知识库上的诱导的”软”后验分布, 集成软搜索处理和强化学习<br>[89]将RNN和特定领域知识编码相结合作为软件和系统动作的模板</p>
+<blockquote>
+<p><strong>[12] B. Dhingra, L. Li, X. Li, J. Gao, Y.-N. Chen, F. Ahmed, and L. Deng. Towards end-to-end reinforce- ment learning of dialogue agents for information access. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 484–495, Vancouver, Canada, July 2017. Association for Computational Linguistics.</strong><br><strong>[89] J. D. Williams, K. Asadi, and G. Zweig. Hybrid code networks: practical and efficient end-to-end dialog control with supervised and reinforcement learning. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 665–677, Vancouver, Canada, July 2017. Association for Computational Linguistics.</strong></p>
+</blockquote>
+<h3 id="4-非面向任务的对话系统"><a href="#4-非面向任务的对话系统" class="headerlink" title="4. 非面向任务的对话系统"></a>4. 非面向任务的对话系统</h3><p>不向面向任务的对话系统, 目的是完成一个特定的任务, 非面向任务的对话系统(也可以称为chatbots)关注于和人类进行宽领域的谈话. 一般来说, chat bots实现的方案不是生成方法就是基于检索的方法. </p>
+<p>生成模型能够生成更多的从未出现在语料库的合理回应, 基于检索的模型享有信息量和流畅响应的优势. 因为它们使用回应选择算法从仓库中去获取相应的回答.</p>
+<p>接下来的部分, 将首次介绍神经生成模型, 研究热点中的其中一个, 我们会讨论该模型的优缺点以及可能的改进, 然后介绍深度学习在基于搜索的模型上的应用.</p>
+<h4 id="4-1-神经生成模型"><a href="#4-1-神经生成模型" class="headerlink" title="4.1 神经生成模型"></a>4.1 神经生成模型</h4><p>[54]提出了一个生成概率模型, 基于基于分析的统计机器翻译, 在微博上对谈话进行建模, 它将回答的生成问题视为一个翻译问题, 然而回答的生成是要比语言之间的翻译要困难得多, 这是由于存在许多貌似正确的回应, 以及过去和回答之间的分析校准的缺失.</p>
+<p>深度学习在机器翻译上的成功应用, 称神经机器翻译, 进而促进对神经生成对话系统的研究工作</p>
+<p>在接下来的子模块里面, 我们会介绍序列到序列的模型, 这是生成神经模型的基础, 然后我们将讨论研究的热点,  包括合并对话上下文, 提高回答多样性, 制造话题和人格, 利用外部知识库, 互动学习和评价.</p>
+<h5 id="4-1-1-序列到序列的模型"><a href="#4-1-1-序列到序列的模型" class="headerlink" title="4.1.1 序列到序列的模型"></a>4.1.1 序列到序列的模型</h5><p>给定一个原序列 $X=(x_1, x_2, x_3, …, x_T)$, 包括T个词, 以及目标序列(回答) $Y = (y_1, y_2, y_3, …, y_{T’})$, 包括T’个词<br>我们的目标就是最大化概率</p>
+<script type="math/tex; mode=display">p(y_1, y_2, y_3, ..., y_{T'}|x_1, x_2, x_3, ..., x_T)</script><p>这样的模型类似编码器-解码器结构, 编码器读取X, 一个接一个的单词, 并且通过RNN表示成一个上下文向量c, 将c作为输入, 解码器估计出Y的生成概率, 其中对于编码器有:</p>
+<script type="math/tex; mode=display">h_t=f(x_t,h_{t-1})</script><p>其中$h_t$就是隐藏的状态值, RNN有着许多变体, 例如LSTM或者GRU<br>c就是最后一个$h_T$的隐藏状态值, 解码器是一个标准的RNN语言模型以及一个条件上下文向量c<br>每一个时间t的候选词的概率分布$p_t$ , 按如下计算:</p>
+<script type="math/tex; mode=display">s_t = f(y_{t-1}, s_{t-1}, c)\\p_t = softmax(s_t, y_{t-1})</script><p>这里$s_t$是解码器的隐藏状态, Seq2Seq的目标函数如下定义:</p>
+<script type="math/tex; mode=display">p(y_1, ...,y_{T'}|x_1, ..., x_T) = p(y_1|c) \prod^{T'}_{t = 2}{p(y_t|c, y_1, ..., y_{t-1})}</script><p>[2]给出了一种通过注意力机制来提升性能的方法, 每一个单词都受到不同的上下文向量c的条件, 所以Y的每一个词可能依赖于X的不同部分. 特别地, $y_i$对应着上下文向量$c_i$, 而$c_i$是一个加权平均值, 如下:</p>
+<script type="math/tex; mode=display">c_i = \sum^{T}_{j=1}{\alpha_{ij}h_j}\\ \alpha_{ij}=\frac{exp(e_{ij})}{\sum_{k=1}^{T}{exp(e_{ik})}} \\e_{ij}=g(s_{t-1}, h_j)</script><p>g是一个多层感知器</p>
+<p>[61]使用了循环神经网络编码器-解码器框架来进行推特微博网页上回复的生成.</p>
+<p>一般来说, 这些模型都用一个神经网络来表达对话的历史, 并且生成估计的回答, 这样的模型能够利用大量的数据来学习有意义的自然语言表达和生成策略, 并且只需要少量的领域知识和人工处理</p>
+<h5 id="4-1-2-对话上下文"><a href="#4-1-2-对话上下文" class="headerlink" title="4.1.2 对话上下文"></a>4.1.2 对话上下文</h5><p>重视之前的话语的能力是建立对话系统的关键, 这可以使对话生动并且有参与性.</p>
+<p>[67] 处理上下文敏感回答生成的挑战的时候, 通过用连续的表达或者词向量和分析器表示整个对话历史(包括当前的信息).<br>回应被作为RNN语言模型来生成, 就如同[7]中的解码器. [58]使用层次模型, 首次捕获到个人的话语的意思, 并且将其整合进叙述之中. </p>
+<blockquote>
+<p><strong>[67] A. Sordoni, M. Galley, M. Auli, C. Brockett, Y. Ji, M. Mitchell, J.-Y. Nie, J. Gao, and B. Dolan. A neural network approach to context-sensitive generation of conversational responses. In Proceedings of the 2015 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, pages 196–205, Denver, Colorado, May–June 2015. Association for Computational Linguistics.</strong><br><strong>[7] K. Cho, B. van Merrienboer, C. Gulcehre, D. Bahdanau, F. Bougares, H. Schwenk, and Y. Bengio. Learning phrase representations using rnn encoder– decoder for statistical machine translation. In Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP), pages 1724–1734, Doha, Qatar, October 2014. Association for Computational Linguistics.</strong><br><strong>[58] I. Serban, A. Sordoni, Y. Bengio, A. Courville, and J. Pineau. Building end-to-end dialogue systems using generative hierarchical neural network models, 2016.</strong></p>
+</blockquote>
+<p>[96]使用注意力机制将层次模型进行扩展, 以分别关注话语内部和言语之间的重要部分, 并分别注重单词关注和话语关注.</p>
+<p>[71]进行的现有的方法中的系统的比较（包括非分层和分层模型), 并提出了一个变体, 权重相对于上下文查询的相关性的上下文.</p>
+<ul>
+<li>层次的RNN通常要比非层次的RNN效果要好</li>
+<li>在上下文的信息之下, 神经网络趋于生成更长, 更有意义, 并且不同的回答</li>
+</ul>
+<blockquote>
+<p><strong>[96] C. Xing, W. Wu, Y. Wu, M. Zhou, Y. Huang, and W. Y. Ma. Hierarchical recurrent attention network for response generation. 2017. </strong><br><strong>[71] Z. Tian, R. Yan, L. Mou, Y. Song, Y. Feng, and D. Zhao. How to make context more useful? an empirical study on context-aware neural conversational models. In Meeting of the Association for Computational Linguistics, pages 231–236, 2017.</strong></p>
+</blockquote>
+<h5 id="4-1-3-回答多样性"><a href="#4-1-3-回答多样性" class="headerlink" title="4.1.3 回答多样性"></a>4.1.3 回答多样性</h5><p>最近的序列到序列对话系统的一个挑战性问题就是他们趋于生成带有少量意思的不重要的, 不置可否的, 普遍相关的回答, 特别是高频率去分析那些”I don’t like”等句子</p>
+<p>这样的行为可以归因为在对话数据集中像I don’t like的生成回答的高频率依赖, 与更多信息性多样性反应的相对稀疏性相反</p>
+<p>一种有希望的方法来减轻这样挑战就是找到更好的目标函数<br>[30] 指出了网络模型分配了高的概率给”安全的回答”, 当对于给定输出优化输出的似然性的时候, 他们使用最大交互信息(MMI), 这是第一次在对话识别当中引入, 最后优化目标, 它会判断交互在输入和输出之间的依赖, 考虑信息中回答的相反依赖</p>
+<blockquote>
+<p><strong>[30] J. Li, M. Galley, C. Brockett, J. Gao, and B. Dolan. A diversity-promoting objective function for neural conversation models. In Proceedings of the 2016 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, pages 110–119, San Diego, California, June 2016. Association for Computational Linguistics.</strong></p>
+</blockquote>
+<p>[101]合并了反向文档频率[55]到计算回答依赖的训练处理中</p>
+<p>一些研究者认识到解码的处理是产生多余候选回答的另一源头之一, [62]和[34]识别出beam search缺少多样性当在beam中生成回答的时候, [62]介绍了随机beam search过程, [34]加上了一个额外项来进行beam search的给分, 用于惩罚search中相同父母节点的兄弟扩展.</p>
+<p>[37, 67, 62]利用全局特征进一步实现了重评分步骤, 进而避免生成减少或者生成一般的回答<br>[47] 推测这个问题不仅仅在目标解码和回答频率中存在, 还有信息本身可能就缺少回应足够的信息. 它提出了逐点的相互信息(PMI)来预测作为关键字的名词, 这个名词反应了回答的要点, 并且生成一个包含该关键字的回答</p>
+<p>其他的工作可能关注于生成更多的多样性回答, 通过引入随机潜在变量, 它们证明了自然对话是不确定的, 对于一个相同信息的回答会因人而异. 然而, 当前的回答被局限成确定的编码和解码器. 通过加入一个潜变量, 这些模型有一个好处, 那就是, 在生成的时候, 他们可以通过第一个抽样样本的回答分布对潜变量进行赋值, 然后确定性地解码.</p>
+<p>[6]表达了一个潜变量模型针对只有一次的对话回答, 这个模型包含一个随机部分$z$在解码器$P(Y|z, X)$当中, $z$是通过多样化编码框架[26;25;65]计算出来的.</p>
+<p>[59]介绍了层次对话模型框架[58]的潜变量. 潜变量被设计去做高水平的决定, 比如话题或者情感.<br>[57]通过学习潜变量序列将这个方法扩展, 即下一个话语的潜变量的条件仅有先前的潜变量序列<br>[63]用明确的属性来约束潜变量, 使得潜变量有更好的解释性, 这些属性可以被人工分配也可以自动检测一些话题或者人格</p>
+<h5 id="4-1-4-话题和人格"><a href="#4-1-4-话题和人格" class="headerlink" title="4.1.4 话题和人格"></a>4.1.4 话题和人格</h5><p>学习对话的内在属性的确是提高对话多样性的另一种方法并且保证对话连续性. 在不同的属性, 话题和人格方面都进行了广泛的探索.</p>
+<p>[95]注意到人们通常会利用对话来联想主题相关的概念, 然后利用概念生成相应的回答. 它们使用推特LDA模型得到输入的主题, fed主题的信息并且输入表达到一个联合注意力模块中生成主题相关的回答.</p>
+<p> [94]给出解码器的改进, 提升了效果.<br> [8]做了一个问题的一般化处理, 它们将话语分类到不同的领域, 然后生成相应领域的下一个话语</p>
+<p>[109]加入了情感向量到生成模型当中, 对于困惑的表现很不错, [51]给系统一个身份, 这样该系统就可以连续地回答个人问题<br>[31]进一步将用户的信息考虑进来创建一个更为真实的chat bot</p>
+<p>由于训练数据来自于不同的人, 产生了不一致性, [106]提出了二相的训练方法, 使用大范围的数据进行初始化, 更好地调整模型以生成个性化的回答</p>
+<p>[45]使用迁移强化学习来减少不一致性</p>
+<h5 id="4-1-5-外部知识库"><a href="#4-1-5-外部知识库" class="headerlink" title="4.1.5 外部知识库"></a>4.1.5 外部知识库</h5><p>人类对话和对话系统的一个重要的区别是是否和现实结合起来, 引入一个外部知识库是一种有前景的做法用于跨越人类和对话系统的背景知识的鸿沟, 记忆网络是基于知识解决问答任务的传统的做法, 然而, 直接应用这种方法于对话生成中太过于简单了, [16] 在此之上进行了尝试, 并且取得了优异的性能. [75]也通过将CNN嵌入和RNN嵌入耦合到多模态空间中来处理具有背景知识的open domain对话，并在困惑中取得进展, 一个简单的任务是对于一个问题对应外部知识生成回答.</p>
+<p>[103]不像一般的在知识库中搜索的方法, 使用了知识库中的单词和常见的单词在生成的过程之中<br>经验主义的研究证明了该模型能够成功地针对问题通过引用知识库来生成自然的和正确的回答</p>
+<h5 id="4-1-6-交互对话学习"><a href="#4-1-6-交互对话学习" class="headerlink" title="4.1.6 交互对话学习"></a>4.1.6 交互对话学习</h5><p>通过交互进行学习是对话系统的最终目标, [35]在两个虚拟agent之间模拟了对话, 他们定义简单的启发式近似来奖励用于描绘好的对话: </p>
+<ul>
+<li>好的对话是向前看的或者交互的(一轮对话暗示了下一轮对话)</li>
+<li>信息化的</li>
+<li>连贯的, 一致的</li>
+</ul>
+<p>编码-解码RNN的参数在有限的包含了所有可能的话语的动作空间中定义了策略, agent学习一种使用”策略梯度方法”, 通过在进行的对话模拟中优化长期的开发者定义的奖励的策略 [91], 而不是使用MLE作为目标</p>
+<p>[33]进一步地提高了bot从交互中进行学习能力, 通过使用策略学习和前向预测于文本和数值反馈上, 模型能够通过在线和人类交互进而自我学习.</p>
+<p>大多数的用户对于某些回应不理解可能会进一步的询问, 对话系统应该具备这种能力<br>[32]定义了3种不同的情况, 针对bot在回答方面的问题. 比较不使用询问问题的方法的实验结果, 这种方法在某些场景下有一定的提升<br>[29]研究了谈判对话的任务, 作为传统的序列到序列的模型模拟人类的对话, 但是失败于优化特殊的目标, 该工作使用面向目标的训练和解码方法, 并且证明了值得花时间的观点</p>
+<h5 id="4-1-7-评估"><a href="#4-1-7-评估" class="headerlink" title="4.1.7 评估"></a>4.1.7 评估</h5><p>评估一个生成回答的质量, 是一个对话回答生成系统[37]的重要方面.<br>面向任务的对话系统可以被基于人类生成的有监督的信号来评估, 比如任务完成性测试或者用户满意度分数[24;46;76], 然而非面向任务的对话系统的生成回答的自动分析仍是一个开放的问题. 尽管有一些语言重叠测量, 比如BLEU, METEOR和ROUGE广泛用于生成回答的评估.</p>
+<p>[37]发现这些测量, 和来源于word2vec[43]的词向量测量一样, 要么十分弱要么和人类的判断不相关, 虽然词向量矩阵能够明显地在多种数据集下区分基本的和最先进的模型<br>[70]提出了使用两个神经网络模型来评估一系列的转向特征来评估对话的成功率</p>
+<blockquote>
+<p><strong>[37] C.-W. Liu, R. Lowe, I. Serban, M. Noseworthy, L. Charlin, and J. Pineau. How not to evaluate your dialogue system: An empirical study of unsupervised evaluation metrics for dialogue response generation. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, pages 2122– 2132, Austin, Texas, November 2016. Association for Computational Linguistics.</strong><br><strong>[70] P.-H. Su, D. Vandyke, M. Gasic, D. Kim, N. Mrksic, T.-H. Wen, and S. Young. Learning from real users: Rating dialogue success with neural networks for reinforcement learning in spoken dialogue systems. arXiv preprint arXiv:1508.03386, 2015. </strong></p>
+</blockquote>
+<h4 id="4-2-基于检索的方法"><a href="#4-2-基于检索的方法" class="headerlink" title="4.2 基于检索的方法"></a>4.2 基于检索的方法</h4><p>基于检索的方法会在候选回答中选择一个回应, 基于检索的方法的关键是回应信息匹配, 匹配算法需要克服信息和回应之间的语义鸿沟[21].</p>
+<blockquote>
+<p><strong>[21] B. Hu, Z. Lu, H. Li, and Q. Chen. Convolutional neural network architectures for matching natural language sentences. In Advances in neural information processing systems, pages 2042–2050, 2014.</strong></p>
+</blockquote>
+<h5 id="4-2-1-单轮回应匹配"><a href="#4-2-1-单轮回应匹配" class="headerlink" title="4.2.1 单轮回应匹配"></a>4.2.1 单轮回应匹配</h5><p>早期的关于基于搜索的研究主要关注于单轮对话[78]的回应选择, 只用信息来检索一个合适的回应. 特别地, 上下文和候选回应都被分别编码成向量, 匹配分数基于两个向量计算出来, 假设$x$是一个信息的向量表示,  $y$对应着回应的向量表示, 这里我们可以给出双线性匹配:<script type="math/tex">match(x,y)=x^TAy</script></p>
+<p>$A$是一个预定义矩阵, 或者更为复杂. [39] 提出了基于DNN的匹配模型用于短文本选择, 在结构中结合了局部和层次的性质.<br>[21]使用了深度卷积神经网络来进行模型的提升, 用于学习信息和回应的表达或直接学习两个句子之间交互的表示, 使用多层感知器来计算出匹配的分数.<br>[79]抽取匹配模式的依存树并且使用它作为稀疏one hot输入, 输入到深度前馈网络, 作为上下文回答匹配.<br>[92]合并了利用推特LDA模型生成的主题向量到基于CNN的结构中, 用于推动更为丰富的回应</p>
+<blockquote>
+<p><strong>[21] B. Hu, Z. Lu, H. Li, and Q. Chen. Convolutional neural network architectures for matching natural language sentences. In Advances in neural information processing systems, pages 2042–2050, 2014. </strong><br><strong>[79] M. Wang, Z. Lu, H. Li, and Q. Liu. Syntax-based deep matching of short texts. 03 2015. </strong><br><strong>[92] Y. Wu, W. Wu, Z. Li, and M. Zhou. Topic augmented neural network for short text conversation. 2016.</strong></p>
+</blockquote>
+<h5 id="4-2-2-多轮回应匹配"><a href="#4-2-2-多轮回应匹配" class="headerlink" title="4.2.2 多轮回应匹配"></a>4.2.2 多轮回应匹配</h5><p>近年来, 多轮的基于搜索的对话引来越来越多的注意. 在多轮回应选择中, 当前信息和先前的话语都作为输入.</p>
+<p>模型应该选择一个自然的回应, 并且和上下文是相关的, 对于在先前的话语中找出重要信息以及对于话语关系适当的建模以保证对话一致性是很重要的.</p>
+<p>[38]利用RNN/LSTM的结构对上下文(将先前的话语和当前的信息都连接起来)和候选回应进行编码, 成为上下文向量和候选回应向量, 接着对两个向量计算匹配度分数</p>
+<blockquote>
+<p><strong>[38] R. Lowe, N. Pow, I. Serban, and J. Pineau. The ubuntu dialogue corpus: A large dataset for research in unstructured multi-turn dialogue systems. In Proceedings of the 16th Annual Meeting of the Special Interest Group on Discourse and Dialogue, pages 285– 294, Prague, Czech Republic, September 2015. Association for Computational Linguistics.</strong></p>
+</blockquote>
+<p>[97]用不同的策略来选择先前的话语, 然后将它们和当前的信息进行合并, 生成重定义的上下文.</p>
+<blockquote>
+<p><strong>[97] R. Yan, Y. Song, and H. Wu. Learning to respond with deep neural networks for retrieval-based humancomputer conversation system. In Proceedings of the 39th International ACM SIGIR Conference on Research and Development in Information Retrieval, SIGIR ’16, pages 55–64, New York, NY, USA, 2016. ACM.</strong></p>
+</blockquote>
+<p>[111]认为上下文-回应匹配不仅仅停留在单词水平, 应该涉及表达方式水平.</p>
+<blockquote>
+<p><strong>[111] X. Zhou, D. Dong, H. Wu, S. Zhao, D. Yu, H. Tian, X. Liu, and R. Yan. Multi-view response selection for human-computer conversation. In Proceedings of the 2016 Conference on Empirical Methods in Natural Language Processing, pages 372–381, 2016.</strong></p>
+</blockquote>
+<p>[93]进一步提高了对表达关系和上下文信息的利用, 通过CNN针对多粒度间隔的上下文中的每个话语匹配一个回应, 将这些回应产生的时序向量, 输入到RNN来对语句中的关系进行建模</p>
+<blockquote>
+<p><strong>[93] Y. Wu, W. Wu, C. Xing, M. Zhou, and Z. Li. Sequential matching network: A new architecture for multi-turn response selection in retrieval-based chatbots. In Proceedings of the 55th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), pages 496–505, Vancouver, Canada, July 2017. Association for Computational Linguistics</strong></p>
+</blockquote>
+<h4 id="4-3-混合方法"><a href="#4-3-混合方法" class="headerlink" title="4.3 混合方法"></a>4.3 混合方法</h4><p>将生成模型和基于搜索的模型相结合在性能上有重要的作用.[66]和[52]试着将其进行结合</p>
+<p>基于搜索的系统通常会给出精确的但是生硬的回答, 基于生成的系统更趋向于给出流畅的但是无意义的回答.</p>
+<p>在一个混合的系统中, 检索到的候选和原始的信息, 都输入到RNN的回应生成器中, 最后由post-reranker给出回应, 这个方法结合了搜索和生成模型的优点, 在表现上具备吸引性.</p>
+<p>[60]集成了自然语言生成和搜索模型, 包括基于组件的模型, 词袋模型, 序列到序列的神经网络和隐变量神经网络模型, 应用强化学习众包数据和现实用户交互来找到一个合适的回应</p>
+<blockquote>
+<p><strong>[60] I. V. Serban, C. Sankar, M. Germain, S. Zhang, Z. Lin, S. Subramanian, T. Kim, M. Pieper, S. Chandar, N. R. Ke, et al. A deep reinforcement learning chatbot. arXiv preprint arXiv:1709.02349, 2017. </strong></p>
+</blockquote>
+<h3 id="5-讨论和总结"><a href="#5-讨论和总结" class="headerlink" title="5. 讨论和总结"></a>5. 讨论和总结</h3><p>深度学习已经成为了对话系统的基础方法, 研究者研究将神经网络应用到传统面向任务的对话系统的不同部分中, 包括自然语言理解, 自然语言生成, 对话状态跟踪. </p>
+<p>近几年来, 端到端的框架不仅在非面向任务的闲聊对话系统中变得流行, 并且面向任务的系统中也流行起来.</p>
+<p>深度学习能够利用大量的数据, 有希望建立一个统一的对话系统.<br>面向任务和非面向任务的边界有点模糊. 特别地, 闲聊对话直接通过序列到序列进行建模. 任务完成模型也正朝着端到端的可训练方式发展, 强化学习代表了状态-动作空间并且合起了整个管道.</p>
+<p>值得注意的是当前的端到端模型还远远不能达到完美, 除了上面所提及的成果, 问题仍然具有挑战性, 接下来, 我们讨论一些可能的研究方向:</p>
+<ul>
+<li><strong>Swift Warm-up(迅速热身)</strong>. 虽然端到端的模型是当前研究的热点, 我们在实际的对话工程中还是需要依赖于传统的管道, 特别是对于新领域的warm-up. 每日对话数据太”大”了, 然而, 特定领域的对话数据是有限的. 特别地, 特定领域的对话数据集和对话系统的构建是吃力的, 基于神经网络的模型对于使用大量的数据是比较好的, 我们需要使用新的方法来解决warm-up, 对于agent能够通过和人类交互从而自我学习是有希望的</li>
+<li><strong>深度理解</strong>. 当前的基于神经网络的对话系统极其严重地依赖于大量不同类型的标注好的数据, 结构化的知识库以及对话数据. 他们一遍一遍模仿来学习说话, 就像一个婴儿一样, 所以回答并不具备多样性甚至有时候没有意义, 因此, agent应该能够更有效地学习到对语言和现实世界的深度理解, 特别地, 对于agent能够从人类的教导中学习避免重复的训练是存在可能性的. 在网络上高质量的知识是有效的, 如果能够利用这样的非结构化知识源来进行理解的话, 对话agent能够变得更加聪明. 最后但并非不重要的, 一个对话agent应该能够做出合理的推断, 找到一些新的东西, 在不同领域中共享知识而不是像一只鹦鹉一样重复文字.</li>
+<li><strong>隐私保护</strong>. 大部分的应用的对话系统服务大量的人, 我们用着的是同一个对话agent, 当它可以通过交互进行学习, 理解和推理, 对话agent会无意暗中地存储一些敏感信息, 因此, 一个好的对话系统需要保护用户的隐私.</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+            <a href="/tags/对话系统/" rel="tag"># 对话系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/05/利用双向数据流进行机器理解/" rel="next" title="利用双向数据流进行机器理解">
+                <i class="fa fa-chevron-left"></i> 利用双向数据流进行机器理解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/06/软件测试方法课程笔记(3)/" rel="prev" title="软件测试方法课程笔记(3)">
+                软件测试方法课程笔记(3) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Mezereon" />
+            
+              <p class="site-author-name" itemprop="name">Mezereon</p>
+              <p class="site-description motion-element" itemprop="description">With Saber</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MezereonXP" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/202fe3605b6d" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_34206952" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-Survey-on-Dialogue-Systems-Recent-Advances-and-New-Frontiers-论文笔记"><span class="nav-number">1.</span> <span class="nav-text">A Survey on Dialogue Systems: Recent Advances and New Frontiers 论文笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-摘要"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-介绍"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-面向任务的对话系统"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 面向任务的对话系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-管道方法"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">3.1 管道方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1-语言理解"><span class="nav-number">1.0.3.1.1.</span> <span class="nav-text">3.1.1 语言理解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-对话状态跟踪"><span class="nav-number">1.0.3.1.2.</span> <span class="nav-text">3.1.2 对话状态跟踪</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-3-策略学习"><span class="nav-number">1.0.3.1.3.</span> <span class="nav-text">3.1.3 策略学习</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-4-自然语言生成"><span class="nav-number">1.0.3.1.4.</span> <span class="nav-text">3.1.4 自然语言生成</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-端到端方法"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">3.2 端到端方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-非面向任务的对话系统"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. 非面向任务的对话系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-神经生成模型"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">4.1 神经生成模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-1-序列到序列的模型"><span class="nav-number">1.0.4.1.1.</span> <span class="nav-text">4.1.1 序列到序列的模型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-2-对话上下文"><span class="nav-number">1.0.4.1.2.</span> <span class="nav-text">4.1.2 对话上下文</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-3-回答多样性"><span class="nav-number">1.0.4.1.3.</span> <span class="nav-text">4.1.3 回答多样性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-4-话题和人格"><span class="nav-number">1.0.4.1.4.</span> <span class="nav-text">4.1.4 话题和人格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-5-外部知识库"><span class="nav-number">1.0.4.1.5.</span> <span class="nav-text">4.1.5 外部知识库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-6-交互对话学习"><span class="nav-number">1.0.4.1.6.</span> <span class="nav-text">4.1.6 交互对话学习</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-7-评估"><span class="nav-number">1.0.4.1.7.</span> <span class="nav-text">4.1.7 评估</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-基于检索的方法"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">4.2 基于检索的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-1-单轮回应匹配"><span class="nav-number">1.0.4.2.1.</span> <span class="nav-text">4.2.1 单轮回应匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-2-多轮回应匹配"><span class="nav-number">1.0.4.2.2.</span> <span class="nav-text">4.2.2 多轮回应匹配</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-混合方法"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">4.3 混合方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-讨论和总结"><span class="nav-number">1.0.5.</span> <span class="nav-text">5. 讨论和总结</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mezereon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
