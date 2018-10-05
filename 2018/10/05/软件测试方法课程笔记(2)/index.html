@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="软件测试,笔记," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="软件测试方法课程笔记(2)2. 黑盒测试2.1 介绍优点:  没有任何的偏向 无需开发知识 只考虑用户的看法 需求确定就可以测试  2.2 等价类划分为了产生少量的测试用例, 并且可以测试大部分的情况, 我们可以使用等价类划分的方法比如对于输入值是范围值, 我们可以使用等价类划分成范围内的和不是范围内的两种等价类 等价类有一种评判标准, 分为强, 弱, 又分为一般和健壮弱：只单缺陷假设强：多缺陷假">
+<meta name="keywords" content="软件测试,笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件测试方法课程笔记(2)">
+<meta property="og:url" content="https://mezereonxp.github.io/2018/10/05/软件测试方法课程笔记(2)/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="软件测试方法课程笔记(2)2. 黑盒测试2.1 介绍优点:  没有任何的偏向 无需开发知识 只考虑用户的看法 需求确定就可以测试  2.2 等价类划分为了产生少量的测试用例, 并且可以测试大部分的情况, 我们可以使用等价类划分的方法比如对于输入值是范围值, 我们可以使用等价类划分成范围内的和不是范围内的两种等价类 等价类有一种评判标准, 分为强, 弱, 又分为一般和健壮弱：只单缺陷假设强：多缺陷假">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-c4c3edb1218c36b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-8a44639d7e7ce2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-d0a4fdb3f9926cd5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-bcf64bfab335f535.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-dda8e67fb456d1e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-04ce9194a21627f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-be0b0cc7855932ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-b80fb588ddda26fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-9a79c832b1eeedbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-7167ece401fc8f17.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-692f0868b384b10f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-c295a13c6950e71b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-9ccdbf8ed9f14fa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-30c045a84cfdc099.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-c13f943025831fab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-35945826fae6cccb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-b53398e35c3ac5d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-39d297cbb8938243.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-10e60c7279dc86cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-1fdc6e481af452e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-5b04dc1bbc960131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-af42a076dd3aa362.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-6d94be1b217f35c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-31782b86a3a1f84c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-05T13:52:14.829Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="软件测试方法课程笔记(2)">
+<meta name="twitter:description" content="软件测试方法课程笔记(2)2. 黑盒测试2.1 介绍优点:  没有任何的偏向 无需开发知识 只考虑用户的看法 需求确定就可以测试  2.2 等价类划分为了产生少量的测试用例, 并且可以测试大部分的情况, 我们可以使用等价类划分的方法比如对于输入值是范围值, 我们可以使用等价类划分成范围内的和不是范围内的两种等价类 等价类有一种评判标准, 分为强, 弱, 又分为一般和健壮弱：只单缺陷假设强：多缺陷假">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2601951-c4c3edb1218c36b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mezereonxp.github.io/2018/10/05/软件测试方法课程笔记(2)/"/>
+
+
+
+
+
+  <title>软件测试方法课程笔记(2) | MyBlog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MyBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">share something</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mezereonxp.github.io/2018/10/05/软件测试方法课程笔记(2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mezereon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">软件测试方法课程笔记(2)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-05T21:47:53+08:00">
+                2018-10-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件测试/" itemprop="url" rel="index">
+                    <span itemprop="name">软件测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="软件测试方法课程笔记-2"><a href="#软件测试方法课程笔记-2" class="headerlink" title="软件测试方法课程笔记(2)"></a>软件测试方法课程笔记(2)</h1><h3 id="2-黑盒测试"><a href="#2-黑盒测试" class="headerlink" title="2. 黑盒测试"></a>2. 黑盒测试</h3><h4 id="2-1-介绍"><a href="#2-1-介绍" class="headerlink" title="2.1 介绍"></a>2.1 介绍</h4><p>优点:</p>
+<ol>
+<li>没有任何的偏向</li>
+<li>无需开发知识</li>
+<li>只考虑用户的看法</li>
+<li>需求确定就可以测试</li>
+</ol>
+<h4 id="2-2-等价类划分"><a href="#2-2-等价类划分" class="headerlink" title="2.2 等价类划分"></a>2.2 等价类划分</h4><p>为了产生少量的测试用例, 并且可以测试大部分的情况, 我们可以使用等价类划分的方法<br>比如对于输入值是范围值, 我们可以使用等价类划分成范围内的和不是范围内的两种等价类</p>
+<p>等价类有一种评判标准, 分为强, 弱, 又分为一般和健壮<br>弱：只单缺陷假设<br>强：多缺陷假设<br>一般：考虑有效值<br>健壮：考虑无效值</p>
+<h4 id="2-3-边界值分析"><a href="#2-3-边界值分析" class="headerlink" title="2.3 边界值分析"></a>2.3 边界值分析</h4><p>也就是对于范围的值, 我们需要取<strong>min, min+, normal, max-, max</strong>五个值<br>如果带有鲁棒性的话, 可以增加<strong>min-, max+</strong>来进行验证</p>
+<p><strong>Summary</strong></p>
+<ul>
+<li>等价类测试的弱形式不如强形式测试全面。</li>
+<li>无效值会引起运行错误的时候（实现语言是强类型），则没有必要做健壮形式的测试。</li>
+<li>错误条件很重要的时候，健壮测试很重要。</li>
+<li>边界值测试是等价类测试的一种补充，两者结合可以加强测试效果。</li>
+<li>决策表技术可以解决变量之间依赖的问题。</li>
+<li>要进行多次尝试，确认最合适的等价类划分。</li>
+</ul>
+<h4 id="2-4-决策表方法"><a href="#2-4-决策表方法" class="headerlink" title="2.4 决策表方法"></a>2.4 决策表方法</h4><p>如下图所示<br><img src="http://upload-images.jianshu.io/upload_images/2601951-c4c3edb1218c36b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>左侧是桩部分，右侧是条目部分，上面是条件部分，下面是行动部分<br>因此，可以引用条件桩，行动桩，条件条目和行动条目.<br>条目部分的一列是一条规则。规则指示在规则的条件部分中指示的条件环境下要采取什么行动.</p>
+<p>我们列出决策表之后, 还可以对无关项进行合并, 比如<br>(Y, Y, N)的结果是和(Y, Y, Y)是一样的, 那么我们可以将其合并为(Y, Y, -)</p>
+<h4 id="2-5-因果图分析方法"><a href="#2-5-因果图分析方法" class="headerlink" title="2.5 因果图分析方法"></a>2.5 因果图分析方法</h4><p>等价分类法和边界值分析法的缺点是没有检查各种输入条件的组合.<br>要检查输入条件的组合并非易事，因为即使可以将输入条件分成等价类，但它们的组合情况可能很多，如果没有一个系统的方法是难以设计测试用例的.<br>借助因果图列出输入数据的各种组合与程序对应动作效果之间的阶段联系，构造判定表，由此设计测试用例是生成测试用例的有效办法.</p>
+<p>这里我们首先给出因果图的几种类型:</p>
+<ol>
+<li>等价, 如果C1 = 1, 那么E1 = 1, 反之亦然<br><img src="http://upload-images.jianshu.io/upload_images/2601951-8a44639d7e7ce2ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></li>
+<li>非C1 = ! E1<br><img src="http://upload-images.jianshu.io/upload_images/2601951-d0a4fdb3f9926cd5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></li>
+<li>或 C1^C2^C3 = E1<br><img src="http://upload-images.jianshu.io/upload_images/2601951-bcf64bfab335f535.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>4.与 C1 and C2 = E1<br><img src="http://upload-images.jianshu.io/upload_images/2601951-dda8e67fb456d1e3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></li>
+</ol>
+<p>给出一些约束:</p>
+<ol>
+<li>异约束(C1,C2必选其一, 或者都不选)<br><img src="http://upload-images.jianshu.io/upload_images/2601951-04ce9194a21627f2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></li>
+<li>或约束 (C1, C2, C3至少有一个)<br><img src="http://upload-images.jianshu.io/upload_images/2601951-be0b0cc7855932ae.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></li>
+<li>唯一约束(必选其一)<br><img src="http://upload-images.jianshu.io/upload_images/2601951-b80fb588ddda26fe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></li>
+<li>要求约束(C1要求C2)<br><img src="http://upload-images.jianshu.io/upload_images/2601951-9a79c832b1eeedbb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></li>
+<li>强制约束(E1把E2覆盖了)<br><img src="http://upload-images.jianshu.io/upload_images/2601951-7167ece401fc8f17.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></li>
+</ol>
+<p>因果图的画的时候要注意使用中间节点来使得整个图易于表达</p>
+<h4 id="2-6-正交矩阵法"><a href="#2-6-正交矩阵法" class="headerlink" title="2.6 正交矩阵法"></a>2.6 正交矩阵法</h4><p>正交矩阵是一种用于测试的系统化的统计方法</p>
+<p>给出几种测试实验的类型:</p>
+<ol>
+<li>全面测试</li>
+<li>单因子测试</li>
+<li>正交测试<ol>
+<li>OTDM(Orthogonal Test Design Method)</li>
+<li>利用伽罗瓦理论进行测试</li>
+</ol>
+</li>
+</ol>
+<p>首先引入<strong>因子</strong>的概念, 因子也就是影响的因素, 拥有自己的定义域, 范围等<br>然后是<strong>水平</strong>的概念, 水平是给定相应因子的值的集合的数目</p>
+<p>正交矩阵(正交表)是该方法的核心, 定义为:</p>
+<script type="math/tex; mode=display">L \_{Runs}(Levels^{Factors})</script><p>其中Runs是矩阵的行数, Factors是矩阵的列数(因子的数目), Levels是因子的最大取值</p>
+<p>关于试验次数给出计算的方法:</p>
+<script type="math/tex; mode=display">Experiment Times=\sum(level\  amout\ of\ every\ factor - 1)+1</script><h4 id="2-7-场景测试"><a href="#2-7-场景测试" class="headerlink" title="2.7 场景测试"></a>2.7 场景测试</h4><p>场景测试是基于用例来进行分析的</p>
+<p>现在的软件都是由事件的触发来控制流程, 事件触发的情景便形成了场景<br>同一个事件不同的触发顺序和处理结果形成了事件流<br>将该思想引入软件测试之中, 生动描绘出事件触发时候的情景, 有利于测试</p>
+<p>关于<strong>事件流</strong>:</p>
+<ol>
+<li>事件的基础流: 覆盖自然发生的事</li>
+<li>事件的可选流</li>
+</ol>
+<p>三步法生成测试用例:</p>
+<ol>
+<li>对于每一个用例, 生成用例场景的full set</li>
+<li>对于每一个场景, 确定至少一个测试用例, 以及可以执行的条件</li>
+<li>对于每一个测试用例, 确定测试的值</li>
+</ol>
+<h4 id="2-8-有限状态机"><a href="#2-8-有限状态机" class="headerlink" title="2.8 有限状态机"></a>2.8 有限状态机</h4><p>提供了对应用基于状态的简单建模方法, 一般以六元组的形式表示</p>
+<script type="math/tex; mode=display">M=(X,Y,Q,q \_0,\delta,O)</script><p>$X$是一个有限的输入集合<br>$Y$是一个有限的输出集合<br>$Q$是一个有限的状态集合<br>$q _0\in Q$是一个初始状态<br>$\delta: Q \times X \rightarrow Q$是状态转移函数<br>$O: Q \times X \rightarrow Y$是输出函数</p>
+<p>给出正常的FSM<br><img src="http://upload-images.jianshu.io/upload_images/2601951-692f0868b384b10f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></p>
+<p>四种错误类型:</p>
+<ol>
+<li>操作错误<br><img src="http://upload-images.jianshu.io/upload_images/2601951-c295a13c6950e71b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>2.转变错误<br><img src="http://upload-images.jianshu.io/upload_images/2601951-9ccdbf8ed9f14fa8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>3.额外状态错误<br><img src="http://upload-images.jianshu.io/upload_images/2601951-30c045a84cfdc099.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>4.丢失状态错误<br><img src="http://upload-images.jianshu.io/upload_images/2601951-c13f943025831fab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></li>
+</ol>
+<p>首先给出假设:</p>
+<ol>
+<li>M是特定的, 最小的, 连接的和确定性的</li>
+<li>M从一个确定的初始状态开始</li>
+<li>M是精确重置到初始状态</li>
+<li>M和IUT有相同的输出集</li>
+</ol>
+<p>关于<strong>Chow的W方法</strong>, 有以下步骤:</p>
+<ol>
+<li>给定有限状态机, 估计出最大的状态数目m</li>
+<li>构造M的描述集合W</li>
+<li>分为两个部分:<ol>
+<li>构造M的测试树</li>
+<li>生成测试数的转变覆盖集合P</li>
+</ol>
+</li>
+<li>利用m和W构造集合Z</li>
+<li>P.Z就是所求的测试集合</li>
+</ol>
+<p>下面对于每一个步骤给出具体的方案:</p>
+<ol>
+<li>最大的状态数目我们只需要令<script type="math/tex">m=|Q|</script></li>
+<li>关于<strong>描述集合W</strong>的构建</li>
+</ol>
+<p>我们令<script type="math/tex">M=(X,Y,Q,q \_1,\delta,O)</script>是一个最小的并且完整的FSM<br><strong>描述集合W</strong>是一个输入序列的有限的集合, 这些输入序列能够区分M的任意状态对的行为, 每一个W中的输入序列都是有限长度, 给定状态$q _i$和$q _j$, W包含一个字符串s, 使得<script type="math/tex">O(q \_i, s)\neq O(q \_j,s)</script><br><img src="http://upload-images.jianshu.io/upload_images/2601951-35945826fae6cccb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>如图所示, 我们可以用W中的字符串(输入序列)baaa来将M中的q1和q2区分开来<br>那么, 接下来我们给出W的具体构造方法</p>
+<ol>
+<li>构造一个集合Q的k等价划分的序列, 记作P1, P2, … ,Pm, m&gt;0</li>
+<li>逆序遍历k等价划分来获得每个状态对的区分序列</li>
+</ol>
+<p>关于Q的k等价划分, 我们记作$P _k$, 是n个有限集合$\sum _{k1}, \sum _{k2}, …,\sum _{kn} $的集合, 使得<script type="math/tex">\bigcup \_{i=1}^{n}\sum \_{ki}=Q</script><br>状态如果属于$\sum _{ki}$就称为<strong>k等价</strong>的<br>如果u属于$\sum _{ki}$, 同时v属于$\sum _{kj}$, i ≠ j, 那么u和k就称为<strong>k可区分</strong>的<br>我们以构建1-等价划分为例, 首先给出FSM<br><img src="http://upload-images.jianshu.io/upload_images/2601951-b53398e35c3ac5d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>首先我们对输入输出进行简单的划分, 得到<br><img src="http://upload-images.jianshu.io/upload_images/2601951-39d297cbb8938243.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>我们可以继续构建2-等价划分, 我们对P1表进行重写, 得<br><img src="http://upload-images.jianshu.io/upload_images/2601951-10e60c7279dc86cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>状态下标后面多了一个划分组的索引, 进而的得到P2表<br><img src="http://upload-images.jianshu.io/upload_images/2601951-1fdc6e481af452e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>重复该过程, 我们最终可以得到<br><img src="http://upload-images.jianshu.io/upload_images/2601951-5b04dc1bbc960131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></p>
+<p>那么如何利用一堆表来找到区分状态的序列呢?<br>举个例子, 我们如果想找到q2和q3的区分序列, 就需要找到在Pi中q2和q3同一个划分, 但是p(i+1)就不同了, 找到这样的i值<br>很容易得到P1和P2, P1中的不同输入也就是区分序列了, 但是P1中对于所有输入都可以区分, 我们选择z = a<br>进一步我们需要q1和q5的的区分序列, P1中我们继续选择a, 更新z = z.a = aa, 由于该转变无法继续区分序列了, 到这里会结束<br>我们可以计算一下输出</p>
+<script type="math/tex; mode=display">O(q \_2, "aa") = 00 \\ O(q \_3, "aa") = 01</script><p>这就是最小的可区分序列了, 我们可以遍历所有状态对, 最后生成W集合</p>
+<ol>
+<li>具体分两个步骤的细节:<ol>
+<li>对M构建测试树<br>一个FSM的测试树, 以初始化状态为根节点, 它包含从根节点至少一条路径到当前FSM的所有状态, 下面给出具体的测试树的构造方法.<br>状态$q _0$, 初始化的状态, 是测试树的根, 假设测试树已经被构造到水平k, 第k+1的水平将会被构建<br>在水平k选择一个节点n,<br>如果从1到k水平中出现出现过, 那么n就是叶子节点并且不能被继续展开,<br>如果n不是叶子节点, 那么我们将其扩展, 增加节点n的一个分支通向一个新的节点m, 如果$\delta(n,x)=m$, 这个分支将会被标记为x, 这个步骤对k水平的所有节点做一遍<br><img src="http://upload-images.jianshu.io/upload_images/2601951-af42a076dd3aa362.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></li>
+<li>利用测试树生成转变覆盖集合P<br>转变覆盖集合P的生成方法很简单, 就是将从测试树的根节点出发, 所有可能的输出构成一个集合, 给出我们这个测试树的P集合<br><img src="http://upload-images.jianshu.io/upload_images/2601951-6d94be1b217f35c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></li>
+</ol>
+</li>
+<li><p>接下来我们来构造Z集合<br>给出Z集合的计算方法: <script type="math/tex">Z=X^0.W\cup X^1.W\cup ... \cup X^{m-1-n}.W\cup X^{m-n}.W</script><br>对于m=n, 易得<script type="math/tex">Z=X^0.W=W</script><br>特别地<br><img src="http://upload-images.jianshu.io/upload_images/2601951-31782b86a3a1f84c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></p>
+</li>
+<li><p>测试集合 = P.Z</p>
+</li>
+</ol>
+<p>我们按如下步骤对实现进行测试:</p>
+<ol>
+<li>找到对应T的每个元素的回应</li>
+<li>生成测试用例, 注意到虽然应用是根据M来建模的, 仍然可能在T的元素被运用之前有一些元素被设置</li>
+<li>执行应用并且检查是否和回应对应, 测试后重置应用的状态为初始状态</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/软件测试/" rel="tag"># 软件测试</a>
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/05/软件测试方法课程笔记(1)/" rel="next" title="软件测试方法课程笔记(1)">
+                <i class="fa fa-chevron-left"></i> 软件测试方法课程笔记(1)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Mezereon" />
+            
+              <p class="site-author-name" itemprop="name">Mezereon</p>
+              <p class="site-description motion-element" itemprop="description">With Saber</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MezereonXP" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/202fe3605b6d" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_34206952" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#软件测试方法课程笔记-2"><span class="nav-number">1.</span> <span class="nav-text">软件测试方法课程笔记(2)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-黑盒测试"><span class="nav-number">1.0.1.</span> <span class="nav-text">2. 黑盒测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-介绍"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">2.1 介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-等价类划分"><span class="nav-number">1.0.1.2.</span> <span class="nav-text">2.2 等价类划分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-边界值分析"><span class="nav-number">1.0.1.3.</span> <span class="nav-text">2.3 边界值分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-决策表方法"><span class="nav-number">1.0.1.4.</span> <span class="nav-text">2.4 决策表方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-因果图分析方法"><span class="nav-number">1.0.1.5.</span> <span class="nav-text">2.5 因果图分析方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-正交矩阵法"><span class="nav-number">1.0.1.6.</span> <span class="nav-text">2.6 正交矩阵法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-7-场景测试"><span class="nav-number">1.0.1.7.</span> <span class="nav-text">2.7 场景测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-8-有限状态机"><span class="nav-number">1.0.1.8.</span> <span class="nav-text">2.8 有限状态机</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mezereon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
