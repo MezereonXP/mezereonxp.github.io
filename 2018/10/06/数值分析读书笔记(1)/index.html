@@ -87,14 +87,10 @@
 <meta property="og:site_name" content="MyBlog">
 <meta property="og:description" content="数值分析读书笔记（1）导论1.数学问题与数值计算问题一般来说，解决实际问题的第一步是将实际问题转换为数学问题，接着建立数学模型来解决这个数学问题，而理论解或者解析解通常难以求得，于是数值计算的方法应运而生 首先我们要将一个数学问题转化成数值问题  数值问题是指输入数据与输出数据之间函数关系的一个确定而无歧义的描述  按照建立数值问题的基本形式，数学问题可以分为两大类  包含非有理函数或未知函数 主">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi? $$e(x">
-<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi?$$\epsilon ^ *=\epsilon ^ * (x">
-<meta property="og:image" content="http://www.forkosh.com/mathtex.cgi?$$\lim_{k\to \infty}\frac{\begin{vmatrix} x_{k+1}-x\end{vmatrix}}{\begin{vmatrix} x_{k}-x\end{vmatrix}}=c_r=0$$">
-<meta property="og:updated_time" content="2018-10-05T16:58:14.279Z">
+<meta property="og:updated_time" content="2018-10-05T16:59:55.863Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数值分析读书笔记（1）导论">
 <meta name="twitter:description" content="数值分析读书笔记（1）导论1.数学问题与数值计算问题一般来说，解决实际问题的第一步是将实际问题转换为数学问题，接着建立数学模型来解决这个数学问题，而理论解或者解析解通常难以求得，于是数值计算的方法应运而生 首先我们要将一个数学问题转化成数值问题  数值问题是指输入数据与输出数据之间函数关系的一个确定而无歧义的描述  按照建立数值问题的基本形式，数学问题可以分为两大类  包含非有理函数或未知函数 主">
-<meta name="twitter:image" content="http://www.forkosh.com/mathtex.cgi? $$e(x">
 
 
 
@@ -423,81 +419,72 @@
 <li>舍入误差</li>
 </ul>
 <p>这里引入绝对误差，相对误差和有效数字的概念</p>
-<p>首先是<strong>绝对误差</strong>  <img src="http://www.forkosh.com/mathtex.cgi? $$e(x" alt="">=x-\tilde {x}<script type="math/tex">) , 其中![](http://www.forkosh.com/mathtex.cgi?</script>\tilde x<script type="math/tex">)为x的近似值,我们可以得到**绝对误差界**
-![](http://www.forkosh.com/mathtex.cgi?</script>\begin{vmatrix} e(x) \end{vmatrix} =\begin{vmatrix} x-\tilde x \end{vmatrix} \le \Delta (x) =\Delta  $)</p>
-<p>然而绝对误差并不能很好的表现数的近似程度，引出<strong>相对误差</strong><br><img src="http://www.forkosh.com/mathtex.cgi?$$\epsilon ^ *=\epsilon ^ * (x" alt=""> = \frac{e(x)}{x} =\frac{x-\tilde x}{x} $$)<br>自然也有<strong>相对误差界</strong><br>![](<a href="http://www.forkosh.com/mathtex.cgi?" target="_blank" rel="noopener">http://www.forkosh.com/mathtex.cgi?</a></p>
-<script type="math/tex; mode=display">\begin{vmatrix} \epsilon ^ * \end{vmatrix} = \begin{vmatrix} \epsilon ^ * (x) \end{vmatrix} = \begin{vmatrix}  \frac{e(x)}{x}  \end{vmatrix}=\begin{vmatrix}\frac{x-\tilde x}{x}\end{vmatrix} \le \delta ^*(x)=\delta^*$$)
-注意到分母为x,而实际当中我们经常用![](http://www.forkosh.com/mathtex.cgi?$$\tilde x$$)来代替分母，即![](http://www.forkosh.com/mathtex.cgi?
-$$\begin{vmatrix}\epsilon\end{vmatrix}=  \begin{vmatrix} \epsilon (x) \end{vmatrix}= \begin{vmatrix} \frac{e(x)}{\tilde x} \end{vmatrix}=\begin{vmatrix} \frac{x-\tilde x}{\tilde x} \end{vmatrix} \le \delta(x)=\delta $$)
-
-接下来给出有效数字的定义
-**如果近似值的误差界是某一位的半个单位，且该位到近似值的第一位有n个非零数，那么该近似值就有n位有效数字**
-> 使用四舍五入法可以使绝对误差最小，并且利用四舍五入法来计算近似值，每一位数值都是有效可靠的
-
-可进一步探寻近似值和相对误差之间的某种联系,记
-![](http://www.forkosh.com/mathtex.cgi?$$\tilde x = \pm 0.a_1a_2\cdots a_n \times 10^m = \pm a_1a_2\cdots a_n \times 10^{m-1}  $$)
-通过简单的放缩可得
-![](http://www.forkosh.com/mathtex.cgi?$$a_1 \times 10^{m-1} \le \tilde x \le (a_1+1) \times 10^{m-1}$$)
-那么当近似值的有效数字为n时，相对误差的上界为
-![](http://www.forkosh.com/mathtex.cgi?$$\begin{vmatrix} \epsilon (x) \end{vmatrix}= \begin{vmatrix} \frac{e(x)}{\tilde x} \end{vmatrix}=\begin{vmatrix} \frac{x-\tilde x}{\tilde x} \end{vmatrix} \le \frac{0.5 \times 10^{m-n}}{a_1 \times 10^{m-1} }=\frac{1}{2a_1}\times 10^{1-n}$$)
-
-由此可以引申出一个定理
-如果x的有效数字位数为n，则有 ![](http://www.forkosh.com/mathtex.cgi?$$\delta \le \frac{1}{2a_1}\times 10^{1-n}$$)
-反之，如果![](http://www.forkosh.com/mathtex.cgi?$$\delta \ge \frac{1}{2(a_1+1)}\times 10^{1-n}),则有效数字位数至少有n
-
-讨论一下函数的误差
-其中绝对误差为
-![](http://upload-images.jianshu.io/upload_images/2601951-4f137db8103810bd.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-相对误差为
-![](http://www.forkosh.com/mathtex.cgi?$$\epsilon(y)=\frac{e(y)}{\tilde y}=\frac{f^`(\tilde x)e(x)}{\tilde y} =\frac{\tilde xf^`(\tilde x)e(x)}{\tilde y \tilde x}=\frac{\tilde x f^`(\tilde x)}{\tilde y}\epsilon (x)$$)
-相对误差界为
-![](http://www.forkosh.com/mathtex.cgi?$$\begin{vmatrix}\epsilon(y)\end{vmatrix}\le\frac{\begin{vmatrix}\tilde x \end{vmatrix}\begin{vmatrix}f^`(\tilde x)\end{vmatrix}}{\begin{vmatrix}\tilde y\end{vmatrix}}\delta(x)$$)
-从而
-![](http://www.forkosh.com/mathtex.cgi?$$Def : \delta(y)=\frac{\begin{vmatrix}\tilde x \end{vmatrix}\begin{vmatrix}f^`(\tilde x)\end{vmatrix}}{\begin{vmatrix}\tilde y\end{vmatrix}}\delta(x) = A_{f}\delta(x)$$)
-![](http://www.forkosh.com/mathtex.cgi?$A_{f}$)即函数的相对误差界放大系数
-![](http://www.forkosh.com/mathtex.cgi?$$A_{f}=\frac{\begin{vmatrix}\tilde x \end{vmatrix}\begin{vmatrix}f^`(\tilde x)\end{vmatrix}}{\begin{vmatrix}\tilde y\end{vmatrix}}$$)
-
-进一步推广至多元函数
-利用Tayor展开可知其中绝对误差为
-![](http://upload-images.jianshu.io/upload_images/2601951-e0fae35e2cb5d808.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-给出绝对误差界
-![](http://upload-images.jianshu.io/upload_images/2601951-eef400778ae01e88.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-得相对误差界
-![](http://upload-images.jianshu.io/upload_images/2601951-72004df21fdb0e2b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-![](http://www.forkosh.com/mathtex.cgi?$A_{fi}$)即多元函数的相对误差界放大系数
-![](http://upload-images.jianshu.io/upload_images/2601951-fc622fc3884d0b2b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-接下来介绍减少误差的计算法则
-- 避免两相近数做减法
-- 避免大数吃掉小数
-- 避免除数过小
-- 简化运算，避免重复运算
-
-**关于数值稳定的定义**
-> 如果一个算法经过多次计算，将初始的误差变大了，陈该算法为数值不稳定的，反之为数值稳定的
-
-**关于病态问题的定义**
-> 如果一个数值问题，对输入做出轻微的扰动会对输出产生较大的影响，称该问题为病态的
-
-##4.算法性态分析概述
-一个算法的复杂度有两种，分别为
-- 时间复杂度（指需要的计算机的时间资源）
-- 空间复杂度（指需要的计算机的储存器资源）
-
-> 计算复杂度取决于被求解问题的规模大小，输入数据和算法本身，**计算复杂度用算法的基本运算次数与基本操作量来测量**
-
-数学上用时间复杂度为问题规模的**多项式函数**或者**指数函数**来作为区分算法好与坏的分水岭，如果时间复杂度为问题规模的多项式函数那么这个算法是好的，而如果是指数函数则被称为不好的算法
-
->由于输入数据的不同，时间复杂度也不同，我们引入复杂度的期望作为**平均时间复杂度**
-
-我们利用算法复杂度来度量那些使用直接法的算法，对于迭代的算法我们使用**收敛率**来评价
-
-由于这里没有对向量，矩阵等给出其大小的“测度”，故先讨论下迭代法产生的实数的序列![](http://www.forkosh.com/mathtex.cgi?$$\lbrace x_k\rbrace_{k=0}^\infty$$)
-收敛率的高低使用**收敛阶**的大小衡量
-
-Def:如果上述实数序列收敛于x，即![](http://www.forkosh.com/mathtex.cgi?$$\lim_{k\to \infty}x_k=x$$)，假定存在某个正数![](http://www.forkosh.com/mathtex.cgi?$r\in [1,\infty$),使得极限
-![](http://www.forkosh.com/mathtex.cgi?</script><p>\lim_{k\to \infty}\frac{e_{k+1}}{e_k^r}=\lim_{k\to \infty}\frac{\begin{vmatrix} x_{k+1}-x\end{vmatrix}}{\begin{vmatrix} x_{k}-x\end{vmatrix}^r}=c_r&gt;0$$)<br>存在，称该迭代法是r阶收敛</p>
+<p>首先是<strong>绝对误差</strong>  $ e(x)=x-\tilde x$ ,其中$\tilde x$为$x$的近似值,我们可以得到<strong>绝对误差界</strong></p>
+<script type="math/tex; mode=display">\begin{vmatrix} e(x) \end{vmatrix} =\begin{vmatrix} x-\tilde x \end{vmatrix} \le \Delta (x) =\Delta</script><p>然而绝对误差并不能很好的表现数的近似程度，引出<strong>相对误差</strong></p>
+<script type="math/tex; mode=display">\epsilon ^ *=\epsilon ^ * (x) = \frac{e(x)}{x} =\frac{x-\tilde x}{x}</script><p>自然也有<strong>相对误差界</strong></p>
+<script type="math/tex; mode=display">\begin{vmatrix} \epsilon ^ * \end{vmatrix} = \begin{vmatrix} \epsilon ^ * (x) \end{vmatrix} = \begin{vmatrix}  \frac{e(x)}{x}  \end{vmatrix}=\begin{vmatrix}\frac{x-\tilde x}{x}\end{vmatrix} \le \delta ^*(x)=\delta^*</script><p>注意到分母为$x$,而实际当中我们经常用$\tilde x$来代替分母，即</p>
+<script type="math/tex; mode=display">\begin{vmatrix}\epsilon\end{vmatrix}=  \begin{vmatrix} \epsilon (x) \end{vmatrix}= \begin{vmatrix} \frac{e(x)}{\tilde x} \end{vmatrix}=\begin{vmatrix} \frac{x-\tilde x}{\tilde x} \end{vmatrix} \le \delta(x)=\delta</script><p>接下来给出有效数字的定义<br><strong>如果近似值$\tilde x$的误差界是某一位的半个单位，且该位到$\tilde x$的第一位有n个非零数，那么$\tilde x$就有n位有效数字</strong></p>
+<blockquote>
+<p>使用四舍五入法可以使绝对误差最小，并且利用四舍五入法来计算近似值，每一位数值都是有效可靠的</p>
+</blockquote>
+<p>可进一步探寻近似值和相对误差之间的某种联系,记</p>
+<script type="math/tex; mode=display">\tilde x = \pm 0.a_1a_2\cdots a_n \times 10^m = \pm a_1a_2\cdots a_n \times 10^{m-1}</script><p>通过简单的放缩可得</p>
+<script type="math/tex; mode=display">a_1 \times 10^{m-1} \le \tilde x \le (a_1+1) \times 10^{m-1}</script><p>那么当$\tilde x$的有效数字为$n$时，相对误差的上界为</p>
+<script type="math/tex; mode=display">\begin{vmatrix} \epsilon (x) \end{vmatrix}= \begin{vmatrix} \frac{e(x)}{\tilde x} \end{vmatrix}=\begin{vmatrix} \frac{x-\tilde x}{\tilde x} \end{vmatrix} \le \frac{0.5 \times 10^{m-n}}{a_1 \times 10^{m-1} }=\frac{1}{2a_1}\times 10^{1-n}</script><p>由此可以引申出一个定理</p>
+<script type="math/tex; mode=display">如果x的有效数字位数为n，则有 \delta \le \frac{1}{2a_1}\times 10^{1-n}</script><script type="math/tex; mode=display">反之，如果\delta \ge \frac{1}{2(a_1+1)}\times 10^{1-n},则有效数字位数至少有n</script><p>讨论一下函数的误差<br>其中绝对误差为</p>
+<script type="math/tex; mode=display">e(y)=f(x)-f(\tilde x)\approx f^`(\tilde x)(x-\tilde x)=f^`(\tilde x)e(x)</script><p>相对误差为</p>
+<script type="math/tex; mode=display">\epsilon(y)=\frac{e(y)}{\tilde y}=\frac{f^`(\tilde x)e(x)}{\tilde y} =\frac{\tilde xf^`(\tilde x)e(x)}{\tilde y \tilde x}=\frac{\tilde x f^`(\tilde x)}{\tilde y}\epsilon (x)</script><p>相对误差界为</p>
+<script type="math/tex; mode=display">\begin{vmatrix}\epsilon(y)\end{vmatrix}\le\frac{\begin{vmatrix}\tilde x \end{vmatrix}\begin{vmatrix}f^`(\tilde x)\end{vmatrix}}{\begin{vmatrix}\tilde y\end{vmatrix}}\delta(x)</script><p>从而</p>
+<script type="math/tex; mode=display">Def : \delta(y)=\frac{\begin{vmatrix}\tilde x \end{vmatrix}\begin{vmatrix}f^`(\tilde x)\end{vmatrix}}{\begin{vmatrix}\tilde y\end{vmatrix}}\delta(x) = A_{f}\delta(x)</script><p>$A_{f}$即函数的相对误差界放大系数</p>
+<script type="math/tex; mode=display">A_{f}=\frac{\begin{vmatrix}\tilde x \end{vmatrix}\begin{vmatrix}f^`(\tilde x)\end{vmatrix}}{\begin{vmatrix}\tilde y\end{vmatrix}}</script><p>进一步推广至多元函数<br>利用Tayor展开可知其中绝对误差为</p>
+<script type="math/tex; mode=display">\begin{align}
+e(y)& =f(x_1,x_2,\ldots,x_n)-f(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)\\
+    &\approx \sum_{i=1}^n \frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)}{\partial \tilde x_i}(x_i-\tilde x_i)+R\\
+    其中R&=\frac{1}{2!}\left(\sum_{i=1}^n(x_i-\tilde{x}_i)\frac{\partial}{\partial x_n}\right)^2f(\xi_1,\xi_2,\ldots,\xi_n)
+    \end{align}</script><p>给出绝对误差界</p>
+<script type="math/tex; mode=display">\begin{align}
+\begin{vmatrix}e(y) \end{vmatrix}& =\begin{vmatrix}f(x_1,x_2,\ldots,x_n)-f(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)\end{vmatrix}\\
+        &\le\sum_{i=1}^n \begin{vmatrix}\frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)}{\partial \tilde x_i}\end{vmatrix}\bullet e(x_i)\\
+    &\le\sum_{i=1}^n \begin{vmatrix}\frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)}{\partial \tilde x_i}\end{vmatrix}\bullet\Delta(x_i)=\Delta(y)\\
+    \end{align}</script><p>得相对误差界</p>
+<script type="math/tex; mode=display">\begin{align}
+    \begin{vmatrix}\epsilon(y)\end{vmatrix}&=\frac{\begin{vmatrix}e(y)\end{vmatrix}}{\begin{vmatrix}\tilde y\end{vmatrix}}\le\sum_{i=1}^n \begin{vmatrix}\frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)m}{\partial \tilde x_i}\end{vmatrix}\bullet \frac{\begin{vmatrix}e(x_i)\end{vmatrix}}{\begin{vmatrix}\tilde{y}\end{vmatrix}}\\
+    &=\sum_{i=1}^n \begin{vmatrix}\frac{\tilde{x_i}}{\tilde{y}}\end{vmatrix}\begin{vmatrix}\frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)}{\partial \tilde x_i}\end{vmatrix}\bullet \frac{\begin{vmatrix}e(x_i)\end{vmatrix}}{\begin{vmatrix}\tilde{x_i}\end{vmatrix}}\\
+    &\le\sum_{i=1}^n \begin{vmatrix}\frac{\tilde{x_i}}{\tilde{y}}\end{vmatrix}\begin{vmatrix}\frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)}{\partial \tilde x_i}\end{vmatrix}\bullet \delta(x_i)\\
+    &=\sum_{i=1}^n A_{fi}\delta(x_i)=\delta(y)
+    \end{align}</script><p>$A_{fi}$即多元函数的相对误差界放大系数</p>
+<script type="math/tex; mode=display">A_{fi}=\begin{vmatrix}\frac{\tilde{x_i}}{\tilde{y}}\end{vmatrix}\begin{vmatrix}\frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)}{\partial \tilde x_i}\end{vmatrix}，i=1,2,\ldots,n</script><p>接下来介绍减少误差的计算法则</p>
 <ul>
+<li>避免两相近数做减法</li>
+<li>避免大数吃掉小数</li>
+<li>避免除数过小</li>
+<li>简化运算，避免重复运算</li>
+</ul>
+<p><strong>关于数值稳定的定义</strong></p>
+<blockquote>
+<p>如果一个算法经过多次计算，将初始的误差变大了，陈该算法为数值不稳定的，反之为数值稳定的</p>
+</blockquote>
+<p><strong>关于病态问题的定义</strong></p>
+<blockquote>
+<p>如果一个数值问题，对输入做出轻微的扰动会对输出产生较大的影响，称该问题为病态的</p>
+</blockquote>
+<h2 id="4-算法性态分析概述"><a href="#4-算法性态分析概述" class="headerlink" title="4.算法性态分析概述"></a>4.算法性态分析概述</h2><p>一个算法的复杂度有两种，分别为</p>
+<ul>
+<li>时间复杂度（指需要的计算机的时间资源）</li>
+<li>空间复杂度（指需要的计算机的储存器资源）</li>
+</ul>
+<blockquote>
+<p>计算复杂度取决于被求解问题的规模大小，输入数据和算法本身，<strong>计算复杂度用算法的基本运算次数与基本操作量来测量</strong></p>
+</blockquote>
+<p>数学上用时间复杂度为问题规模的<strong>多项式函数</strong>或者<strong>指数函数</strong>来作为区分算法好与坏的分水岭，如果时间复杂度为问题规模的多项式函数那么这个算法是好的，而如果是指数函数则被称为不好的算法</p>
+<blockquote>
+<p>由于输入数据的不同，时间复杂度也不同，我们引入复杂度的期望作为<strong>平均时间复杂度</strong></p>
+</blockquote>
+<p>我们利用算法复杂度来度量那些使用直接法的算法，对于迭代的算法我们使用<strong>收敛率</strong>来评价</p>
+<p>由于这里没有对向量，矩阵等给出其大小的“测度”，故先讨论下迭代法产生的实数的序列<script type="math/tex">\lbrace x_k\rbrace_{k=0}^\infty</script><br>收敛率的高低使用<strong>收敛阶</strong>的大小衡量</p>
+<script type="math/tex; mode=display">Def:如果上述实数序列\lbrace x_k\rbrace_{k=0}^\infty收敛于x，即\lim_{k\to \infty}x_k=x，假定存在某个正数r\in [1,\infty),使得极限\\
+\lim_{k\to \infty}\frac{e_{k+1}}{e_k^r}=\lim_{k\to \infty}\frac{\begin{vmatrix} x_{k+1}-x\end{vmatrix}}{\begin{vmatrix} x_{k}-x\end{vmatrix}^r}=c_r>0
+存在，称该迭代法是r阶收敛</script><ul>
 <li>r=1时为线性收敛</li>
 <li>r&gt;1时为超线性收敛<ul>
 <li>r=2，平方收敛</li>
@@ -505,7 +492,8 @@ Def:如果上述实数序列收敛于x，即![](http://www.forkosh.com/mathtex.c
 </ul>
 </li>
 </ul>
-<p>需要注意的是，若有<br><img src="http://www.forkosh.com/mathtex.cgi?$$\lim_{k\to \infty}\frac{\begin{vmatrix} x_{k+1}-x\end{vmatrix}}{\begin{vmatrix} x_{k}-x\end{vmatrix}}=c_r=0$$" alt=""><br>也称为超线性收敛<br>收敛阶如果比较小，则需要加速，这是数值计算的重要研究课题</p>
+<p>需要注意的是，若有</p>
+<script type="math/tex; mode=display">\lim_{k\to \infty}\frac{\begin{vmatrix} x_{k+1}-x\end{vmatrix}}{\begin{vmatrix} x_{k}-x\end{vmatrix}}=c_r=0</script><p>也称为超线性收敛<br>收敛阶如果比较小，则需要加速，这是数值计算的重要研究课题</p>
 
       
     </div>
@@ -704,7 +692,7 @@ Def:如果上述实数序列收敛于x，即![](http://www.forkosh.com/mathtex.c
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数值分析读书笔记（1）导论"><span class="nav-number">1.</span> <span class="nav-text">数值分析读书笔记（1）导论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-数学问题与数值计算问题"><span class="nav-number">1.1.</span> <span class="nav-text">1.数学问题与数值计算问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-数值计算的基本数学思想与方法"><span class="nav-number">1.2.</span> <span class="nav-text">2.数值计算的基本数学思想与方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-计算误差的基本概念以及误差分析"><span class="nav-number">1.3.</span> <span class="nav-text">3.计算误差的基本概念以及误差分析</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数值分析读书笔记（1）导论"><span class="nav-number">1.</span> <span class="nav-text">数值分析读书笔记（1）导论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-数学问题与数值计算问题"><span class="nav-number">1.1.</span> <span class="nav-text">1.数学问题与数值计算问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-数值计算的基本数学思想与方法"><span class="nav-number">1.2.</span> <span class="nav-text">2.数值计算的基本数学思想与方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-计算误差的基本概念以及误差分析"><span class="nav-number">1.3.</span> <span class="nav-text">3.计算误差的基本概念以及误差分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-算法性态分析概述"><span class="nav-number">1.4.</span> <span class="nav-text">4.算法性态分析概述</span></a></li></ol></li></ol></div>
             
 
           </div>
