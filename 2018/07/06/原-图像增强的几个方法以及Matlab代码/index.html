@@ -79,16 +79,30 @@
 
 
 
-<meta name="description" content="With Saber">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MyBlog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为$I$ 则其中每一个像素点的灰度值为$I(x,y)$ 我们利用简单的线性变换可以得到： $I(x,y)^=kI(x,y)+b$ 取$k=1,b=16$可以得到    这里给出关键代码 123456original = imread(strcat(strcat(&apos;resource\&apos;,name),&apos;.b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图像增强的几个方法以及Matlab代码">
+<meta property="og:url" content="http://yoursite.com/2018/07/06/原-图像增强的几个方法以及Matlab代码/index.html">
 <meta property="og:site_name" content="MyBlog">
-<meta property="og:description" content="With Saber">
+<meta property="og:description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为$I$ 则其中每一个像素点的灰度值为$I(x,y)$ 我们利用简单的线性变换可以得到： $I(x,y)^=kI(x,y)+b$ 取$k=1,b=16$可以得到    这里给出关键代码 123456original = imread(strcat(strcat(&apos;resource\&apos;,name),&apos;.b">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/qkbqr6vm63.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/o05khpgona.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/kt8u4o1kx3.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/5nohrkq1zn.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/48pxz2e18h.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/8dm2dfnvag.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/cvrwgg1qi8.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/2flvtmp5q5.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/av5ms0fcu6.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/i23j6xa959.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/me1a45r0z7.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/f2fua1o891.png">
+<meta property="og:updated_time" content="2018-10-05T03:30:30.473Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MyBlog">
-<meta name="twitter:description" content="With Saber">
+<meta name="twitter:title" content="图像增强的几个方法以及Matlab代码">
+<meta name="twitter:description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为$I$ 则其中每一个像素点的灰度值为$I(x,y)$ 我们利用简单的线性变换可以得到： $I(x,y)^=kI(x,y)+b$ 取$k=1,b=16$可以得到    这里给出关键代码 123456original = imread(strcat(strcat(&apos;resource\&apos;,name),&apos;.b">
+<meta name="twitter:image" content="https://ask.qcloudimg.com/http-save/2616258/qkbqr6vm63.png">
 
 
 
@@ -118,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/07/06/原-图像增强的几个方法以及Matlab代码/"/>
 
 
 
 
 
-  <title>MyBlog</title>
+  <title>图像增强的几个方法以及Matlab代码 | MyBlog</title>
   
 
 
@@ -143,8 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,137 +230,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/05/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mezereon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MyBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/05/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-05T10:53:00+08:00">
-                2018-10-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -377,9 +262,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/06/原-图像增强的几个方法以及Matlab代码/" itemprop="url">图像增强的几个方法以及Matlab代码</a></h1>
+          <h1 class="post-title" itemprop="name headline">图像增强的几个方法以及Matlab代码</h1>
         
 
         <div class="post-meta">
@@ -429,9 +312,7 @@
       
 
       
-        
-          
-            <h3 id="1-灰度线性变换"><a href="#1-灰度线性变换" class="headerlink" title="1. 灰度线性变换"></a>1. 灰度线性变换</h3><p>灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作</p>
+        <h3 id="1-灰度线性变换"><a href="#1-灰度线性变换" class="headerlink" title="1. 灰度线性变换"></a>1. 灰度线性变换</h3><p>灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作</p>
 <p>假设图像为$I$</p>
 <p>则其中每一个像素点的灰度值为$I(x,y)$</p>
 <p>我们利用简单的线性变换可以得到：</p>
@@ -492,8 +373,6 @@
 <p><img src="https://ask.qcloudimg.com/http-save/2616258/f2fua1o891.png" alt="Alt text"></p>
 <p>给出部分关键代码</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">I=double(I);</span><br><span class="line">[M,N]=<span class="built_in">size</span>(I);</span><br><span class="line">rL=<span class="number">0.5</span>;</span><br><span class="line">rH=<span class="number">4.7</span>;<span class="comment">%可根据需要效果调整参数</span></span><br><span class="line">c=<span class="number">2</span>;</span><br><span class="line">d0=<span class="number">10</span>;</span><br><span class="line">I1=<span class="built_in">log</span>(I+<span class="number">1</span>);<span class="comment">%取对数</span></span><br><span class="line">FI=fft2(I1);<span class="comment">%傅里叶变换</span></span><br><span class="line">n1=<span class="built_in">floor</span>(M/<span class="number">2</span>);</span><br><span class="line">n2=<span class="built_in">floor</span>(N/<span class="number">2</span>);</span><br><span class="line">H = <span class="built_in">ones</span>(M, N);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:M</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:N</span><br><span class="line">        D(<span class="built_in">i</span>,<span class="built_in">j</span>)=((<span class="built_in">i</span>-n1).^<span class="number">2</span>+(<span class="built_in">j</span>-n2).^<span class="number">2</span>);</span><br><span class="line">        H(<span class="built_in">i</span>,<span class="built_in">j</span>)=(rH-rL).*(<span class="built_in">exp</span>(c*(-D(<span class="built_in">i</span>,<span class="built_in">j</span>)./(d0^<span class="number">2</span>))))+rL;<span class="comment">%高斯同态滤波</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">I2=ifft2(H.*FI);<span class="comment">%傅里叶逆变换</span></span><br><span class="line">I3=<span class="built_in">real</span>(<span class="built_in">exp</span>(I2));</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>),imshow(I3,[]);title(<span class="string">'同态滤波增强后'</span>);</span><br></pre></td></tr></table></figure>
-          
-        
       
     </div>
     
@@ -510,12 +389,28 @@
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/05/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -525,10 +420,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -536,6 +432,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -556,8 +456,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -599,6 +508,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-灰度线性变换"><span class="nav-number">1.</span> <span class="nav-text">1. 灰度线性变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-直方图均衡变换"><span class="nav-number">2.</span> <span class="nav-text">2. 直方图均衡变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-同态滤波"><span class="nav-number">3.</span> <span class="nav-text">3. 同态滤波</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -732,6 +657,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
