@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="软件测试,笔记," />
+  <meta name="keywords" content="java,时序数据,异常检测," />
 
 
 
@@ -79,18 +79,30 @@
 
 
 
-<meta name="description" content="软件测试方法课程笔记(3)3. 白盒测试 这是一种验证技术，软件工程师可以用它来检查他们的代码是否按预期工作。它考虑到系统或组件的内部机制。它也被称为结构测试，清楚的盒测试和玻璃盒测试。  白盒测试又分为静态测试和动态测试静态白盒测试方法:  代码检查法 静态结构分析法 静态质量度量法等.  动态白盒测试是基于覆盖的测试，尽可能覆盖程序的结构特性和逻辑路径. 白盒测试主要用于单元测试 白盒测试必须">
-<meta name="keywords" content="软件测试,笔记">
+<meta name="description" content="上文我们使用LOF-ICAD方法实现了时序数据的异常检测, 这次我们介绍一种更为常见的方法———-指数平滑. 指数平滑的方法, 其原理就是通过拟合出一个近似的模型来对未来进行预测, 我们可以通过这个预测来和实际的值进行比较, 如果差距过大, 我们就可以判定这个点是异常的. 首先我们介绍一下一阶指数平滑的算法 一阶指数平滑算法这里给出一些符号的定义:  序列长度记为n, 参数记为α(指数平滑算法只有">
+<meta name="keywords" content="java,时序数据,异常检测">
 <meta property="og:type" content="article">
-<meta property="og:title" content="软件测试方法课程笔记(3)">
-<meta property="og:url" content="https://mezereonxp.github.io/2018/10/06/软件测试方法课程笔记(3)/index.html">
+<meta property="og:title" content="指数平滑方法">
+<meta property="og:url" content="https://mezereonxp.github.io/2018/10/06/指数平滑方法/index.html">
 <meta property="og:site_name" content="MyBlog">
-<meta property="og:description" content="软件测试方法课程笔记(3)3. 白盒测试 这是一种验证技术，软件工程师可以用它来检查他们的代码是否按预期工作。它考虑到系统或组件的内部机制。它也被称为结构测试，清楚的盒测试和玻璃盒测试。  白盒测试又分为静态测试和动态测试静态白盒测试方法:  代码检查法 静态结构分析法 静态质量度量法等.  动态白盒测试是基于覆盖的测试，尽可能覆盖程序的结构特性和逻辑路径. 白盒测试主要用于单元测试 白盒测试必须">
+<meta property="og:description" content="上文我们使用LOF-ICAD方法实现了时序数据的异常检测, 这次我们介绍一种更为常见的方法———-指数平滑. 指数平滑的方法, 其原理就是通过拟合出一个近似的模型来对未来进行预测, 我们可以通过这个预测来和实际的值进行比较, 如果差距过大, 我们就可以判定这个点是异常的. 首先我们介绍一下一阶指数平滑的算法 一阶指数平滑算法这里给出一些符号的定义:  序列长度记为n, 参数记为α(指数平滑算法只有">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-05T16:15:57.267Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-bf4530ebacbc3b3b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-86c3f30956e961ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-43ffb0ff57227edb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-1cc0b7f5f6e8ba36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-62efb0050faa1b33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-55b62235782c530e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-4c95e8a2c51e21f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-13aacc1c012b5468.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-84869fccbb7974ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-f08f89ac91cf6005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/2601951-09d0f565413f752c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-05T16:53:53.765Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="软件测试方法课程笔记(3)">
-<meta name="twitter:description" content="软件测试方法课程笔记(3)3. 白盒测试 这是一种验证技术，软件工程师可以用它来检查他们的代码是否按预期工作。它考虑到系统或组件的内部机制。它也被称为结构测试，清楚的盒测试和玻璃盒测试。  白盒测试又分为静态测试和动态测试静态白盒测试方法:  代码检查法 静态结构分析法 静态质量度量法等.  动态白盒测试是基于覆盖的测试，尽可能覆盖程序的结构特性和逻辑路径. 白盒测试主要用于单元测试 白盒测试必须">
+<meta name="twitter:title" content="指数平滑方法">
+<meta name="twitter:description" content="上文我们使用LOF-ICAD方法实现了时序数据的异常检测, 这次我们介绍一种更为常见的方法———-指数平滑. 指数平滑的方法, 其原理就是通过拟合出一个近似的模型来对未来进行预测, 我们可以通过这个预测来和实际的值进行比较, 如果差距过大, 我们就可以判定这个点是异常的. 首先我们介绍一下一阶指数平滑的算法 一阶指数平滑算法这里给出一些符号的定义:  序列长度记为n, 参数记为α(指数平滑算法只有">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/2601951-bf4530ebacbc3b3b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -120,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="https://mezereonxp.github.io/2018/10/06/软件测试方法课程笔记(3)/"/>
+  <link rel="canonical" href="https://mezereonxp.github.io/2018/10/06/指数平滑方法/"/>
 
 
 
 
 
-  <title>软件测试方法课程笔记(3) | MyBlog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>指数平滑方法 | MyBlog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -263,7 +275,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mezereonxp.github.io/2018/10/06/软件测试方法课程笔记(3)/">
+    <link itemprop="mainEntityOfPage" href="https://mezereonxp.github.io/2018/10/06/指数平滑方法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mezereon">
@@ -280,7 +292,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">软件测试方法课程笔记(3)</h1>
+          <h1 class="post-title" itemprop="name headline">指数平滑方法</h1>
         
 
         <div class="post-meta">
@@ -292,7 +304,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-06T00:47:53+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-06T00:53:19+08:00">
                 2018-10-06
               </time>
             
@@ -315,8 +327,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/软件测试/" itemprop="url" rel="index">
-                    <span itemprop="name">软件测试</span>
+                  <a href="/categories/数据挖掘/" itemprop="url" rel="index">
+                    <span itemprop="name">数据挖掘</span>
                   </a>
                 </span>
 
@@ -352,80 +364,37 @@
       
 
       
-        <h1 id="软件测试方法课程笔记-3"><a href="#软件测试方法课程笔记-3" class="headerlink" title="软件测试方法课程笔记(3)"></a>软件测试方法课程笔记(3)</h1><h3 id="3-白盒测试"><a href="#3-白盒测试" class="headerlink" title="3. 白盒测试"></a>3. 白盒测试</h3><blockquote>
-<p>这是一种验证技术，软件工程师可以用它来检查他们的代码是否按预期工作。<br>它考虑到系统或组件的内部机制。<br>它也被称为结构测试，清楚的盒测试和玻璃盒测试。</p>
-</blockquote>
-<p>白盒测试又分为<strong>静态测试</strong>和<strong>动态测试</strong><br>静态白盒测试方法:</p>
-<ul>
-<li>代码检查法</li>
-<li>静态结构分析法</li>
-<li>静态质量度量法等.</li>
-</ul>
-<p>动态白盒测试是基于覆盖的测试，尽可能覆盖程序的<strong>结构特性</strong>和<strong>逻辑路径</strong>.</p>
-<p>白盒测试主要用于<strong>单元测试</strong></p>
-<p>白盒测试必须满足以下原则：</p>
+        <p>上文我们使用LOF-ICAD方法实现了时序数据的异常检测, 这次我们介绍一种更为常见的方法———-指数平滑.</p>
+<p>指数平滑的方法, 其原理就是通过拟合出一个近似的模型来对未来进行预测, 我们可以通过这个预测来和实际的值进行比较, 如果差距过大, 我们就可以判定这个点是异常的.</p>
+<p>首先我们介绍一下一阶指数平滑的算法</p>
+<h3 id="一阶指数平滑算法"><a href="#一阶指数平滑算法" class="headerlink" title="一阶指数平滑算法"></a>一阶指数平滑算法</h3><p>这里给出一些符号的定义:</p>
 <ol>
-<li>所有的独立路径至少被测试一次</li>
-<li>所有的逻辑变量需要测试两次, 也就是对于真和假都进行测试</li>
-<li>对于内部数据结构的检查, 需要保证其结构的有效性和性能</li>
-<li>在可操作的范围内将所有的循环运行</li>
+<li><p>序列长度记为n, 参数记为α(指数平滑算法只有一个参数)</p>
+</li>
+<li><p>时序序列的定义:<br><img src="https://upload-images.jianshu.io/upload_images/2601951-bf4530ebacbc3b3b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="时序数据序列"></p>
+</li>
+<li><p>拟合序列的定义:<br><img src="https://upload-images.jianshu.io/upload_images/2601951-86c3f30956e961ff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="拟合数据序列"></p>
+</li>
 </ol>
-<p>逻辑覆盖是通过对程序逻辑结构的遍历实现程序的覆盖.<br>是以程序内部的逻辑结构为基础的测试用例设计方法.<br>白盒测试作为逻辑测试方法，是以程序内部逻辑驱动的单元测试方法.</p>
-<h3 id="4-单元测试"><a href="#4-单元测试" class="headerlink" title="4. 单元测试"></a>4. 单元测试</h3><p>单元测试是一个软件开发过程，其中应用程序中最小的可测试部分（称为单元）被单独和独立地审查以便正确操作</p>
-<p>一般情况下，被测单元能够实现一个特定的功能，并与其他单元有明确的接口定义，这样才可以与其他单元隔离开来</p>
-<p><strong>单元测试的目的:</strong></p>
-<ul>
-<li>验证代码是否与设计一致。</li>
-<li>跟踪需求和设计的实施。</li>
-<li>发现设计和需求之间的错误。</li>
-<li>发现编码过程中引入的错误。</li>
-</ul>
-<p><strong>单元测试的过程:</strong></p>
-<ol>
-<li>在详细设计阶段完成单元测试计划</li>
-<li>建立单元测试环境，完成测试设计和开发</li>
-<li>执行单元测试用例，并且详细记录测试结果</li>
-<li>判定单元测试是否通过</li>
-<li>提交单元测试报告</li>
-</ol>
-<p><strong>单元测试的优点:</strong></p>
-<ol>
-<li>单独进行，一起进行，降低软件质量成本，缩短开发周期；</li>
-<li>便于跟踪错误；</li>
-<li>集成后错误会放大，集成后复杂性高，很难发现问题；</li>
-<li>无需而外的设备和人员。</li>
-</ol>
-<h3 id="5-集成测试"><a href="#5-集成测试" class="headerlink" title="5. 集成测试"></a>5. 集成测试</h3><blockquote>
-<p><strong>集成测试的概念:</strong><br>集成测试是软件测试的阶段, 其中将各个软件模块作为一个组合进行测试.<br>集成测试在单元测试之后并且在系统测试之前.</p>
-</blockquote>
-<p>在集成测试之前，单元测试已经完成。集成测试所集成的单元是经过单元测试保证的单元。<br>如果不经过单元测试的保证集成测试的效果受到影响，并且付出更大代价。<br>单元测试与集成测试所关注的范围不同，所发现问题的集合包含不相交区域，不能相互代替。</p>
-<p>系统测试对象是整个系统以及与系统交互的硬件软件平台，对系统能够做各种功能性和非功能性的验证<br>集成测试测试对象是模块与模块之间的接口，包括整体架构的问题。</p>
-<blockquote>
-<p><strong>集成测试的目的:</strong><br>集成测试的根本目的就是根据系统的高层设计，或者叫架构设计验证模块组装后是否满足功能、性能、可靠性是否满足需求</p>
-</blockquote>
-<p>按照集成力度的不同可以把集成测试划分为三个级别:</p>
-<ul>
-<li><strong>系统间测试</strong>(这种形式的测试构成了低层次的集成测试，其目标是将模块组合在一起构建一个内聚系统)</li>
-<li><strong>子系统测试</strong>(这是一个高级测试阶段，需要连接独立测试的系统)</li>
-<li><strong>成对测试</strong>(在成对集成中，一次只能测试整个系统中的两个互联系统<br>成对测试的目的是确保考虑中的两个系统可以一起工作，假设整个环境中的其他系统按照预期行事)</li>
-</ul>
-<p><strong>测试用例设计思路</strong><br>集成测试应用的是介于白盒和黑盒之间的灰盒测试技术。在测试用例设计中要综合使用白盒和黑盒测试方法。<br>一般经过集成测试分析以后，测试用例的大体轮廓已定，测试用例设计就是充分保证测试用例完成测试的既定目标</p>
-<h3 id="6-系统测试"><a href="#6-系统测试" class="headerlink" title="6.系统测试"></a>6.系统测试</h3><p>软件或硬件的系统测试（系统测试）是在完整的集成系统上进行测试，以评估系统是否符合其指定的要求。<br>系统测试属于黑盒测试的范围，因此不需要知道代码或逻辑的内部设计。</p>
-<h3 id="1-软件测试介绍"><a href="#1-软件测试介绍" class="headerlink" title="1. 软件测试介绍"></a>1. 软件测试介绍</h3><p><strong>软件缺陷的定义</strong><br>从产品内部看，软件缺陷是产品开发或维护过程中所存在的错误、毛病等各种问题。<br>从产品外部看，软件缺陷是系统所需要实现的某种功能的失效或者违背。</p>
-<p><strong>软件质量</strong></p>
-<ol>
-<li>满足用户需求；</li>
-<li>建立合理的进度、成本与功能的关系； </li>
-<li>具备扩展性和灵活性； </li>
-<li>能有效的处理例外情况； </li>
-<li>保持成本和性能的平衡</li>
-</ol>
-<p><strong>软件质量保证</strong><br>为了确保软件开发过程和结果符合预期的要求，而建立的一系列规程，以及依照规程和计划采取的一系列活动，以及结果评价。</p>
-<p><strong>质量控制</strong><br>为了达到产品的品质要求而采取的作业技术和活动</p>
-<p><strong>软件测试是为了发现错误而执行程序的过程。</strong><br>一个好的测试能过在第一时间发现程序中存在的错误。<br>一个好的测试是发现了至今尚未发现的错误。</p>
-<h3 id="9-软件质量"><a href="#9-软件质量" class="headerlink" title="9. 软件质量"></a>9. 软件质量</h3><p><strong>质量保证活动是工作过程的向导</strong> 　　<br>它们量度过程,发现缺陷,并提出改进建议。 　　<br>这些活动的直接结果是改变过程。 　　<br>这些变化的范围包括产生更加符合过程甚至是全新的过程。 　　<br>质量控制活动的输出通常是质量保证活动的输入。 　　<br>审核工作是质量保证活动的一个例子,看产品产生是否以及如何按过程进行的。最终的结果可能会建议改进或更加符合这一过程。 </p>
-<p><strong>质量控制活动是以产品为工作导向的</strong>　<br>它们量度产品、识别的不足,并提出改进的建议。 　　<br>这些活动的<strong>直接结果是改变的产品</strong>。 　　<br><strong>改变的范围可以从单行的代码变更到产品完全返工重新设计</strong>。 　　<br>他们评估产品、识别的弱点并提出改进建议。<br><strong>测试和评审是QC活动的例子</strong>, 它们通常改变的是产品,而不是那些过程。 　　<br>质量控制（QC）活动往往是质量保证（QA）活动的起点。 </p>
-<p><strong>测试的度量</strong><br>四个一般核心领域,可以协助设计有效的度量标准<br>时间表相关的度量用来量度各种各样活动实际完成所用的时间和估计时间的比较。<br>质量相关的度量用来量度产品或过程的质量。<br>资源相关的度量用来量度项目和执行测试所花费的人力、物力、财力等资源。<br>大小的度量用来量度源码大小或测试包中测试数目。</p>
+<p>对于一阶指数平滑而言<br><img src="https://upload-images.jianshu.io/upload_images/2601951-43ffb0ff57227edb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="迭代过程"></p>
+<p>这里我们需要定义一下初始值, 一般来说, 我们可以令初值是前3个数据的平均值:<br><img src="https://upload-images.jianshu.io/upload_images/2601951-1cc0b7f5f6e8ba36.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="初始值设置"></p>
+<p>我们通过这样的设置之后, 便可以利用初始值不断迭代出下一步的拟合值, 也就是通过t0可以不断推到tn的值, 但是这样带来的效果可能会很差, 因为参数α可能是不准确的, 那么迭代下去误差会越来越大, 我们必须解决这个问题, 这里我们先搁置, 讲一讲二阶指数平滑</p>
+<h3 id="二阶指数平滑算法"><a href="#二阶指数平滑算法" class="headerlink" title="二阶指数平滑算法"></a>二阶指数平滑算法</h3><p>二阶指数平滑相对于一阶指数平滑算法只是增加了迭代的次数， 使得拟合的精度相对提高了</p>
+<p>这里我们给出相应的迭代的细节：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2601951-62efb0050faa1b33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="迭代细节"></p>
+<p>对于未来T期的估计</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2601951-55b62235782c530e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="对未来的估计"></p>
+<p>其中</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2601951-4c95e8a2c51e21f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="参数细节"></p>
+<p>好了, 我们接下来就需要解决α参数的优化问题, 我们需要一种学习算法来使得误差变小, 以往的算法是使用动态规划, 这里我们使用随机梯度下降策略, 给出具体的细节</p>
+<h3 id="随机梯度下降法策略"><a href="#随机梯度下降法策略" class="headerlink" title="随机梯度下降法策略"></a>随机梯度下降法策略</h3><p>随机梯度下降法, 需要我们去求部分偏导数, 这里我们首先给出初始的梯度计算, 以及一般性的梯度计算<br><img src="https://upload-images.jianshu.io/upload_images/2601951-13aacc1c012b5468.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="初始梯度计算"></p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2601951-84869fccbb7974ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="一般性梯度计算"></p>
+<p>定义损失函数:<br><img src="https://upload-images.jianshu.io/upload_images/2601951-f08f89ac91cf6005.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Loss"></p>
+<p>根据上述偏导数, 我们就可以给出迭代的具体过程:</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/2601951-09d0f565413f752c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="具体迭代过程"></p>
+<p>到此, 我们便给出了一阶和二阶指数平滑的算法以及利用梯度下降来对参数进行优化的方法</p>
+<p>具体代码的实现以及使用的细节可以到我的github项目中进行查看:<br><a href="https://github.com/MezereonXP/AnomalyDetectTool" target="_blank" rel="noopener">https://github.com/MezereonXP/AnomalyDetectTool</a></p>
+<p>欢迎大家star~~, 有任何的问题可以提issue或者发送邮件到我的邮箱mezereonxp@gmail.com</p>
 
       
     </div>
@@ -443,9 +412,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/软件测试/" rel="tag"># 软件测试</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
-            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+            <a href="/tags/时序数据/" rel="tag"># 时序数据</a>
+          
+            <a href="/tags/异常检测/" rel="tag"># 异常检测</a>
           
         </div>
       
@@ -458,8 +429,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/06/A Survey on Dialogue Systems Recent Advances and New Frontiers 论文笔记/" rel="next" title="如何搭建一个对话系统">
-                <i class="fa fa-chevron-left"></i> 如何搭建一个对话系统
+              <a href="/2018/10/06/LOF-ICAD方法/" rel="next" title="教你用java实现时序数据异常检测(1)LOF-ICAD方法">
+                <i class="fa fa-chevron-left"></i> 教你用java实现时序数据异常检测(1)LOF-ICAD方法
               </a>
             
           </div>
@@ -467,10 +438,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/06/LOF-ICAD方法/" rel="prev" title="教你用java实现时序数据异常检测(1)LOF-ICAD方法">
-                教你用java实现时序数据异常检测(1)LOF-ICAD方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -628,7 +595,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#软件测试方法课程笔记-3"><span class="nav-number">1.</span> <span class="nav-text">软件测试方法课程笔记(3)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-白盒测试"><span class="nav-number">1.0.1.</span> <span class="nav-text">3. 白盒测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-单元测试"><span class="nav-number">1.0.2.</span> <span class="nav-text">4. 单元测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-集成测试"><span class="nav-number">1.0.3.</span> <span class="nav-text">5. 集成测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-系统测试"><span class="nav-number">1.0.4.</span> <span class="nav-text">6.系统测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-软件测试介绍"><span class="nav-number">1.0.5.</span> <span class="nav-text">1. 软件测试介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-软件质量"><span class="nav-number">1.0.6.</span> <span class="nav-text">9. 软件质量</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一阶指数平滑算法"><span class="nav-number">1.</span> <span class="nav-text">一阶指数平滑算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二阶指数平滑算法"><span class="nav-number">2.</span> <span class="nav-text">二阶指数平滑算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#随机梯度下降法策略"><span class="nav-number">3.</span> <span class="nav-text">随机梯度下降法策略</span></a></li></ol></div>
             
 
           </div>
