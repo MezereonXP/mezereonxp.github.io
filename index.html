@@ -307,7 +307,7 @@
 <p>假设图像为$I$</p>
 <p>则其中每一个像素点的灰度值为$I(x,y)$</p>
 <p>我们利用简单的线性变换可以得到：</p>
-<p>$I(x,y)^<em>=k</em>I(x,y)+b$</p>
+<p>$I(x,y)^{*}=k\times I(x,y)+b$</p>
 <p>取$k=1,b=16$可以得到</p>
 <p><img src="https://ask.qcloudimg.com/http-save/2616258/qkbqr6vm63.png" alt="Alt text"></p>
 <p><img src="https://ask.qcloudimg.com/http-save/2616258/o05khpgona.png" alt="Alt text"></p>
@@ -334,7 +334,7 @@
 <p><img src="https://ask.qcloudimg.com/http-save/2616258/48pxz2e18h.png" alt="Alt text"></p>
 <p><img src="https://ask.qcloudimg.com/http-save/2616258/8dm2dfnvag.png" alt="Alt text"></p>
 <p>给出关键代码:</p>
-<p>m = 255;<br>subplot(1,3,3);<br>H = histeq(I,m);<br>imshow(H,[]);<br>title(‘直方图均衡后的图像’);</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">m = <span class="number">255</span>;</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">H = histeq(I,m);</span><br><span class="line">imshow(H,[]);</span><br><span class="line">title(<span class="string">'直方图均衡后的图像'</span>);</span><br></pre></td></tr></table></figure>
 <p>类似地， 我们可以对rgb图像进行直方图均衡, 这里直接给出结果</p>
 <p><img src="https://ask.qcloudimg.com/http-save/2616258/cvrwgg1qi8.png" alt="Alt text"></p>
 <p><img src="https://ask.qcloudimg.com/http-save/2616258/2flvtmp5q5.png" alt="Alt text"></p>
