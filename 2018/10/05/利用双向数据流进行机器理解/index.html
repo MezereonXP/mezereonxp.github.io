@@ -382,10 +382,10 @@
 </ol>
 <p>这里我们给出相应的层次结构图<br> <img src="http://ol3p4szw6.bkt.clouddn.com/BIDAF-1.png" alt="层次结构"></p>
 <p>我们来继续讨论其中每一层更多的细节</p>
-<h4 id="3-1-字符嵌入层"><a href="#3-1-字符嵌入层" class="headerlink" title="3.1 字符嵌入层"></a>3.1 字符嵌入层</h4><p>字符嵌入层的作用主要在于将一个词映射到高维的向量空间之中，我们令${x_1, x_2, …, x_T}$ 和 ${q_1, q_2, …, q_J}$代表上下文的词集合和问题的词集合， 这两者都是有序的， 利用Kim的字符水平的CNN方法， 我们可以获得对应的字符水平的嵌入向量， 多个字符被嵌入成一个向量， 理解成CNN的一维输入， 大小和CNN输入的大小一致， CNN的输出被max-pool， 最终得到一个固定长度的向量。</p>
+<h4 id="3-1-字符嵌入层"><a href="#3-1-字符嵌入层" class="headerlink" title="3.1 字符嵌入层"></a>3.1 字符嵌入层</h4><p>字符嵌入层的作用主要在于将一个词映射到高维的向量空间之中，我们令$\{x_1, x_2, …, x_T\}$ 和 $\{q_1, q_2, …, q_J\}$代表上下文的词集合和问题的词集合， 这两者都是有序的， 利用Kim的字符水平的CNN方法， 我们可以获得对应的字符水平的嵌入向量， 多个字符被嵌入成一个向量， 理解成CNN的一维输入， 大小和CNN输入的大小一致， CNN的输出被max-pool， 最终得到一个固定长度的向量。</p>
 <p>我们有必要对Kim这个方法进行介绍</p>
 <h5 id="3-1-1-关于字符水平的CNN方法"><a href="#3-1-1-关于字符水平的CNN方法" class="headerlink" title="3.1.1 关于字符水平的CNN方法"></a>3.1.1 关于字符水平的CNN方法</h5><p>我们首先给出Kim论文中的整套网络结构图， Kim是使用这套结构做文本分类的<br><img src="http://ol3p4szw6.bkt.clouddn.com/KimCNN.png" alt=""><br>输入一共有n个词， 每一个词都是k维的<strong>词向量</strong>， 这里我们记$x_{1:n} = x_1\oplus x_2\oplus … \oplus x_n$, 其中$\oplus$是向量的连接操作， CNN的卷积操作就是利用一个过滤器 $w \in \mathbb{R}^{hk}$， 实际上就是利用一个h大小的窗口来进行移动， 如上图所示， 红色窗口就是h=2的一个窗口， 从上到下对所有的词进行扫描， 这里我们给出计算方法：</p>
-<script type="math/tex; mode=display">c_i = f(w \cdot x_{i:i+h-1} + b)</script><p>向量c对应着上图的第二部分的一个长条， $c = ({c<em>1, c_2, …, c</em>{n-h+1}})$， 函数$f$是一个非线性函数， 类似于双曲正切瀚函数tanh。</p>
+<script type="math/tex; mode=display">c_i = f(w \cdot x_{i:i+h-1} + b)</script><p>向量c对应着上图的第二部分的一个长条， $c = ({c_1, c_2, …, c_{n-h+1}})$， 函数$f$是一个非线性函数， 类似于双曲正切瀚函数tanh。</p>
 <p>接下去我们就可以根据多个窗口大小来构造一系列的特征向量， 如上图所示， 接着就是经过<strong>Max-over-time pooling</strong>， 生成一个一维向量， 向量的大小等于不同窗口的个数。</p>
 <blockquote>
 <p><strong>关于Max-over-time pooling</strong><br>该方法是Collobert在2011年提出来的， 原理十分简单， 就是取特征向量的最大值</p>
