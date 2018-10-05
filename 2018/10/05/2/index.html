@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-af42a076dd3aa362.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-6d94be1b217f35c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-31782b86a3a1f84c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-10-05T14:06:13.873Z">
+<meta property="og:updated_time" content="2018-10-05T14:08:03.541Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="软件测试方法课程笔记(2)">
 <meta name="twitter:description" content="软件测试方法课程笔记(2)2. 黑盒测试2.1 介绍优点:  没有任何的偏向 无需开发知识 只考虑用户的看法 需求确定就可以测试  2.2 等价类划分为了产生少量的测试用例, 并且可以测试大部分的情况, 我们可以使用等价类划分的方法比如对于输入值是范围值, 我们可以使用等价类划分成范围内的和不是范围内的两种等价类 等价类有一种评判标准, 分为强, 弱, 又分为一般和健壮弱：只单缺陷假设强：多缺陷假">
@@ -427,7 +427,7 @@
 </ol>
 <p>首先引入<strong>因子</strong>的概念, 因子也就是影响的因素, 拥有自己的定义域, 范围等<br>然后是<strong>水平</strong>的概念, 水平是给定相应因子的值的集合的数目</p>
 <p>正交矩阵(正交表)是该方法的核心, 定义为:</p>
-<script type="math/tex; mode=display">L \_{Runs}(Levels^{Factors})</script><p>其中Runs是矩阵的行数, Factors是矩阵的列数(因子的数目), Levels是因子的最大取值</p>
+<script type="math/tex; mode=display">L_{Runs}(Levels^{Factors})</script><p>其中Runs是矩阵的行数, Factors是矩阵的列数(因子的数目), Levels是因子的最大取值</p>
 <p>关于试验次数给出计算的方法:</p>
 <script type="math/tex; mode=display">Experiment Times=\sum(level\  amout\ of\ every\ factor - 1)+1</script><h4 id="2-7-场景测试"><a href="#2-7-场景测试" class="headerlink" title="2.7 场景测试"></a>2.7 场景测试</h4><p>场景测试是基于用例来进行分析的</p>
 <p>现在的软件都是由事件的触发来控制流程, 事件触发的情景便形成了场景<br>同一个事件不同的触发顺序和处理结果形成了事件流<br>将该思想引入软件测试之中, 生动描绘出事件触发时候的情景, 有利于测试</p>
@@ -443,7 +443,7 @@
 <li>对于每一个测试用例, 确定测试的值</li>
 </ol>
 <h4 id="2-8-有限状态机"><a href="#2-8-有限状态机" class="headerlink" title="2.8 有限状态机"></a>2.8 有限状态机</h4><p>提供了对应用基于状态的简单建模方法, 一般以六元组的形式表示</p>
-<script type="math/tex; mode=display">M=(X,Y,Q,q \_0,\delta,O)</script><p>$X$是一个有限的输入集合<br>$Y$是一个有限的输出集合<br>$Q$是一个有限的状态集合<br>$q _0\in Q$是一个初始状态<br>$\delta: Q \times X \rightarrow Q$是状态转移函数<br>$O: Q \times X \rightarrow Y$是输出函数</p>
+<script type="math/tex; mode=display">M=(X,Y,Q,q_0,\delta,O)</script><p>$X$是一个有限的输入集合<br>$Y$是一个有限的输出集合<br>$Q$是一个有限的状态集合<br>$q_0\in Q$是一个初始状态<br>$\delta: Q \times X \rightarrow Q$是状态转移函数<br>$O: Q \times X \rightarrow Y$是输出函数</p>
 <p>给出正常的FSM<br><img src="http://upload-images.jianshu.io/upload_images/2601951-692f0868b384b10f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></p>
 <p>四种错误类型:</p>
 <ol>
@@ -473,14 +473,14 @@
 <li>最大的状态数目我们只需要令<script type="math/tex">m=|Q|</script></li>
 <li>关于<strong>描述集合W</strong>的构建</li>
 </ol>
-<p>我们令<script type="math/tex">M=(X,Y,Q,q\_1,\delta,O)</script>是一个最小的并且完整的FSM<br><strong>描述集合W</strong>是一个输入序列的有限的集合, 这些输入序列能够区分M的任意状态对的行为, 每一个W中的输入序列都是有限长度, 给定状态$q_i$和$q_j$, W包含一个字符串s, 使得<script type="math/tex">O(q\_i, s)\neq O(q\_j,s)</script><br><img src="http://upload-images.jianshu.io/upload_images/2601951-35945826fae6cccb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>如图所示, 我们可以用W中的字符串(输入序列)baaa来将M中的q1和q2区分开来<br>那么, 接下来我们给出W的具体构造方法</p>
+<p>我们令<script type="math/tex">M=(X,Y,Q,q_1,\delta,O)</script>是一个最小的并且完整的FSM<br><strong>描述集合W</strong>是一个输入序列的有限的集合, 这些输入序列能够区分M的任意状态对的行为, 每一个W中的输入序列都是有限长度, 给定状态$q_i$和$q_j$, W包含一个字符串s, 使得<script type="math/tex">O(q_i, s)\neq O(q_j,s)</script><br><img src="http://upload-images.jianshu.io/upload_images/2601951-35945826fae6cccb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>如图所示, 我们可以用W中的字符串(输入序列)baaa来将M中的q1和q2区分开来<br>那么, 接下来我们给出W的具体构造方法</p>
 <ol>
 <li>构造一个集合Q的k等价划分的序列, 记作P1, P2, … ,Pm, m&gt;0</li>
 <li>逆序遍历k等价划分来获得每个状态对的区分序列</li>
 </ol>
-<p>关于Q的k等价划分, 我们记作$P_k$, 是n个有限集合$\sum _{k1}, \sum _{k2}, …,\sum _{kn} $的集合, 使得<script type="math/tex">\bigcup\_{i=1}^{n}\sum \_{ki}=Q</script><br>状态如果属于$\sum_{ki}$就称为<strong>k等价</strong>的<br>如果u属于$\sum_{ki}$, 同时v属于$\sum_{kj}$, i ≠ j, 那么u和k就称为<strong>k可区分</strong>的<br>我们以构建1-等价划分为例, 首先给出FSM<br><img src="http://upload-images.jianshu.io/upload_images/2601951-b53398e35c3ac5d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>首先我们对输入输出进行简单的划分, 得到<br><img src="http://upload-images.jianshu.io/upload_images/2601951-39d297cbb8938243.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>我们可以继续构建2-等价划分, 我们对P1表进行重写, 得<br><img src="http://upload-images.jianshu.io/upload_images/2601951-10e60c7279dc86cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>状态下标后面多了一个划分组的索引, 进而的得到P2表<br><img src="http://upload-images.jianshu.io/upload_images/2601951-1fdc6e481af452e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>重复该过程, 我们最终可以得到<br><img src="http://upload-images.jianshu.io/upload_images/2601951-5b04dc1bbc960131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></p>
+<p>关于Q的k等价划分, 我们记作$P<em>k$, 是n个有限集合$\sum</em>{k1}, \sum<em>{k2}, …,\sum</em>{kn} $的集合, 使得<script type="math/tex">\bigcup_{i=1}^{n}\sum_{ki}=Q</script><br>状态如果属于$\sum<em>{ki}$就称为<strong>k等价</strong>的<br>如果u属于$\sum</em>{ki}$, 同时v属于$\sum_{kj}$, i ≠ j, 那么u和k就称为<strong>k可区分</strong>的<br>我们以构建1-等价划分为例, 首先给出FSM<br><img src="http://upload-images.jianshu.io/upload_images/2601951-b53398e35c3ac5d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>首先我们对输入输出进行简单的划分, 得到<br><img src="http://upload-images.jianshu.io/upload_images/2601951-39d297cbb8938243.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>我们可以继续构建2-等价划分, 我们对P1表进行重写, 得<br><img src="http://upload-images.jianshu.io/upload_images/2601951-10e60c7279dc86cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>状态下标后面多了一个划分组的索引, 进而的得到P2表<br><img src="http://upload-images.jianshu.io/upload_images/2601951-1fdc6e481af452e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"><br>重复该过程, 我们最终可以得到<br><img src="http://upload-images.jianshu.io/upload_images/2601951-5b04dc1bbc960131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></p>
 <p>那么如何利用一堆表来找到区分状态的序列呢?<br>举个例子, 我们如果想找到q2和q3的区分序列, 就需要找到在Pi中q2和q3同一个划分, 但是p(i+1)就不同了, 找到这样的i值<br>很容易得到P1和P2, P1中的不同输入也就是区分序列了, 但是P1中对于所有输入都可以区分, 我们选择z = a<br>进一步我们需要q1和q5的的区分序列, P1中我们继续选择a, 更新z = z.a = aa, 由于该转变无法继续区分序列了, 到这里会结束<br>我们可以计算一下输出</p>
-<script type="math/tex; mode=display">O(q\_2, "aa") = 00 \\ O(q\_3, "aa") = 01</script><p>这就是最小的可区分序列了, 我们可以遍历所有状态对, 最后生成W集合</p>
+<script type="math/tex; mode=display">O(q_2, "aa") = 00 \\ O(q_3, "aa") = 01</script><p>这就是最小的可区分序列了, 我们可以遍历所有状态对, 最后生成W集合</p>
 <ol>
 <li>具体分两个步骤的细节:<ol>
 <li>对M构建测试树<br>一个FSM的测试树, 以初始化状态为根节点, 它包含从根节点至少一条路径到当前FSM的所有状态, 下面给出具体的测试树的构造方法.<br>状态$q_0$, 初始化的状态, 是测试树的根, 假设测试树已经被构造到水平k, 第k+1的水平将会被构建<br>在水平k选择一个节点n,<br>如果从1到k水平中出现出现过, 那么n就是叶子节点并且不能被继续展开,<br>如果n不是叶子节点, 那么我们将其扩展, 增加节点n的一个分支通向一个新的节点m, 如果$\delta(n,x)=m$, 这个分支将会被标记为x, 这个步骤对k水平的所有节点做一遍<br><img src="http://upload-images.jianshu.io/upload_images/2601951-af42a076dd3aa362.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Alt text"></li>
