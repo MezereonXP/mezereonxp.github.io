@@ -79,16 +79,21 @@
 
 
 
-<meta name="description" content="With Saber">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MyBlog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为III 则其中每一个像素点的灰度值为I(x,y)I(x,y)I(x,y) 我们利用简单的线性变换可以得到： I(x,y)∗=k∗I(x,y)+bI(x,y)^=kI(x,y)+bI(x,y)∗=k∗I(x,y)+b 取k=1,b=16k=1,b=16k=1,b=16可以得到    这里给出关键代码 o">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[原]图像增强的几个方法以及Matlab代码">
+<meta property="og:url" content="http://yoursite.com/2018/09/24/原-图像增强的几个方法以及Matlab代码/index.html">
 <meta property="og:site_name" content="MyBlog">
-<meta property="og:description" content="With Saber">
+<meta property="og:description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为III 则其中每一个像素点的灰度值为I(x,y)I(x,y)I(x,y) 我们利用简单的线性变换可以得到： I(x,y)∗=k∗I(x,y)+bI(x,y)^=kI(x,y)+bI(x,y)∗=k∗I(x,y)+b 取k=1,b=16k=1,b=16k=1,b=16可以得到    这里给出关键代码 o">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/qkbqr6vm63.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/o05khpgona.png">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/kt8u4o1kx3.png">
+<meta property="og:updated_time" content="2018-10-05T03:16:58.107Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MyBlog">
-<meta name="twitter:description" content="With Saber">
+<meta name="twitter:title" content="[原]图像增强的几个方法以及Matlab代码">
+<meta name="twitter:description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为III 则其中每一个像素点的灰度值为I(x,y)I(x,y)I(x,y) 我们利用简单的线性变换可以得到： I(x,y)∗=k∗I(x,y)+bI(x,y)^=kI(x,y)+bI(x,y)∗=k∗I(x,y)+b 取k=1,b=16k=1,b=16k=1,b=16可以得到    这里给出关键代码 o">
+<meta name="twitter:image" content="https://ask.qcloudimg.com/http-save/2616258/qkbqr6vm63.png">
 
 
 
@@ -118,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/24/原-图像增强的几个方法以及Matlab代码/"/>
 
 
 
 
 
-  <title>MyBlog</title>
+  <title>[原]图像增强的几个方法以及Matlab代码 | MyBlog</title>
   
 
 
@@ -143,8 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,137 +221,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/05/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mezereon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MyBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/05/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-05T10:53:00+08:00">
-                2018-10-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -377,9 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/24/原-图像增强的几个方法以及Matlab代码/" itemprop="url">[原]图像增强的几个方法以及Matlab代码</a></h1>
+          <h1 class="post-title" itemprop="name headline">[原]图像增强的几个方法以及Matlab代码</h1>
         
 
         <div class="post-meta">
@@ -429,9 +303,7 @@
       
 
       
-        
-          
-            <h3 id="1-灰度线性变换"><a href="#1-灰度线性变换" class="headerlink" title="1. 灰度线性变换"></a><a id="1__1"></a>1. 灰度线性变换</h3><p>灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作</p>
+        <h3 id="1-灰度线性变换"><a href="#1-灰度线性变换" class="headerlink" title="1. 灰度线性变换"></a><a id="1__1"></a>1. 灰度线性变换</h3><p>灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作</p>
 <p>假设图像为<span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 0.68333em; vertical-align: 0em;"></span><span class="mord mathit" style="margin-right: 0.07847em;">I</span></span></span></span></span></p>
 <p>则其中每一个像素点的灰度值为<span class="katex--inline"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi><mo>(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">I(x,y)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord mathit" style="margin-right: 0.07847em;">I</span><span class="mopen">(</span><span class="mord mathit">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord mathit" style="margin-right: 0.03588em;">y</span><span class="mclose">)</span></span></span></span></span></p>
 <p>我们利用简单的线性变换可以得到：</p>
@@ -616,8 +488,6 @@ subplot(1,3,3),imshow(I3,[]);title(&apos;同态滤波增强后&apos;);
                 &lt;div&gt;
                     阅读：18                     &lt;/div&gt;
 </code></pre>
-          
-        
       
     </div>
     
@@ -634,191 +504,32 @@ subplot(1,3,3),imshow(I3,[]);title(&apos;同态滤波增强后&apos;);
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/06/原-关于Socket的使用以及java实现/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mezereon">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MyBlog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/06/原-关于Socket的使用以及java实现/" itemprop="url">图像增强的几个方法以及Matlab代码</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-06T12:49:29+08:00">
-                2018-07-06
-              </time>
+              <a href="/2018/07/06/原-关于Socket的使用以及java实现/" rel="next" title="图像增强的几个方法以及Matlab代码">
+                <i class="fa fa-chevron-left"></i> 图像增强的几个方法以及Matlab代码
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
+              <a href="/2018/10/05/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
             
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h3 id="1-灰度线性变换"><a href="#1-灰度线性变换" class="headerlink" title="1. 灰度线性变换"></a>1. 灰度线性变换</h3><p>灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作</p>
-<p>假设图像为$I$</p>
-<p>则其中每一个像素点的灰度值为$I(x,y)$</p>
-<p>我们利用简单的线性变换可以得到：</p>
-<p>$I(x,y)^<em>=k</em>I(x,y)+b$</p>
-<p>取$k=1,b=16$可以得到</p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/qkbqr6vm63.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/o05khpgona.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/kt8u4o1kx3.png" alt="Alt text"></p>
-<p>这里给出关键代码</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">original = imread(strcat(strcat(<span class="string">'resource\',name),'</span>.bmp'));</span><br><span class="line">transformed = LinearFunction(original, <span class="number">1</span>, <span class="number">16</span>);</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">imshow(transformed)</span><br><span class="line">title(<span class="string">'线性变换后的图像'</span>)</span><br><span class="line">imwrite(transformed,strcat(strcat(<span class="string">'result\',name),'</span>(linear).jpg'))</span><br></pre></td></tr></table></figure>
-<h3 id="2-直方图均衡变换"><a href="#2-直方图均衡变换" class="headerlink" title="2. 直方图均衡变换"></a>2. 直方图均衡变换</h3><p>这种方法通常用来增加许多图像的全局对比度，尤其是当图像的有用数据的对比度相当接近的时候。通过这种方法，亮度可以更好地在直方图上分布。这样就可以用于增强局部的对比度而不影响整体的对比度，直方图均衡化通过有效地扩展常用的亮度来实现这种功能。</p>
-<p>这种方法对于背景和前景都太亮或者太暗的图像非常有用，这种方法尤其是可以带来X光图像中更好的骨骼结构显示以及曝光过度或者曝光不足照片中更好的细节。这种方法的一个主要优势是它是一个相当直观的技术并且是可逆操作，如果已知均衡化函数，那么就可以恢复原始的直方图，并且计算量也不大。这种方法的一个缺点是它对处理的数据不加选择，它可能会增加背景噪声的对比度并且降低有用信号的对比度。</p>
-<p>考虑一个离散的灰度图像${x}$</p>
-<p>让$n_i$表示灰度$i$出现的次数， 这样图像中灰度为$i$的像素出现的概率为：</p>
-<p>$p_x(i)=p(x=i)=\frac{n_i}{n}， 0\leq i&lt;L$</p>
-<p>$L$是图像中所有的灰度数（通常是255）</p>
-<p>把对应于$p_x$的累积分布函数，定义为：</p>
-<p>$cdf_x(i)=\sum_{j=0}^i{p_x(j)}$</p>
-<p>是图像的累计归一化直方图</p>
-<p>我们创建一个形式为$y=T(x)$的变换， 对于原始图像的每一个值它就产生一个$y$， 这样$y$的累计概率函数就可以在所有值范围内线性化， 转换公式定义为：</p>
-<p>$cdf_y(i)=iK$</p>
-<p>对于常数K， $CDF$的性质允许我们做这样的变换， 定义为：</p>
-<p>$cdf_y(y’)=cdf_y(T(k))=cdf_x(k)$</p>
-<p>其中$k\in [0,L)$， 注意$T$将不同的灰度级映射到$(0,1)$， 为了将这些值映射到最初的域， 需要在结果上应用下面的简单变换：</p>
-<p>$y’ = y*(max{x}-min{x})+min{x}$</p>
-<p>给出部分结果：</p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/5nohrkq1zn.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/48pxz2e18h.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/8dm2dfnvag.png" alt="Alt text"></p>
-<p>给出关键代码:</p>
-<p>m = 255;<br>subplot(1,3,3);<br>H = histeq(I,m);<br>imshow(H,[]);<br>title(‘直方图均衡后的图像’);</p>
-<p>类似地， 我们可以对rgb图像进行直方图均衡, 这里直接给出结果</p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/cvrwgg1qi8.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/2flvtmp5q5.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/av5ms0fcu6.png" alt="Alt text"></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[M,N,G]=<span class="built_in">size</span>(I1);</span><br><span class="line">result=<span class="built_in">zeros</span>(M,N,<span class="number">3</span>);</span><br><span class="line"><span class="comment">%获得每一层每一个点的RGB值，并判断其值等于多少</span></span><br><span class="line"><span class="keyword">for</span> g=<span class="number">1</span>:<span class="number">3</span></span><br><span class="line">    A=<span class="built_in">zeros</span>(<span class="number">1</span>,<span class="number">256</span>);</span><br><span class="line">    <span class="comment">%每处理完一层，参数要重新初始化为0</span></span><br><span class="line">    average=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> k=<span class="number">1</span>:<span class="number">256</span></span><br><span class="line">        count=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:M</span><br><span class="line">            <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:N</span><br><span class="line">                value=I1(<span class="built_in">i</span>,<span class="built_in">j</span>,g);</span><br><span class="line">                <span class="keyword">if</span> value==k</span><br><span class="line">                    count=count+<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        count=count/(M*N*<span class="number">1.0</span>);</span><br><span class="line">        average=average+count;</span><br><span class="line">        A(k)=average;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    A=uint8(<span class="number">255.</span>*A+<span class="number">0.5</span>);</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:M</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:N</span><br><span class="line">            I1(<span class="built_in">i</span>,<span class="built_in">j</span>,g)=A(I1(<span class="built_in">i</span>,<span class="built_in">j</span>,g)+<span class="number">0.5</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%展示处理效果</span></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">imshow(I1);</span><br></pre></td></tr></table></figure>
-<h3 id="3-同态滤波"><a href="#3-同态滤波" class="headerlink" title="3. 同态滤波"></a>3. 同态滤波</h3><p>同态滤波利用去除<strong>乘性噪声</strong>(multiplicative noise)，可以同时增加对比度以及标准化亮度，借此达到图像增强的目的。</p>
-<p>一副图像可以表示为其<strong>照度</strong>(illumination)分量和<strong>反射</strong>(reflectance)分量的乘积，虽然在时域上这两者是不可分离的，但是经由傅立叶转换两者在频域中可以线性分离。由于照度可视为环境中的照明，相对变化很小，可以看作是图像的低频成分；而反射率相对变化较大，则可视为高频成分。通过分别处理照度和反射率对像元灰度值的影响，通常是借由<strong>高通滤波器</strong>(high-pass filter)，让图像的照明更加均匀，达到增强阴影区细节特征的目的。</p>
-<p>做法是：</p>
-<p>对于一幅图像， 可以表示成照射分量和反射分量的乘积， 也就是：</p>
-<p>$m(x,y)=i(x,y)\cdot r(x,y)$</p>
-<p>其中， $m$是图像， $i$是为照度分量， $r$是反射分量</p>
-<p>为了在频域中使用高通滤波器， 我们必须进行傅里叶变换， 但是由于上式是一个乘积式， 不能直接对照度分量和反射分量进行操作， 因此对上式取对数</p>
-<p>$ln(m(x,y))=ln(i(x,y))+ln(r(x,y))$</p>
-<p>然后对上式进行傅里叶转换</p>
-<p>$\mathcal{F}{ln(m(x,y))}=\mathcal{F} { ln(i(x,y))}+ \mathcal{F}{ln(r(x,y))}$</p>
-<p>我们将$\mathcal{F}{ln(m(x,y))}$定义为$M(u,v)$</p>
-<p>接下来对图像进行高通滤波， 如此可以使图像的照明更均匀， 高频分量增加且低频分量减少</p>
-<p>$N(u,v)=H(u,v)\cdot M(u,v)$</p>
-<p>其中$H$是高通滤波器</p>
-<p>为了将图像从频域转回时域，我们对$N$做傅立叶逆转换</p>
-<p>$n(x,y)=\mathcal{F}^{-1}{N(x,y)}$</p>
-<p>最后使用指数函数来复原我们一开始取的对数</p>
-<p>$m’(x,y)=exp{n(x,y)}$</p>
-<p>给出处理结果</p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/i23j6xa959.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/me1a45r0z7.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/f2fua1o891.png" alt="Alt text"></p>
-<p>给出部分关键代码</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">I=double(I);</span><br><span class="line">[M,N]=<span class="built_in">size</span>(I);</span><br><span class="line">rL=<span class="number">0.5</span>;</span><br><span class="line">rH=<span class="number">4.7</span>;<span class="comment">%可根据需要效果调整参数</span></span><br><span class="line">c=<span class="number">2</span>;</span><br><span class="line">d0=<span class="number">10</span>;</span><br><span class="line">I1=<span class="built_in">log</span>(I+<span class="number">1</span>);<span class="comment">%取对数</span></span><br><span class="line">FI=fft2(I1);<span class="comment">%傅里叶变换</span></span><br><span class="line">n1=<span class="built_in">floor</span>(M/<span class="number">2</span>);</span><br><span class="line">n2=<span class="built_in">floor</span>(N/<span class="number">2</span>);</span><br><span class="line">H = <span class="built_in">ones</span>(M, N);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:M</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:N</span><br><span class="line">        D(<span class="built_in">i</span>,<span class="built_in">j</span>)=((<span class="built_in">i</span>-n1).^<span class="number">2</span>+(<span class="built_in">j</span>-n2).^<span class="number">2</span>);</span><br><span class="line">        H(<span class="built_in">i</span>,<span class="built_in">j</span>)=(rH-rL).*(<span class="built_in">exp</span>(c*(-D(<span class="built_in">i</span>,<span class="built_in">j</span>)./(d0^<span class="number">2</span>))))+rL;<span class="comment">%高斯同态滤波</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">I2=ifft2(H.*FI);<span class="comment">%傅里叶逆变换</span></span><br><span class="line">I3=<span class="built_in">real</span>(<span class="built_in">exp</span>(I2));</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>),imshow(I3,[]);title(<span class="string">'同态滤波增强后'</span>);</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -828,10 +539,11 @@ subplot(1,3,3),imshow(I3,[]);title(&apos;同态滤波增强后&apos;);
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -839,6 +551,10 @@ subplot(1,3,3),imshow(I3,[]);title(&apos;同态滤波增强后&apos;);
 
 
           
+
+  
+
+
 
         </div>
         
@@ -859,8 +575,17 @@ subplot(1,3,3),imshow(I3,[]);title(&apos;同态滤波增强后&apos;);
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -902,6 +627,22 @@ subplot(1,3,3),imshow(I3,[]);title(&apos;同态滤波增强后&apos;);
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-灰度线性变换"><span class="nav-number">1.</span> <span class="nav-text">1. 灰度线性变换</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1035,6 +776,10 @@ subplot(1,3,3),imshow(I3,[]);title(&apos;同态滤波增强后&apos;);
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
