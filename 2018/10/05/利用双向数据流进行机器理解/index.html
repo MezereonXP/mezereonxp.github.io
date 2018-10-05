@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器理解,NLP,双向数据流,机器学习," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="利用双向注意流进行机器理解本文基于Bi-Directional Attention Flow For Machine Comprehension一文 1. 概述Machine Comprehension也就是机器理解， 简记为MC， 针对给定的一个上下文， 回答一个问题， 这需要我们对复杂的交互过程进行建模， 近来， 注意力机制（Attention Mechanisms）成功对MC作出了扩展， 特">
+<meta name="keywords" content="机器理解,NLP,双向数据流,机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用双向数据流进行机器理解">
+<meta property="og:url" content="https://mezereonxp.github.io/2018/10/05/利用双向数据流进行机器理解/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="利用双向注意流进行机器理解本文基于Bi-Directional Attention Flow For Machine Comprehension一文 1. 概述Machine Comprehension也就是机器理解， 简记为MC， 针对给定的一个上下文， 回答一个问题， 这需要我们对复杂的交互过程进行建模， 近来， 注意力机制（Attention Mechanisms）成功对MC作出了扩展， 特">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://ol3p4szw6.bkt.clouddn.com/BIDAF-1.png">
+<meta property="og:image" content="http://ol3p4szw6.bkt.clouddn.com/KimCNN.png">
+<meta property="og:image" content="http://ol3p4szw6.bkt.clouddn.com/probability.png">
+<meta property="og:updated_time" content="2018-10-05T16:22:41.922Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用双向数据流进行机器理解">
+<meta name="twitter:description" content="利用双向注意流进行机器理解本文基于Bi-Directional Attention Flow For Machine Comprehension一文 1. 概述Machine Comprehension也就是机器理解， 简记为MC， 针对给定的一个上下文， 回答一个问题， 这需要我们对复杂的交互过程进行建模， 近来， 注意力机制（Attention Mechanisms）成功对MC作出了扩展， 特">
+<meta name="twitter:image" content="http://ol3p4szw6.bkt.clouddn.com/BIDAF-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mezereonxp.github.io/2018/10/05/利用双向数据流进行机器理解/"/>
+
+
+
+
+
+  <title>利用双向数据流进行机器理解 | MyBlog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MyBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">share something</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mezereonxp.github.io/2018/10/05/利用双向数据流进行机器理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mezereon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">利用双向数据流进行机器理解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-05T21:47:53+08:00">
+                2018-10-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自然语言处理/" itemprop="url" rel="index">
+                    <span itemprop="name">自然语言处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="利用双向注意流进行机器理解"><a href="#利用双向注意流进行机器理解" class="headerlink" title="利用双向注意流进行机器理解"></a>利用双向注意流进行机器理解</h1><p>本文基于Bi-Directional Attention Flow For Machine Comprehension一文</p>
+<h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><p>Machine Comprehension也就是机器理解， 简记为MC， 针对给定的一个上下文， 回答一个问题， 这需要我们对复杂的交互过程进行建模， 近来， 注意力机制（Attention Mechanisms）成功对MC作出了扩展， 特别是使用注意力机制来关注上下文并且最后生成一个固定大小的向量。 在该篇文章中， 介绍了<strong>BIDAF</strong>（双向注意流）网络， 一个多阶段层次化的过程， 可以将上下文表现于不同的粒度之上， 使用双向注意流来获取一个<strong>问题-察觉</strong>（query-aware）的上下文的表示方法， 而不是过早的对上下文进行概要</p>
+<h3 id="2-介绍"><a href="#2-介绍" class="headerlink" title="2. 介绍"></a>2. 介绍</h3><p>近年来， MC和QA（问题回答）的关注程度逐渐增强， 特别是NLP（自然语言处理）和计算机视觉， 端到端训练的系统在对于文本和图像的多种任务中表现出色， 其中一个重要的因素就是使用了注意力机制， 该种技术可以使得系统关注于一个目标区域于上下文段落中， 或者是一张图片中（特别是视觉问答领域）， 这里我们给出注意力机制的一些特性：</p>
+<ol>
+<li><strong>计算好的注意力权重通常被用来从上下文向量中抽取最为相关的信息， 上下文向量是通过某种归纳映射得到的固定大小的向量。</strong></li>
+<li><strong>文本领域中， 整个注意力机制是暂时性的， 动态化的， 当前时间步的注意力权值是之前时间步注意力的一个映射结果</strong></li>
+<li><strong>整个机制通常是单向的</strong></li>
+</ol>
+<p>这篇文章中主要介绍了<strong>双向注意流网络（BIDAF network）</strong>， 一种层次化的多阶段的结构， 在不同粒度等级上对上下文进行建模， BIDAF主要包括对<strong>字符粒度等级（Character Level）</strong>和<strong>词粒度水平（Word Level）</strong>， 并且使用双向注意流来获取<strong>问题-察觉</strong>的上下文的表示方法。</p>
+<p>提出来的新的注意力机制对于之前热门的注意力机制有以下几点提升：</p>
+<ol>
+<li>我们的注意力层并不用于将上下文映射到一个固定大小的向量， 反而是， 注意力在每一个时间步都会计算， 以及每一个时间步的<strong>伴随向量（Attend Vector）</strong>连同着先前层的表示， 都被允许流向后来的模型层， 这样的方法就减少了过早将上下文映射成固定大小的向量所带来的误差。</li>
+<li>使用<strong>少内存（Memory-less）</strong>的注意力机制， 即， 我们每一次迭代计算的时候， 每一个时间步的注意力仅是当前问题和上下文的一个函数得出的结果， 并不直接依赖于先前时间步的注意力， 我们猜想这种简化可以减轻<strong>注意力层（attention layer）</strong>到<strong>模型层（model layer）</strong>的计算负载， 使得注意力层关注于学习问题和上下文之间的注意力， 这同时使得模型层可以从<strong>问题-察觉</strong>的上下文表达（实质上是注意力层的输出）中学习到某种复杂的交互逻辑。</li>
+<li>使用双向注意力机制， 能够产生更为完整的信息。</li>
+</ol>
+<h3 id="3-关于模型"><a href="#3-关于模型" class="headerlink" title="3. 关于模型"></a>3. 关于模型</h3><p>整个机器理解模型是一个层次化多阶段的过程， 包括以下六个层次：</p>
+<ol>
+<li><strong>字符嵌入层（Character embedding layer）</strong><br>其主要作用是将词映射到一个固定大小的向量， 这里我们使用<strong>字符水平的卷积神经网络（Character level CNN）</strong>， 该网络由Kim在2014年提出， 我们后续会对部分细节进行补充。</li>
+<li><strong>词嵌入层（Word embedding layer）</strong><br>这里是使用预先训练的词嵌入模型， 将每一个词映射到固定大小的向量。</li>
+<li><strong>上下文嵌入层（Contextual embedding layer）</strong><br>主要作用是给每一个词加一个上下文的<strong>线索（cue）</strong>， 前三层都是对问题和上下文进行应用</li>
+<li><strong>注意流层（Attention flow layer）</strong><br>这里是组合问题和上下文的向量， 生成一个<strong>问题-察觉</strong>的特征向量集合。</li>
+<li><strong>模型层（Modeling layer）</strong><br>本文是使用<strong>循环神经网络（RNN）</strong>来对上下文进行扫描</li>
+<li><strong>输出层（Output layer）</strong><br>该层提供对问题的回答</li>
+</ol>
+<p>这里我们给出相应的层次结构图<br> <img src="http://ol3p4szw6.bkt.clouddn.com/BIDAF-1.png" alt="层次结构"></p>
+<p>我们来继续讨论其中每一层更多的细节</p>
+<h4 id="3-1-字符嵌入层"><a href="#3-1-字符嵌入层" class="headerlink" title="3.1 字符嵌入层"></a>3.1 字符嵌入层</h4><p>字符嵌入层的作用主要在于将一个词映射到高维的向量空间之中，我们令${x_1, x_2, …, x_T}$ 和 ${q_1, q_2, …, q_J}$代表上下文的词集合和问题的词集合， 这两者都是有序的， 利用Kim的字符水平的CNN方法， 我们可以获得对应的字符水平的嵌入向量， 多个字符被嵌入成一个向量， 理解成CNN的一维输入， 大小和CNN输入的大小一致， CNN的输出被max-pool， 最终得到一个固定长度的向量。</p>
+<p>我们有必要对Kim这个方法进行介绍</p>
+<h5 id="3-1-1-关于字符水平的CNN方法"><a href="#3-1-1-关于字符水平的CNN方法" class="headerlink" title="3.1.1 关于字符水平的CNN方法"></a>3.1.1 关于字符水平的CNN方法</h5><p>我们首先给出Kim论文中的整套网络结构图， Kim是使用这套结构做文本分类的<br><img src="http://ol3p4szw6.bkt.clouddn.com/KimCNN.png" alt=""><br>输入一共有n个词， 每一个词都是k维的<strong>词向量</strong>， 这里我们记$x_{1:n} = x_1\oplus x_2\oplus … \oplus x_n$, 其中$\oplus$是向量的连接操作， CNN的卷积操作就是利用一个过滤器 $w \in \mathbb{R}^{hk}$， 实际上就是利用一个h大小的窗口来进行移动， 如上图所示， 红色窗口就是h=2的一个窗口， 从上到下对所有的词进行扫描， 这里我们给出计算方法：</p>
+<script type="math/tex; mode=display">c_i = f(w \cdot x_{i:i+h-1} + b)</script><p>向量c对应着上图的第二部分的一个长条， $c = ({c<em>1, c_2, …, c</em>{n-h+1}})$， 函数$f$是一个非线性函数， 类似于双曲正切瀚函数tanh。</p>
+<p>接下去我们就可以根据多个窗口大小来构造一系列的特征向量， 如上图所示， 接着就是经过<strong>Max-over-time pooling</strong>， 生成一个一维向量， 向量的大小等于不同窗口的个数。</p>
+<blockquote>
+<p><strong>关于Max-over-time pooling</strong><br>该方法是Collobert在2011年提出来的， 原理十分简单， 就是取特征向量的最大值</p>
+<script type="math/tex; mode=display">\hat{c} = max\{c\}</script><p>目的就是获取最大的特征值于特征向量之中</p>
+</blockquote>
+<p>整个pooling的做法目的其实有一部分是为了将变长的输入变成定长， 我规定有几个窗口， 最后就会得到几维的向量。<br>最后将最大池化后的向量结构全连接到一个层上， 加上dropout， 然后softmax输出， 最后得到文本所属不同类别的概率。</p>
+<p>回到这篇文章中来， 我们使用kim的方法就可以将变长文本输入， 转变为一个定长的向量了！</p>
+<h4 id="3-2-词嵌入层"><a href="#3-2-词嵌入层" class="headerlink" title="3.2 词嵌入层"></a>3.2 词嵌入层</h4><p>词嵌入层和字符嵌入层一样， 都是将词映射到一个高维的特征向量的空间， 这里我们使用预先训练好的词向量（采用GloVe）， 来获得定长的词嵌入向量（和字符嵌入层的作用基本相同， 将变长的文本转换成定长的向量），这里最为关键的点就是Pennington在2014年提出来的<strong>GloVe</strong>， 一种词向量的表示方法。</p>
+<h5 id="3-2-1-关于GloVe"><a href="#3-2-1-关于GloVe" class="headerlink" title="3.2.1 关于GloVe"></a>3.2.1 关于GloVe</h5><p>GloVe全称为<strong>Global Vector For Word Representation</strong>， 该方法结合了<strong>全局矩阵分解方法（global matrix factorization）</strong>以及局部上下文窗口方法（local context window）的优点， 我们来仔细说明一下该方法<br>首先我们需要定义一些符号：</p>
+<ol>
+<li><strong>词到词的协出现矩阵$X$</strong><br>其中对于每一个元素$X_{ij}$， 表示词$j$在词$i$的上下文中出现的次数</li>
+<li><strong>单个词的元素$X_{i}$</strong><br>我们定义$X<em>{i} = \sum</em>{k}{X_{ik}}$， 表示所有词在词$i$的上下文中出现的次数</li>
+<li><strong>概率$P_{ij}$</strong><br>我们定义概率$P<em>{ij} = P(j|i) = {X</em>{ij}}/{X_{i}}$， 代表词$j$出现在词$i$的上下文的概率</li>
+</ol>
+<p>举一个例子吧， 我们现在对句子进行分词， 得到了ice（冰）和steam（蒸汽）两个词， 然后我们计算一下概率， 比如在这两个词的上下文中， 某个词k = solid（固体）等出现的概率， 使用大量的数据来进行计算， 我们得到<br><img src="http://ol3p4szw6.bkt.clouddn.com/probability.png" alt=""><br>可以看出来， 如果$P(k|ice) / P(k|steam)$的值远大于1, 则趋于ice的上下文， 远小于1则是更趋向于steam的上下文， 可以看到gas更趋向于steam， 而solid更趋于在ice的上下文中出现。</p>
+<p>通过这个方法， 我们利用gas和solid比起利用water和fashion更加可以区分开ice和steam了， 进而我们可以构造出一个更具有区别性的词向量。<br>给出一个更加一般的模型：</p>
+<script type="math/tex; mode=display">F(w_i, w_j, \hat{w}_k) = \frac{P_{ik}}{P_{jk}}</script><p>其中$w$是一个d维的词向量， 而$\hat{w}$是一个d维的<strong>分离上下文词向量（separate context word vector）</strong>， 等式的右端是通过语料库进行抽取的， F可能依赖于某种未确定的参数， 但是F这样的概率值太多了， 我们这里给出一种选择方案：</p>
+<ol>
+<li>我们希望F能够表达P的概率比值于词向量空间， 由于词向量是线性结构， 故考虑向量的差， 记<script type="math/tex; mode=display">F(w_i - w_j, \hat{w}_k) = \frac{P_{ik}}{P_{jk}}</script></li>
+<li>F可能使用复杂的函数作为参数， 比如神经网络， 这样会使整个线性结构变得复杂， 我们作出以下修改<script type="math/tex; mode=display">F((w_i - w_j)^T\hat{w}_k) = \frac{P_{ik}}{P_{jk}}</script></li>
+<li>进一步修改<script type="math/tex; mode=display">F((w_i - w_j)^T\hat{w}_k) = \frac{F(w_i^T\hat{w}_k) }{F(w_j^T\hat{w}_k) }</script>其中$F(w<em>i\hat{w}_k) = P</em>{ik}$</li>
+<li>令F是指数函数， 得<script type="math/tex; mode=display">w_i^T\hat{w}_k = log(P_{ik}) = log(X_{ik}) - log(X_i)</script></li>
+<li>加上偏置， 由于$X_i$实际和k无关， 在偏置的吸收下， 得到<script type="math/tex; mode=display">w_i^T\hat{w}_k + b_i + \hat{b}_k = log(X_{ik})</script></li>
+<li>给出代价函数， 使用加权最小二乘回归模型解决<script type="math/tex; mode=display">J = \sum_{i,j=1}^{V}{f(X_{ij})(w_i^T\hat{w}_k + b_i + \hat{b}_k)^2}</script>这里需要对$f(X_{ij})$作出部分限定<br>a. $f(0)=0$<br>b. $f()x$是非递减的函数<br>c. 对于较大的x， 应该呈现较小的函数值</li>
+</ol>
+<p>给出函数定义：</p>
+<script type="math/tex; mode=display">f(x) = x / x_{max} \ \ \ \  if\ \ \  x < x_{max}</script><script type="math/tex; mode=display">f(x) = 0 \ \ \ \ other \ \ wise</script><h5 id="3-2-2-向量拼接输入"><a href="#3-2-2-向量拼接输入" class="headerlink" title="3.2.2 向量拼接输入"></a>3.2.2 向量拼接输入</h5><p>通过两个过程我们可以的得到， 字符水平的嵌入以及词水平的嵌入。利用Sirivastava在2015年的时候提出来的双层高速网络， 得到d维度的向量， 相当于得到两个矩阵， $X\in  \mathbb{R}^{d \times T}, Q\in \mathbb{R}^{d \times J}$， 我们之前得到T维和J维的词序列的每一个词都被转换成d维的向量。</p>
+<h4 id="3-3-上下文嵌入层"><a href="#3-3-上下文嵌入层" class="headerlink" title="3.3 上下文嵌入层"></a>3.3 上下文嵌入层</h4><p>利用1997年Sepp Hochreiter 和 Jurgen Schmidhuber提出来的<strong>长短时记忆单元（LSTM）</strong>网络， 我们将LSTM双向放置， 并将输出连接起来， 有两个矩阵$H\in  \mathbb{R}^{2d \times T}, U \in \mathbb{R}^{2d \times J}$， 之所以是2d是因为LSTM是双向的， 对应位置是有两个输出的</p>
+<h4 id="3-4-注意流层"><a href="#3-4-注意流层" class="headerlink" title="3.4 注意流层"></a>3.4 注意流层</h4><p> 注意流层的作用在于在问题和上下文之间连接和熔断， 和先前其他的注意力机制不一样， 并不是直接利用上下文和问题直接组成特征向量， 反而是， 每一个时间步的注意力向量， 以及先前层的嵌入向量， 被允许流向模型层， 降低了过早组合成特征向量所造成的误差。</p>
+<p>该层的输出也就是关于上下文的<strong>问题-察觉</strong>向量表示， 以及先前层的上下文嵌入向量。<br>在这一层， 引入共享的相似度矩阵S，S的大小是T乘以J，其中$S<em>{tj}=\alpha (H</em>{:t}, U<em>{:j})$， 代表上下文的第t个词和问题的第j个词的相似度， $\alpha$是一个可训练的函数， 计算出H的t列和U的j列之间的相似度。<br>定义$\alpha(H</em>{:t}, U<em>{:j}) = w</em>{(S)}^T(h, u, h\circ u)$， 其中w是一个6d维度的可训练的权值向量， $\circ$就是对应元素乘积<br>我们通过两个方向进行计算注意力向量以及伴随向量：</p>
+<h5 id="3-4-1-从上下文到问题"><a href="#3-4-1-从上下文到问题" class="headerlink" title="3.4.1 从上下文到问题"></a>3.4.1 从上下文到问题</h5><p>上下文到问题的注意力， 对于每一个上下文词特别相关， 我们定义一个J维度的向量$a<em>t$来表示， 上下文的第t个词对问题的注意力权值， 注意到$\sum</em>{t,j}a<em>{jt} = 1$, 其中有$a</em>{t} = softmax(S_{t:})$, 由此我们可以定义伴随向量</p>
+<script type="math/tex; mode=display">\hat{U}_{:t} = \sum_{j}a_{tj}U_{:j}</script><p>很容易理解， 也就是拿对应context的相似度向量$S_{t:}$（也就是S的第t行）做softmax操作， $\hat{U}$是一个2d乘T的矩阵</p>
+<h5 id="3-4-2-从问题到上下文"><a href="#3-4-2-从问题到上下文" class="headerlink" title="3.4.2 从问题到上下文"></a>3.4.2 从问题到上下文</h5><p>从问题到上下文的注意力， 也就是当上下文的词和问题的某个词相似度最高， 那么就有可能是问题回答的关键。<br>定义$b = softmax(max_{col}(S))$,  可得到2d大小的伴随上下文向量</p>
+<script type="math/tex; mode=display">\hat{h} = \sum_{t}b_{t}H_{:t}</script><p>也利用上下文中最为关键的词产生伴随上下文向量， 进行T次运算可得到相应的$\hat{H}$</p>
+<h5 id="3-4-3-上下文嵌入向量的生成"><a href="#3-4-3-上下文嵌入向量的生成" class="headerlink" title="3.4.3 上下文嵌入向量的生成"></a>3.4.3 上下文嵌入向量的生成</h5><p>我们将上下文嵌入和注意力向量合并到了G之中， G的每一列就是对上下文的每一个词的<strong>问题-察觉</strong>表达， 给出G的计算方法：</p>
+<script type="math/tex; mode=display">G_{:t} = \beta(H_{:t}, \hat{U}_{:t}, \hat{H}_{:t})</script><p>其中$G_{:t}$就是第t列向量， 其中$\beta$可以是一个可训练的函数， 可以是一个神经网络， 这里给出定义：</p>
+<script type="math/tex; mode=display">\beta(h, \hat{u}, \hat{h}) = (h, \hat{u}, h \circ \hat{u}, h \circ \hat{h})$$这里是输出为8d维度
+#### 3.5 模型层
+模型层很简单， 就是一个简单的双向LSTM， 用于抽取特征， 注意到LSTM的输入输出对应关系可以是n对m， 也就是对于每一个单元的输入是8d， 输出可以选取前d个， 这里的输出定义为d大小
+由于是双向的， 我们便可以得到一个2d乘T的一个矩阵， 直接输入到输出层进行答案的判断。
+
+#### 3.6 输出层
+
+##### 3.6.1 关于训练
+对于QA问题而言， 我们需要一段文本之中找到可能的回答， 也即是去推测出来回答的开始和结束的位置。 
+对于开始位置的概率分布：
+$$p^1 = softmax(w_{(p^1)}^T[G,M])</script><p>$w_{(p^1)}$是一个10d维度的可训练的权值向量<br>我们将M传到另一个LSTM之中获得另一个矩阵， 记$M^2$， 同样是2d乘T的矩阵<br>对于结束位置的概率分布：</p>
+<script type="math/tex; mode=display">p^2 = softmax(w_{(p^2)}^T[G,M^2])</script><p>最后定义误差函数：</p>
+<script type="math/tex; mode=display">L(\theta) = -\frac{1}{N}\sum_{i=1}^N{(log(p_{y_i^1}^1)+log(p_{y_i^2}^2))}</script><p>其中$y_i^1$和$y_i^2$是正确的开始和结束的索引</p>
+<h5 id="3-6-1-关于测试"><a href="#3-6-1-关于测试" class="headerlink" title="3.6.1 关于测试"></a>3.6.1 关于测试</h5><p>测试的话只需要利用动态规划在线性时间内计算出概率最大的(k, l)对， 对应概率也就是$p^1_k p^2_l$ </p>
+<h3 id="4-参考文献"><a href="#4-参考文献" class="headerlink" title="4. 参考文献"></a>4. 参考文献</h3><p>[1] Seo M, Kembhavi A, Farhadi A, et al. Bidirectional attention flow for machine comprehension[J]. arXiv preprint arXiv:1611.01603, 2016.<br>[2] Pennington, Jeffrey, Richard Socher, and Christopher Manning. “Glove: Global vectors for word representation.” Proceedings of the 2014 conference on empirical methods in natural language processing (EMNLP). 2014.<br>[3] Kim, Yoon. “Convolutional neural networks for sentence classification.” arXiv preprint arXiv:1408.5882 (2014).</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器理解/" rel="tag"># 机器理解</a>
+          
+            <a href="/tags/NLP/" rel="tag"># NLP</a>
+          
+            <a href="/tags/双向数据流/" rel="tag"># 双向数据流</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/05/软件测试方法课程笔记(2)/" rel="next" title="软件测试方法课程笔记(2)">
+                <i class="fa fa-chevron-left"></i> 软件测试方法课程笔记(2)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/06/软件测试方法课程笔记(3)/" rel="prev" title="软件测试方法课程笔记(3)">
+                软件测试方法课程笔记(3) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Mezereon" />
+            
+              <p class="site-author-name" itemprop="name">Mezereon</p>
+              <p class="site-description motion-element" itemprop="description">With Saber</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MezereonXP" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/202fe3605b6d" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_34206952" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#利用双向注意流进行机器理解"><span class="nav-number">1.</span> <span class="nav-text">利用双向注意流进行机器理解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-概述"><span class="nav-number">1.0.1.</span> <span class="nav-text">1. 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-介绍"><span class="nav-number">1.0.2.</span> <span class="nav-text">2. 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-关于模型"><span class="nav-number">1.0.3.</span> <span class="nav-text">3. 关于模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-字符嵌入层"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">3.1 字符嵌入层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1-关于字符水平的CNN方法"><span class="nav-number">1.0.3.1.1.</span> <span class="nav-text">3.1.1 关于字符水平的CNN方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-词嵌入层"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">3.2 词嵌入层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-关于GloVe"><span class="nav-number">1.0.3.2.1.</span> <span class="nav-text">3.2.1 关于GloVe</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-2-向量拼接输入"><span class="nav-number">1.0.3.2.2.</span> <span class="nav-text">3.2.2 向量拼接输入</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-上下文嵌入层"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">3.3 上下文嵌入层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-注意流层"><span class="nav-number">1.0.3.4.</span> <span class="nav-text">3.4 注意流层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-1-从上下文到问题"><span class="nav-number">1.0.3.4.1.</span> <span class="nav-text">3.4.1 从上下文到问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-2-从问题到上下文"><span class="nav-number">1.0.3.4.2.</span> <span class="nav-text">3.4.2 从问题到上下文</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-3-上下文嵌入向量的生成"><span class="nav-number">1.0.3.4.3.</span> <span class="nav-text">3.4.3 上下文嵌入向量的生成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-6-1-关于测试"><span class="nav-number">1.0.3.4.4.</span> <span class="nav-text">3.6.1 关于测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-参考文献"><span class="nav-number">1.0.4.</span> <span class="nav-text">4. 参考文献</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mezereon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
