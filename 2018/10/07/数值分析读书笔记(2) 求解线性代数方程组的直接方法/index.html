@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="笔记,数值分析," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数值分析读书笔记（2）求解线性代数方程组的直接方法1.引言矩阵的数值计算一般可以分为直接法和间接法 本章主要介绍$Ax=b$这类线性方程组求解的直接法，数值求解该方程组的基础思想是Gauss消元法  实质是通过一组满秩的初等行变换，将A保秩变换成一个三角矩阵U，此变换过程称为矩阵A的非奇异上三角化  我们的目的就是寻求一个矩阵P，使得PA=U，其中U是一个三角矩阵，其中$Ax=b$和$Ux=\ov">
+<meta name="keywords" content="笔记,数值分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数值分析读书笔记（2）求解线性代数方程组的直接方法">
+<meta property="og:url" content="https://mezereonxp.github.io/2018/10/07/数值分析读书笔记(2) 求解线性代数方程组的直接方法/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="数值分析读书笔记（2）求解线性代数方程组的直接方法1.引言矩阵的数值计算一般可以分为直接法和间接法 本章主要介绍$Ax=b$这类线性方程组求解的直接法，数值求解该方程组的基础思想是Gauss消元法  实质是通过一组满秩的初等行变换，将A保秩变换成一个三角矩阵U，此变换过程称为矩阵A的非奇异上三角化  我们的目的就是寻求一个矩阵P，使得PA=U，其中U是一个三角矩阵，其中$Ax=b$和$Ux=\ov">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-10-06T16:43:57.449Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数值分析读书笔记（2）求解线性代数方程组的直接方法">
+<meta name="twitter:description" content="数值分析读书笔记（2）求解线性代数方程组的直接方法1.引言矩阵的数值计算一般可以分为直接法和间接法 本章主要介绍$Ax=b$这类线性方程组求解的直接法，数值求解该方程组的基础思想是Gauss消元法  实质是通过一组满秩的初等行变换，将A保秩变换成一个三角矩阵U，此变换过程称为矩阵A的非奇异上三角化  我们的目的就是寻求一个矩阵P，使得PA=U，其中U是一个三角矩阵，其中$Ax=b$和$Ux=\ov">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mezereonxp.github.io/2018/10/07/数值分析读书笔记(2) 求解线性代数方程组的直接方法/"/>
+
+
+
+
+
+  <title>数值分析读书笔记（2）求解线性代数方程组的直接方法 | MyBlog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MyBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">share something</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mezereonxp.github.io/2018/10/07/数值分析读书笔记(2) 求解线性代数方程组的直接方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mezereon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数值分析读书笔记（2）求解线性代数方程组的直接方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-07T00:43:02+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数值分析/" itemprop="url" rel="index">
+                    <span itemprop="name">数值分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="数值分析读书笔记（2）求解线性代数方程组的直接方法"><a href="#数值分析读书笔记（2）求解线性代数方程组的直接方法" class="headerlink" title="数值分析读书笔记（2）求解线性代数方程组的直接方法"></a>数值分析读书笔记（2）求解线性代数方程组的直接方法</h1><h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h2><p>矩阵的数值计算一般可以分为直接法和间接法</p>
+<p>本章主要介绍$Ax=b$这类线性方程组求解的直接法，数值求解该方程组的基础思想是Gauss消元法</p>
+<blockquote>
+<p>实质是通过一组满秩的初等行变换，将A保秩变换成一个三角矩阵U，此变换过程称为矩阵A的非奇异上三角化</p>
+</blockquote>
+<p>我们的目的就是寻求一个矩阵P，使得PA=U，其中U是一个三角矩阵，其中$Ax=b$和$Ux=\overline b$同解（$\overline b=Pb$）,有效的生成一个P是我们主要研究的问题</p>
+<h2 id="2-初等下三角矩阵—Guass变换矩阵"><a href="#2-初等下三角矩阵—Guass变换矩阵" class="headerlink" title="2.初等下三角矩阵—Guass变换矩阵"></a>2.初等下三角矩阵—Guass变换矩阵</h2><p>回顾一下线性代数中的三个初等线性变换</p>
+<ul>
+<li>数乘</li>
+<li>倍加</li>
+<li>互换</li>
+</ul>
+<p>我们引入一个一般意义上的初等变换矩阵，它把许多常用的线性变换统一在一个框架里面，在数值线性代数中起着重要的意义</p>
+<p>Def： 称$C^{n \times n}$中如下形式的矩阵$E(u,v;\sigma)$为<strong>初等矩阵</strong>:</p>
+<script type="math/tex; mode=display">E(u,v;\sigma)=I-\sigma u v^{H}</script><p>其中非零向量$u,v\in C^{n},\sigma \neq 0$是实或者复数，即</p>
+<script type="math/tex; mode=display">E(u,v;\sigma)=\begin{pmatrix} 
+1-\sigma u_1v_1 & -\sigma u_1v_2& \cdots &-\sigma u_1v_n\\
+-\sigma u_2v_1& 1-\sigma u_2v_2 & \cdots & -\sigma u_2v_n\\
+\vdots & \vdots &\ddots &\vdots\\
+-\sigma u_nv_1&-\sigma u_nv_2 &\cdots &1-\sigma u_nv_n 
+\end{pmatrix}</script><p>选取不同的$u，v，\sigma$，可以得到许多常用的线性变换矩阵</p>
+<ul>
+<li>数乘（$E_1=E(e_i,e_i;1-\alpha)$）</li>
+<li>倍加（$E_2=E(e_i,e_j;-\mu)$）</li>
+<li>互换（$E_3=E(e_i-e_j,e_i-e_j;1)$）</li>
+</ul>
+<p>下面引出初等变换矩阵的一些重要的数学性质<br><strong>1.两相同向量u，v组成的初等变换矩阵可交换，其积仍然为一个初等矩阵</strong></p>
+<script type="math/tex; mode=display">E(u,v;\sigma)E(u,v;\tau)=E(u,v;\sigma+\tau-\sigma \tau v^{H}u)</script><p>证明：</p>
+<script type="math/tex; mode=display">\begin{align}
+E(u,v;\sigma)E(u,v;\tau) &=(I-\sigma uv^{H}))(I-\tau uv^{H})\\
+&=I-\sigma uv^{H}-\tau uv^{H}+
+\end{align}</script><p><strong>2.若$1-\sigma v^{H} u \neq 0$ ,则初等矩阵E(u,v;\sigma)可逆，其逆矩阵也是初等矩阵</strong></p>
+<script type="math/tex; mode=display">E^{-1}(u,v;\sigma)=E(u,v;\tau),\tau=\frac{\sigma}{\sigma v^{H}u-1}</script><p><strong>3.设$v^{\bot}$表示和$v$正交的（n-1）维子空间</strong><br><strong>a.若$u\notin v^{\bot}$,则$E(u,v;\sigma)$有n个线性无关的特征向量，该组特征向量由u和$v^{\bot}$中任取一组基向量组成</strong><br><strong>b.若$u\in v^{\bot}$,则$E(u,v;\sigma)$仅有n-1个线性无关的特征向量，该组特征向量由$v^{\bot}$中任取一组基向量组成</strong></p>
+<p><strong>4.$det(E(u,v;\sigma))=1-\sigma v^{H}u$</strong></p>
+<p><strong>5.对任意非零向量$a,b\in C^{n}$,必可适当选取$u,v,\sigma$使得<script type="math/tex">E(u,v;\sigma)a=b</script></strong></p>
+<blockquote>
+<p>事实上只需要取$u,v,\sigma $满足<script type="math/tex">v^{H}a\neq 0,\sigma u=\frac{a-b}{v^{H}a}</script></p>
+</blockquote>
+<p>由初等变换矩阵引出Guass变换矩阵，我们选取<script type="math/tex">\sigma =-1,u=l_{k}=(0,\cdots,0,l_{k+1},\cdots,l_{nk})^{T},v=e_{k}=(0,\cdots,0,1,0,\cdots,0)^{T},k=1,2,\cdots,n-1</script></p>
+<p>得到n-1个Guass变换矩阵</p>
+<script type="math/tex; mode=display">L_{k}(l_{k})\equiv E(l_{k},e_{k};-1)=I+l_{k}e_{k}=\begin{pmatrix}
+1\\& \ddots\\&&1\\&&l_{k+1,k}&1\\&&l_{k+2,k}&&1\\&&\vdots&&&\ddots\\&&l_"{nk}&&&&1
+ \end{pmatrix}</script><p>下面给出Guass变换矩阵的一些性质</p>
+<p><strong>1.$det(L_{k})=1+e_{k}^{T}l_{k}=1$</strong></p>
+<p><strong>2.Guass变换矩阵的逆只需要将$\sigma$从-1变成+1</strong></p>
+<p><strong>3.$L_{1}(l_{1})L_{2}(l_{2})\cdots L_{n-1}(l_{n-1})=\begin{pmatrix}1\\l_{21}&amp;1\\l_{31}&amp;l_{32}&amp;1\\\vdots&amp;\vdots&amp;\vdots&amp;\ddots\\l_{n1}&amp;l_{n2}&amp;l_{n3}&amp;\cdots&amp;1\end{pmatrix}$</strong></p>
+<blockquote>
+<p><strong>注意左乘的顺序</strong></p>
+</blockquote>
+<h2 id="3-Gauss消元法"><a href="#3-Gauss消元法" class="headerlink" title="3.Gauss消元法"></a>3.Gauss消元法</h2><p>先介绍一下顺序Gauss消元法，大概分两步</p>
+<ul>
+<li>消元过程</li>
+<li>回代过程</li>
+</ul>
+<p>在消元过程中，我们不断去左乘Gauss变换矩阵，不断将原矩阵的下三角部分一列列变成0，从而最终变换成一个上三角矩阵</p>
+<p>需要注意的是，在一列列的消元过程中，我们需保证$a_{ii}\neq 0 (i=1,2,\dots,n)$,所以需要利用行互换来保证此条件</p>
+<p>当然这一切消元过程的前提是，矩阵A应该是非奇异的</p>
+<p>经过n-1次的Gauss消元，我们可以得到一个上三角矩阵</p>
+<script type="math/tex; mode=display">L_{n-1}^{-1}\cdots L_{k}^{-1}\cdots L_{2}^{-1}L_{1}^{-1}A^{(1)}=A^{(n)}x=L_{n-1}^{-1}\cdots L_{k}^{-1}\cdots L_{2}^{-1}L_{1}^{-1}b^{(1)}=b^{(n)}</script><p>在回代过程中，由于我们得到了一个上三角矩阵，那么就可以从最底行开始逐步解出x</p>
+<p>Gauss消元法的复杂度是$O(n^{3})$，高阶状态下比起克拉默法则运算量要小得多</p>
+<p>Gauss消元法过程中，在对各列进行消元的时候，如果主元比较小的话，运算的结果会产生较大的误差，故引入<strong>Gauss列主元消元法</strong>，即在每一次利用主元消元的步骤之前，把该列中绝对值最大的数所在的行与主元所在的行进行交换</p>
+<h2 id="4-三角分解法"><a href="#4-三角分解法" class="headerlink" title="4.三角分解法"></a>4.三角分解法</h2><p>我们利用Gauss变换矩阵对Gauss消元法进行进一步的分析</p>
+<script type="math/tex; mode=display">L_{n-1}^{-1}\cdots L_{k}^{-1}\cdots L_{2}^{-1}L_{1}^{-1}A^{(1)}x=A^{(n)}x=Ux</script><p>故<script type="math/tex">\begin{align}A&=L_{1}\cdots L_{k}\cdots L_{n-2}L_{n-1}U\\&=(I+l_{1}e_{1}^{T})\cdots(I+l_{n-2}e_{n-2}^{T})(I+l_{n-1}e_{n-1}^{T})U\\&=(I+l_{1}e_{1}^{T}+\cdots+l_{n-1}e_{n-1}^{T})U\end{align}</script></p>
+<p>由此引出矩阵的<strong>LU分解</strong>，又称<strong>Doolittle分解</strong></p>
+<script type="math/tex; mode=display">A=\begin{pmatrix}1\\l_{21}&1\\l_{31}&l_{32}&1\\\vdots&\vdots&\vdots&\ddots\\l_{n1}&l_{n2}&l_{n3}&\cdots&1\end{pmatrix}\begin{pmatrix}u_{11}&u_{12}&u_{13}&\cdots &u_{1n}\\&u_{22}&u_{23}&\cdots&u_{2n}\\&&u_{33}&\cdots &u_{3n}\\&&&\ddots &\vdots \\&&&&u_{nn}\end{pmatrix}</script><p>这里再介绍一下<strong>Crout分解</strong>，即A=LU中的L是一个下三角矩阵，U是单位上三角矩阵</p>
+<p>注意到某些特殊矩阵的三角分解也是比较特殊的，这里引入一类<strong>带状对角形矩阵</strong></p>
+<script type="math/tex; mode=display">A=\begin{pmatrix}a_{11}&\cdots &a_{1,s+1}&\\\vdots&\ddots&&\ddots\\a_{r+1,1}&&a_{r+1,s+1}&&a_{n-s,n}\\&\ddots&&\ddots\\&&a_{n,n-r}&&a_{nn}\end{pmatrix}</script><p>上半带宽为s，下半带宽为r，存在LU分解，其中L是下半带宽为r的单位下三角矩阵，U是上半带宽为s的上三角矩阵</p>
+<p>对于r=s=1的这一类更加特殊的矩阵，称为三对角矩阵，对于此类矩阵的三角分解，介绍一种<strong>“追赶法”</strong></p>
+<p>首先做Crout分解</p>
+<script type="math/tex; mode=display">A=LU=\begin{pmatrix}p_{1} &&&&0\\r_{2}&p_{2}\\&\ddots&\ddots\\&&r_{n-1}&p_{n-1}\\0&&&r_{n}&p_{n}\end{pmatrix}\begin{pmatrix}1&q_{1}&&&0\\&1&q_{2}\\&&\ddots&\ddots\\&&&1&q_{n-1}\\0&&&&1\end{pmatrix}</script><p>然后分两步解决此类问题<br>追：解$Ly=b$<br>赶：解$Ux=y$</p>
+<p>注意到正定对称矩阵的三角分解也是特殊的，这里引入<strong>Cholesky分解</strong></p>
+<p>首先利用Doolittle分解，得$A=LU$,对U进一步提取对角矩阵$diag(u_{11},\dots,u_{nn})$,从而有</p>
+<script type="math/tex; mode=display">U=DD^{-1}U=D(D^{-1}U)=DU_{0}</script><p>故，$A=LDU_{0}$，由于A对称正定，$A^{T}=A$,所以有</p>
+<script type="math/tex; mode=display">A^{T}=(LDU_{0})^{T}=U_{0}^{T}DL^{T}=A=LDU_{0}</script><p>由于分解的唯一性，可知$L^{T}=U_{0}$，从而有</p>
+<script type="math/tex; mode=display">A=LDL^{T}</script><p>我们可以记，$D^{1/2}=diag(\sqrt{u_{11}},\dots,\sqrt{u_{nn}})$,从而</p>
+<script type="math/tex; mode=display">A=LD^{1/2}D^{1/2}L^{T}=LD^{1/2}(LD^{1/2})^{T}=L_{1}L_{1}^{T}</script><p>此种分解手段称为Cholesky分解，限定对角元素为正，此类分解唯一</p>
+<p>上述的Cholesky分解中涉及了开方的运算，下面介绍一种改进的平方根法</p>
+<p>易知，$A=LDL^{T}$,则$Ax=LDL^{T}x$</p>
+<p>先解$Ly=b$,后解$L^{T}x=D^{-1}y$,其中D的逆只需要将对角元素取倒数即可</p>
+<h2 id="5-向量和矩阵的范数"><a href="#5-向量和矩阵的范数" class="headerlink" title="5.向量和矩阵的范数"></a>5.向量和矩阵的范数</h2><blockquote>
+<p>范数是比长度更为一般的概念，有了范数就可以更好的去测度误差的大小</p>
+</blockquote>
+<h4 id="关于向量范数"><a href="#关于向量范数" class="headerlink" title="关于向量范数"></a>关于向量范数</h4><blockquote>
+<script type="math/tex; mode=display">Def: V是数域R/C上的线性空间，对于V中任意的元素x，\\if 存在一个唯一的实函数N（x）与之对应，记为\begin{Vmatrix}x\end{Vmatrix},而且需满足三个条件\\1.非负正定，2.齐次性，3.三角不等式</script></blockquote>
+<p>对于非负正定，当仅当x=0，有N（x）=0，否则N（x）&gt; 0;</p>
+<p>对于齐次性，有<script type="math/tex">\begin{Vmatrix}\alpha x\end{Vmatrix}=\begin{vmatrix}\alpha\end{vmatrix} \begin{Vmatrix}x\end{Vmatrix} ,\alpha \in K</script></p>
+<p>对于三角不等式，有<script type="math/tex">\begin{Vmatrix}x+y\end{Vmatrix}\leq\begin{Vmatrix}x\end{Vmatrix}+\begin{Vmatrix}y\end{Vmatrix},\forall x,y \in V</script></p>
+<p>这里介绍几种常见的向量范数</p>
+<ul>
+<li>$l_{1}-范数$ 向量中的元素的绝对值之和</li>
+<li>$l_{2}-范数$ 向量中的元素的绝对值的平方加起来然后开方</li>
+<li>$l_{\infty}-范数$ 向量元素中的最大绝对值（使用Cauchy-Schwarz不等式证明三角不等式）</li>
+<li>$l_{p}-范数$ 向量中的元素的绝对值的p次方加起来然后开p次方根（利用赫尔德不等式即可证明三角不等式）</li>
+</ul>
+<p>在最优化理论中可能会涉及<strong>加权范数</strong>，A为对称正定矩阵，$(x^{T}Ax)^{1/2}$是一种向量范数，记为$\begin{Vmatrix}x\end{Vmatrix}_{A}$</p>
+<p>在无限维线性空间中，比如在[a,b]区间中，对于所有的实连续函数集合C[a,b],对于其中的一个元素f(x)也是有类似定义的范数</p>
+<ul>
+<li>1范数<script type="math/tex; mode=display">\begin{Vmatrix}f(x)\end{Vmatrix}_1=\int _{a}^{b}\begin{vmatrix}f(x)\end{vmatrix}dx</script></li>
+<li>p范数<script type="math/tex; mode=display">\begin{Vmatrix}f(x)\end{Vmatrix}_p=\left(\int _{a}^{b}\begin{vmatrix}f(x)\end{vmatrix}^{p}dx \right)^{\frac{1}{p}}</script></li>
+<li>∞范数<script type="math/tex; mode=display">\begin{Vmatrix}f(x)\end{Vmatrix}_\infty=max\begin{vmatrix}f(x)\end{vmatrix} ,a\leq x\leq b</script></li>
+</ul>
+<p>下面介绍一下范数的<strong>等价性</strong></p>
+<blockquote>
+<p>对于任意两个定义好的范数，存在两个与向量x无关的非零正常数c1，c2，有</p>
+<script type="math/tex; mode=display">c_1\begin{Vmatrix}x\end{Vmatrix}_\alpha \leq \begin{Vmatrix}x\end{Vmatrix}_\beta\leq c_2\begin{Vmatrix}x\end{Vmatrix}_\alpha</script><p>称两个范数等价</p>
+</blockquote>
+<p>不难验证，此处的等价性满足数学定义中的等价性的三个条件，即自反，对称，传递</p>
+<h4 id="关于矩阵范数"><a href="#关于矩阵范数" class="headerlink" title="关于矩阵范数"></a>关于矩阵范数</h4><p>矩阵范数不仅仅满足非负正定，齐次和三角不等式，而且须满足矩阵相乘的相容性，即</p>
+<script type="math/tex; mode=display">\begin{Vmatrix}AB\end{Vmatrix} \leq \begin{Vmatrix}A\end{Vmatrix}\begin{Vmatrix}B\end{Vmatrix}</script><p>这里给出一类特殊的范数， Frobenius范数</p>
+<script type="math/tex; mode=display">\begin{Vmatrix}A\end{Vmatrix}_F=\left(\sum_{j=1}^{m}\sum_{i=0}^{n}\begin{vmatrix}a_{ij}\end{vmatrix}^{2}\right)^{\frac{1}{2}}</script><p>对于$C^{m \times n}$上面的任意一种向量诱导范数，都有$\begin{Vmatrix} I\end{Vmatrix} = \max \limits_{\begin{Vmatrix} x\end{Vmatrix}=1} \{ \begin{Vmatrix} Ix\end{Vmatrix}=1 \}$</p>
+<p>这里给出一种范数的定义，即诱导矩阵范数，诱导矩阵范数和向量范数密切相关</p>
+<blockquote>
+<p>定义：设在两个向量空间$C^{m},C^{n}$中存在向量范数$\begin{Vmatrix} \bullet\end{Vmatrix}_{V}$, 定义在$C^{m \times n}$空间上的矩阵A的由向量范数 $\begin{Vmatrix}\bullet\end{Vmatrix}_{V}$诱导所给出的矩阵范数为（其中x不为零向量）<script type="math/tex">\begin{Vmatrix} A\end{Vmatrix}_{V}=max\frac{\begin{Vmatrix} Ax\end{Vmatrix}_{V}}{\begin{Vmatrix} x\end{Vmatrix}_{V}}</script></p>
+</blockquote>
+<p>我们为了解决这个最大值的问题，继续等价定义来优化这个问题</p>
+<blockquote>
+<p>$\begin{Vmatrix} A\end{Vmatrix}_{V}=max\frac{\begin{Vmatrix} Ax\end{Vmatrix}_{V}}{\begin{Vmatrix} x\end{Vmatrix}_{V}}=max\begin{Vmatrix} Ax\end{Vmatrix}_{V}$<br>其中第一个max条件为x不为零向量，第二个max条件为$\begin{Vmatrix} x\end{Vmatrix}_{V}=1$</p>
+</blockquote>
+<p>我们利用诱导范数的定义可以从原来的向量范数中诱导出三种范数，分别是</p>
+<blockquote>
+<p>1范数：对矩阵的每一列中的元素取绝对值之后求和，然后选取其中的最大列作为1范数<br>2范数：矩阵的最大奇异值，也就是矩阵与矩阵的转置的乘积的最大特征值<br>无穷范数：对于矩阵的每一行的元素取绝对值之后求和，然后选取其中的最大行作为无穷范数</p>
+</blockquote>
+<p>关于矩阵的应用，这里引入一个<strong>Banach引理</strong></p>
+<blockquote>
+<p>设矩阵A属于n*m的复矩阵空间，对于该空间上的某种矩阵范数$\begin{Vmatrix} \bullet \end{Vmatrix}_{V}$,有$\begin{Vmatrix} A\end{Vmatrix}_{V}&lt;1$,则矩阵$（I±A）$非奇异，且有<script type="math/tex">\begin{Vmatrix} (I-A)^{-1}\end{Vmatrix}_{V}\leq \frac{\begin{Vmatrix} I\end{Vmatrix}}{1-\begin{Vmatrix} A\end{Vmatrix}}</script></p>
+</blockquote>
+<p>给出矩阵<strong>谱半径</strong>的定义</p>
+<blockquote>
+<p>矩阵的谱半径为矩阵的最大特征值，关于矩阵的谱半径，它不超过其任意一种矩阵范数（当矩阵是<strong>Hermite矩阵</strong>时，矩阵的2范数恰好等于矩阵的谱半径）</p>
+</blockquote>
+<p>继续给出线性方程组中<strong>条件数</strong>的定义</p>
+<blockquote>
+<p>在某一矩阵空间中，对于某一矩阵范数，矩阵的条件数=矩阵的范数×矩阵的逆的范数，即</p>
+<script type="math/tex; mode=display">Cond(A)=\begin{Vmatrix} A\end{Vmatrix}_{V} \times \begin{Vmatrix} A^{-1}\end{Vmatrix}_{V}</script></blockquote>
+<p>对于矩阵的条件数来说，它显然大于等于1，当矩阵恰好是正交矩阵的时候，矩阵的条件数恰好等于1<br>当矩阵为对称阵，对应的矩阵范数为2范数的时候，此时的条件数称之为谱条件数，其值等于最大特征值除以最小特征值，然后取绝对值</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/数值分析/" rel="tag"># 数值分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/06/数值分析读书笔记(1)/" rel="next" title="数值分析读书笔记（1）导论">
+                <i class="fa fa-chevron-left"></i> 数值分析读书笔记（1）导论
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Mezereon" />
+            
+              <p class="site-author-name" itemprop="name">Mezereon</p>
+              <p class="site-description motion-element" itemprop="description">With Saber</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MezereonXP" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/202fe3605b6d" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_34206952" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数值分析读书笔记（2）求解线性代数方程组的直接方法"><span class="nav-number">1.</span> <span class="nav-text">数值分析读书笔记（2）求解线性代数方程组的直接方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-引言"><span class="nav-number">1.1.</span> <span class="nav-text">1.引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-初等下三角矩阵—Guass变换矩阵"><span class="nav-number">1.2.</span> <span class="nav-text">2.初等下三角矩阵—Guass变换矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Gauss消元法"><span class="nav-number">1.3.</span> <span class="nav-text">3.Gauss消元法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-三角分解法"><span class="nav-number">1.4.</span> <span class="nav-text">4.三角分解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-向量和矩阵的范数"><span class="nav-number">1.5.</span> <span class="nav-text">5.向量和矩阵的范数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于向量范数"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">关于向量范数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于矩阵范数"><span class="nav-number">1.5.0.2.</span> <span class="nav-text">关于矩阵范数</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mezereon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
