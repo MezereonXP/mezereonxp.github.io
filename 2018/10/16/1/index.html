@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="笔记,图像处理,ResNet,分类器," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记0. 概述深度神经网络在许多AI任务中取得了卓越的成功, 但是通常会造成高的计算量和能量耗费, 对于某些能量有约束的应用, 例如移动传感器等. 我们提出了一种新的框架来, 该框架能够同时优化预测准确度以及能量耗费, 利用该框架来解决以上这个问题. 虽然该方法">
+<meta name="keywords" content="笔记,图像处理,ResNet,分类器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记">
+<meta property="og:url" content="https://mezereonxp.github.io/2018/10/16/1/index.html">
+<meta property="og:site_name" content="MyBlog">
+<meta property="og:description" content="Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记0. 概述深度神经网络在许多AI任务中取得了卓越的成功, 但是通常会造成高的计算量和能量耗费, 对于某些能量有约束的应用, 例如移动传感器等. 我们提出了一种新的框架来, 该框架能够同时优化预测准确度以及能量耗费, 利用该框架来解决以上这个问题. 虽然该方法">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://ol3p4szw6.bkt.clouddn.com/1539601514599.png">
+<meta property="og:image" content="http://ol3p4szw6.bkt.clouddn.com/1539669844523.png">
+<meta property="og:updated_time" content="2018-10-16T11:39:43.695Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记">
+<meta name="twitter:description" content="Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记0. 概述深度神经网络在许多AI任务中取得了卓越的成功, 但是通常会造成高的计算量和能量耗费, 对于某些能量有约束的应用, 例如移动传感器等. 我们提出了一种新的框架来, 该框架能够同时优化预测准确度以及能量耗费, 利用该框架来解决以上这个问题. 虽然该方法">
+<meta name="twitter:image" content="http://ol3p4szw6.bkt.clouddn.com/1539601514599.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://mezereonxp.github.io/2018/10/16/1/"/>
+
+
+
+
+
+  <title>Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记 | MyBlog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MyBlog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">share something</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://mezereonxp.github.io/2018/10/16/1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Mezereon">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyBlog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-16T19:35:12+08:00">
+                2018-10-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/图像处理/" itemprop="url" rel="index">
+                    <span itemprop="name">图像处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/16/1/" class="leancloud_visitors" data-flag-title="Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Energy-efficient-Amortized-Inference-with-Cascaded-Deep-Classifiers论文笔记"><a href="#Energy-efficient-Amortized-Inference-with-Cascaded-Deep-Classifiers论文笔记" class="headerlink" title="Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记"></a>Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记</h1><h3 id="0-概述"><a href="#0-概述" class="headerlink" title="0. 概述"></a>0. 概述</h3><p>深度神经网络在许多AI任务中取得了卓越的成功, 但是通常会造成高的计算量和能量耗费, 对于某些能量有约束的应用, 例如移动传感器等.</p>
+<p>我们提出了一种新的框架来, 该框架能够同时优化预测准确度以及能量耗费, 利用该框架来解决以上这个问题. 虽然该方法在测试阶段会有部分耗费和准确度的交换. 在该框架中, 每一个数据实例被推入到一个级联的深度神经网络, 伴随着增长着的大小, 接着一个选择模块用来进而确定什么时候一个足够精确度的分类器能被用到这个数据实例上.<br>神经网络的级联和选择模块端到端共同进行训练, 使用增强算法来优化交换计算成本和预测准确性. 该方法能够同时提高准确度和效率, 通过学习去分配简单的实例来加速分类器到达足够的准确度, 进而节省结算成本和能量耗费, 同时分配复杂实例给更深的和更强力的分类器来保证令人满意的准确性. </p>
+<p>在大量不同数据集的实验下, 使用级联的ResNet分类器, 我们证明我们的方法比标准的训练好的ResNets要表现出色, 并且只需要少于20%和50%的FLOPs耗费在CIFAR-10/100数据集上, 和66%的ImageNet的数据集上.</p>
+<blockquote>
+<p><strong>FLOPS 为每秒的浮点运算次数(float-point operations per second)</strong></p>
+</blockquote>
+<h3 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h3><p>在这篇文章中, 我们关注于测试阶段的关于图像分类器的能量-效率推断, 传统的方法通常基于为了速度直接降低准确率, 举个例子, 通过减少或者压缩训练好的复杂的神经网络, 以准确率的损失作为代价.</p>
+<p>注意到, 准确度和代价可以被同时提高, 并且并不需要去降低其中任意一者, 这是由于虽然更深更为复杂的神经网络通常有更高的全准确度, 这些图片的很大一部分可以使用更小的更为简单的网络被准确地区分出来, 而更大的神经网络只是在解决复杂图片上是必要的. 因此, 该文章的方法用不同的复杂度联合训练整体的神经网络, 和选择模块一起, 选择模块能够自适应地分配每一张图像到能够足以生成高质量的Label的最小的的神经网络.</p>
+<p>不想传统的学习方法去利用一个恒定的计算误差, 该文的方法是学习去预测准确和快速. 通过训练和使用决策模块, 我们的框架给出一种高效的摊还策略, 这可以在测试阶段大量的减少计算和资源消耗, 甚至可以提升预测的性能.</p>
+<p>从技术层面上来说, 该文设计神经分类器的训练和选择模块到一个联合的优化中, 该优化为训练准确度和一个期望的计算代价作为约束(参考FLOPs代价),  该文设计一个决策模块为一个优化停止过程(optimal stopping process), 该过程可以顺序测试大小不断增大的级联的神经分类器(并且增强预测的准确性), 并且对于给定的图片停止优化准确性和复杂度的交换的分类器. 联合训练是表现在端到端的, 使用强化算法来优化一个在计算代价(FLOPs)和预测准确性之间的交换作为一个反馈信号.</p>
+<p>在CIFAR和ImageNet的分类数据集上进行测试, 使用一个级联的ResNet分类器, 正如所期望的, 在CIFAR数据集上, 大多数的图片都被分配到了更小的网络, 这些小的网络足以成功进行预测, 当然存在复杂的图片被分配到了更大和更强力的网络. 几乎一半的图片被分配到了更小的网络在ImageNet上面.</p>
+<h3 id="2-相关工作"><a href="#2-相关工作" class="headerlink" title="2. 相关工作"></a>2. 相关工作</h3><p>现存有很多方法来提升深度神经网络的能量效率, 大多数这样的工作关注于简化神经网络结构并且(或)数值方面提高基础卷积操作, MobileNet使用深度可分离卷积来建立一个轻量权重的神经网络, ShuffleNet使用点长集合卷积和通道的洗牌操作来建立一个高效的结构, 其他的技术包括连接的修剪(Han, Mao 2015)和瓶颈结构(Iandola et al. 2016), 在静态的技术之外还有, 比如动态容量网络(Dynamic Capacity Network), 自适应地分配容量针对输入数据的不同部分, 通过使用一个低和一个高容量的子网络, 螺旋自适应计算时间网络(Spatially Adaptive Computation Time Networks), 针对图像的区域动态调整执行层的数目. 任意时神经网络(Anytime Neural Networks)能够生成任意时的预测通过最小化一个精巧的带权值的误差和. 其他的考虑了级联分类器在目标检测中快速地拒绝更进一步, 如果能够简单判断的情况下. 条件计算(Conditional computation)和自适应计算提出来了调整计算的数量通过使用一种选择数据的策略, 许多这样的静态和动态的技术被用于标准的深度结构之中, 比如ResNet和Inception, 通常伴随着准确性的误差.和这些静态和动态的方法不同, 该文的方法明确地公式化测试时效率作为一个摊还约束的顺序决策问题, 使得期望的计算误差, 比如说FLOPs, 能够被大幅度地减少, 通过自适应分配训练样本给他们最好的分类器来提高准确性.</p>
+<h3 id="3-方法"><a href="#3-方法" class="headerlink" title="3. 方法"></a>3. 方法</h3><h4 id="3-1-级联分类器的能量约束推理"><a href="#3-1-级联分类器的能量约束推理" class="headerlink" title="3.1 级联分类器的能量约束推理"></a>3.1 级联分类器的能量约束推理</h4><p>分类器, 比如神经网络, 通常伴随着深度和结构的复杂度的提高是更加准确的, 然而, 复杂网络的更高的计算和资源的代价会很快变高, 特别是实时的推理在应用于移动设备的时候. 如果我们有一个级联的分类器, 它们大小不同, 选择一个更小的分类器是可能的. 进而对于输入的数据足够强力的分类器来既实现效率又实现准确性. 这引出了一个主要的问题:</p>
+<blockquote>
+<p>给定一个级联的神经分类器, 它们有不同的准确性和效率, 如何去通过一个有效的选择技术来联合训练它们, 进而分配每一个数据实例到分类器中, 该分类器最适合交换准确性和代价</p>
+</blockquote>
+<p>特别地, 假设我们有K个分类器$\{C_k\}_{k=1}^{K}$和不同的资源代价$\{\mathcal{F}_k\}^{K}_{k=1}$, 资源代价$\mathcal{F}_k$被假设为和分类器的预测容量相关联, 并且可能就是预测容量. 举个例子:<br>FLOPs的一个规范化的值或者神经网络分类器中层的数目, 给定一个输入$x$, 我们记$y$是真正的样本标签, $\hat{y}\sim C_k(\cdot| x)$是分类器$C_k(\cdot| x)$预测的Label, 此外, 我们记$\prod(k|x)$是一个随机化的策略, 它决定着分配输入$x$给分类器$C_k$的概率, 我们的目标是联合训练所有的分类器$\{C_k\}$以及策略$\prod(k|x)$来在约束之下最小化期望的误差函数, 使得期望的资源代价应该不能够大于一个期望的代价$\mathcal{B}$, 即:</p>
+<script type="math/tex; mode=display">max_{\prod, \{C_t\}_{t=1}^K}{\mathbb{E}_{(x,y)\sim D, k_x\sim \prod(\cdot | x), \hat{y}\sim C_{k_x}(\cdot|x)}[-\mathcal{L}(\hat{y}, y)]}\\s.t \ \ \mathbb{E}_{(x,y)\sim D, k_x\sim \prod(\cdot | x), \hat{y}\sim C_{k_x}(\cdot|x)}[\mathcal{F}_{k_x}]<\mathcal{B}</script><p>上式中, $k_x$是分配给x的随机的分类器ID, 更进一步, 我们能够重新定义约束的优化变为一个处罚代价函数的非约束的优化</p>
+<script type="math/tex; mode=display">max_{\prod, \{C_t\}_{t=1}^K}{\mathbb{E}_{(x,y)\sim D, k_x\sim \prod(\cdot | x), \hat{y}\sim C_{k_x}(\cdot|x)}[-\mathcal{L}(\hat{y}, y)-\alpha \mathcal{F}_{k_x}]}</script><p>其中$\alpha$控制着在预测误差函数和资源代价之间的交换, 当这两种形式是二元等价的    情况下有一个显式的一对一的映射在budget约束$\mathcal{B}$和处罚参数$\alpha$, 将会使用这个惩罚形式在文章的实验中.</p>
+<h4 id="3-2-通过优化停止进行能量效率推断"><a href="#3-2-通过优化停止进行能量效率推断" class="headerlink" title="3.2 通过优化停止进行能量效率推断"></a>3.2 通过优化停止进行能量效率推断</h4><p>这里主要是选择模块$\prod$的设计, 需要两个要求:</p>
+<ul>
+<li>能够访问并且有效地利用分类器$\{C_k\}$的信息来做一些推理性的决策</li>
+<li>必须是计算高效的, 举个例子, 至少防止暴力地去估计所有的$K$个分类器并且选择最大置信的一个.<blockquote>
+<p>该文解决了这一个挑战, 通过制定$\prod$变为一个$K$步的最优停止过程(optimal stopping process), 对于每一个时间步$t$, 介绍了一个停止策略模块, 当我们决定停止第$t$个分类器并且使用它作为对于输入$x$最后的预测器, 使用了和分类器$C_t$相关联的特征$s_t(x)$, 并且输出一个停止概率$\pi_t(s_t(x))$, 否则, 将会移动到一个更深的分类器并且重复相同的步骤, 直到它到达最深的一个.</p>
+</blockquote>
+</li>
+</ul>
+<p>利用这种方法, 选择第$k$个分类器的全概率为:</p>
+<script type="math/tex; mode=display">\prod(k|x)=\pi_k(s_k(x))\prod_{t=1}^{k-1}(1-\pi_t(s_t(x)))</script><p><img src="http://ol3p4szw6.bkt.clouddn.com/1539601514599.png" alt="Alt text"></p>
+<p>假设我们最后在第$k$个分类器时停止, agent将会收到一个反馈, 该反馈包含两个部分:</p>
+<ul>
+<li>使用该已选择的分类器的所预测的损失函数, 即$\mathcal{L}(\hat{y}, y)$, 其中$\hat{y}\sim C_k(\cdot|x)$</li>
+<li>从第一个分类开始累计的资源消耗, 即$\sum_{t=1}^k{\mathcal{F}_t}$.</li>
+</ul>
+<p>实际上, 我们也包括累计的停止策略$\pi_t$对于相应的$\mathcal{F}_t$的计算代价, 重要的是, 一旦我们在$k$个分类器处停止, 我们便不再运行比$k$更加”昂贵”的分类器了, 这极大地节省了计算资源.</p>
+<p>在此之上, 我们定义反馈的信号:</p>
+<script type="math/tex; mode=display">R(k, x, y, \hat{y})=-\mathcal{L}(\hat{y}, y)-\alpha\sum_{t=1}^{k-1}\mathcal{F}_t</script><p>重述一遍, 我们的决策模块被设计成Markov决策过程, 包含以下部分:</p>
+<ul>
+<li><strong>观测</strong>:<br>  停止的概率为$\pi_t(s_t(x))$, 在$t$步依赖于特征$s_t(x)$, 这个特征应该可以表达第$t$个分类器$C_t$, 在本文中, 我们简单地使用输出概率作为观测在每一个时间步, 即, $s_t(x)=C_t(\cdot|x)$</li>
+<li><strong>动作</strong>:<br>  基于当前分类器的输出概率, 我们的停止策略模块决定在当前时间步以概率$\pi_t(s_t(x))$, 如果它最终在$k$步停止, 我们使用当前模型$C_k$来预测Label, 即, $\hat{y}\sim C_k(\cdot|x)$</li>
+<li><strong>反馈</strong>:<br>  在最终在某个分类器停止, agent将会收到一个反馈信号, 信号正如上述表述, 包括一个负的损失函数来进行预测, 以及从第一个时间步的累积的能量耗费, 在本文中, 我们使用规范化的FLOPs计数作为耗费.</li>
+</ul>
+<p>假设停止概率是$\{\pi_t\}$和分类器$\{C_t\}$被参数化为$\theta = \{\theta^{\pi_t}, \theta^{C_t}\}_{t=1}^K$, 我们的最终目标是去找到最优的$\theta$来最大化期望的返回, 通过展开这个通过整个的策略的条件分布:</p>
+<script type="math/tex; mode=display">J(\theta) = \mathbb{E}_{(x,y)\sim D}[\mathbb{E}_{k\sim\prod(\cdot|x), \hat{y}\sim C_k(\cdot|x)}R(k, x, y, \hat{y})]\\=\mathbb{E}_{(x,y)\sim D}[\sum_{k=1}^{K}\prod_{t=1}^{k-1}(1-\pi_t(s_t(x);\theta))\bullet\pi_k(s_k(x);\theta)\bullet \sum_{\hat{y}}{C_k(\hat{y}|x;\theta)\cdot R(k,x,y, \hat{y})}]</script><h4 id="3-3-利用强化学习"><a href="#3-3-利用强化学习" class="headerlink" title="3.3 利用强化学习"></a>3.3 利用强化学习</h4><p>为了解决最优停止问题, 使用为人熟知的强化算法((Williams 1992), 通过利用当前的参数和策略梯度的导数来推出每一个独立的sample$(x,y)$, 按以下形式:</p>
+<script type="math/tex; mode=display">\widehat{\nabla_\theta J} = \nabla_\theta{[\sum_{t=1}^{k-1}log(1-\pi_t(s_t(x);\theta))+log(\pi_k    (s_k(x);\theta))+log(C_k(\hat{y}|x;\theta))]\cdot R(k,x,y,\hat{y})}</script><p>更进一步, 引入一个baseline——$b$, 用这个baseline去减少所估计的策略梯度的变化, 变为以下的梯度估计:</p>
+<script type="math/tex; mode=display">\widehat{\nabla_\theta J} = \nabla_\theta{[\sum_{t=1}^{k-1}log(1-\pi_t(s_t(x);\theta))+log(\pi_k    (s_k(x);\theta))+log(C_k(\hat{y}|x;\theta))]\cdot (R(k,x,y,\hat{y})-b)}</script><p>$b$是用来在训练数据的mini-batch上来最小化梯度估计器的变化</p>
+<h5 id="整理一下当前的内容"><a href="#整理一下当前的内容" class="headerlink" title="整理一下当前的内容"></a>整理一下当前的内容</h5><p>现在我们知道了整个模型的大致架构, 流程是这样的:</p>
+<ul>
+<li>首先是图片的输入, 传到当前的分类器, 并且得到结果</li>
+<li>接着将结果(这里所指的结果应该是Label probability, 也就是每一个标签的概率, 参考softmax)传到Agent</li>
+<li>Agent负责分析是否在当前分类器停止, 通过某种策略模块<ul>
+<li>如果不停止, 则向下一个分类器传图片</li>
+<li>如果停止, 则利用当前分类器作为预测方法, 和真实的Label进行比对得到反馈(Reword), 反馈包括<strong>使用当前分类来预测的误差</strong>以及<strong>从第一个分类器开始累积的资源消耗</strong></li>
+</ul>
+</li>
+</ul>
+<p>什么时候停止则引出了决策模块的设计, 决策模块被设计成去最大化一个期望, 这个期望由概率乘上一个反馈, 由于反馈是一个负数, 如果期望越大, 那么误差越小, 资源代价越小.</p>
+<p>引出一个估计梯度来对期望$J$进行优化, 这里借用了Williams的强化学习算法, 故需要补充.</p>
+<h5 id="关于Williams的强化学习算法"><a href="#关于Williams的强化学习算法" class="headerlink" title="关于Williams的强化学习算法"></a>关于Williams的强化学习算法</h5><p> 这里简单介绍一下, 具有以下形式的学习算法统称强化算法</p>
+<script type="math/tex; mode=display">\Delta w_{ij}=\alpha_{ij}(r-b_{ij})e_{ij}</script><p> 其中$\alpha_{ij}$是学习率, $b_{ij}$是强化的baseline, $e_{ij}={\partial ln g_i}/{\partial w_{ij}}$, $e_{ij}$被称为$w_{ij}$的特性资格(characteristic eligibility), $g_i$是一个概率质量函数</p>
+<blockquote>
+<p> 质量函数的数学定义为, 假设$X$是一个定义在可数样本空间$S$上的离散随机变量 $S ⊆ R$，则其概率质量函数 $f_X(x)$ 为</p>
+<script type="math/tex; mode=display">\begin{equation}
+f_X(x)=\left\{
+\begin{array}{rcl}
+Pr(X=x) & & {x \in S}\\
+0 & & {x \in \mathbb{R} \backslash S}
+\end{array} \right.
+\end{equation}</script></blockquote>
+<h4 id="3-4-利用ResNet来构造级联分类器"><a href="#3-4-利用ResNet来构造级联分类器" class="headerlink" title="3.4 利用ResNet来构造级联分类器"></a>3.4 利用ResNet来构造级联分类器</h4><p>该文所使用的ResNet架构为: </p>
+<ul>
+<li>开始的两层是一个卷积层和一个池化层, 步幅stride是4, 对于一些小图片, 比如说CIFAR-10和CIFAR-100来说, 可以只用一个卷积层, stride是1</li>
+<li>接着是一系列的块的堆叠, 对于每一个块, 都有不同的单元数目, 并且每一个残差单元使用残差学习, 形式为<script type="math/tex">y=x+F(x, W_i)</script>其中$x$叫做跳接流, $F(x, W_i)$为残差函数, 该文所使用的残差函数为标准残差, 在小输入场景和不怎么深的网络下经常被使用, 它包括两个3x3的卷积层, 输入和输出的通道(channel)是一样的, 最后, 末尾的单元将会传到一个全局的平均池化层和一个全连接层用于获得分类的概率, 对于每一个卷积层, 使用的是一个batch normalization layer和一个RelU的非线性单元. 在每一块后, 特征图的大小将会减半, 并且滤波器将会加倍, 遵循的是Very Deep Network的设计(Simonyan 2014), 这样保证每一个单元有相同计算代价.</li>
+</ul>
+<h3 id="4-实现和实验设置"><a href="#4-实现和实验设置" class="headerlink" title="4 实现和实验设置"></a>4 实现和实验设置</h3><h4 id="4-1-数据集"><a href="#4-1-数据集" class="headerlink" title="4.1 数据集"></a>4.1 数据集</h4><p>数据集使用的是CIFAR-10/100以及ImgaeNet的32x32, 这三个数据集都是RGB的彩色图片, CIFAR-10和CIFAR-100都有50000张训练图片和10000张测试图片, 相应的对应10类和100类, ImageNet32x32是ImageNet的降采样, 包含1000个类别和相同数量的图片(1200万的训练图片和50000张测试图片)</p>
+<h4 id="4-2-神经分类器的说明"><a href="#4-2-神经分类器的说明" class="headerlink" title="4.2 神经分类器的说明"></a>4.2 神经分类器的说明</h4><p>为了构造一个级联的神经网络分类器, 我们使用ResNet架构的标准的设计来建立一个ResNet的序列, 对于深度是指数式的增长, 在级联之中, 每一个ResNet都是由一个3x3的卷积层开始, 16个滤波器, 接着是3个残差单元的块, 每一个单元包含2个3x3的卷积层, 第二和第三个单元滤波器的数量都会加倍, 特征图的大小对于第一个单元来说会减半.</p>
+<p><img src="http://ol3p4szw6.bkt.clouddn.com/1539669844523.png" alt="Alt text"><br>每一个块设置的单元数目设置为1,3,5,9,18来建立一个ResNet的序列, 相应地对应8, 20, 32, 56, 110层<br>如上图所示, 一共有三个块, 第一个块肯定是2个卷积层, 第二和第三块的卷积层数目就对应着CIFAR里面的Unit Number<br>比如[1,1,1]就对应着一个块里面有三层卷积层, 故总的层数为2+3*2=8</p>
+<p>关于Imgae32x32的数据集, 使用宽度乘子$k$, 借用Wide-ResNet(Zagoruyko and Komodakis 2016)来增加每一个独立的分类器的容量, 通过更改其滤波器的个数来实现, 这里设置宽度乘子分别为1, 1.5, 2, 3, 4, 卷积层的数目为40, 使得ResNet分类器的容量或者说是FLOPs以近乎指数进行增长, 注意到这样的设置更适应于高度差异性的ImageNet.</p>
+<p>这里我们的设计保证级联的神经网络的深度(因此决定复杂度)指数增长, 这就使得我们不用浪费重要的计算资源在测试更小的网络上面, 更具体一点, 假设网络分类器的计算资源消耗是$b^k, k=1,2,3,…,K$, 其中$b&gt;1$, 我们可以计算出当停止在第k个分类器的时候总共的代价为$\sum_{l=1}^{k}b^l\leq \frac{b}{b-1}b^k$, 即上界是$\frac{b}{b-1}$和$b^k$的乘积, 就相当于你直接选了第$k$个分类器.</p>
+<h4 id="4-3-策略模块说明"><a href="#4-3-策略模块说明" class="headerlink" title="4.3 策略模块说明"></a>4.3 策略模块说明</h4><p>这个停止决策模块使用3个全连接的层构造起来, 针对CIFAR-10和CIFAR-100数据集, 使用64个隐藏神经元<br>对于Image32x32数据集使用256个神经元, 每一个全连接层都使用ReLU的非线性单元(除了最后一层), 最后, 全连接层跟着softmax输出停止概率</p>
+<p>这个模块的输入就是Label的概率, 也就是分类器分类结果的概率向量, 这个停止决策模块的计算消耗几乎微不足道, 0.01M的FLOPs, 我们注意到一些其他的特征, 比如首层的卷积滤波会增加停止策略模块的大量的计算消耗, 并且分类准确率很低.</p>
+<h4 id="4-4-其他的训练细节"><a href="#4-4-其他的训练细节" class="headerlink" title="4.4 其他的训练细节"></a>4.4 其他的训练细节</h4><p>在训练阶段, 我们在三个数据集接受标准的数据增大过程:</p>
+<ul>
+<li>在图片的外侧填充4个零</li>
+<li>随机裁剪32x32图片</li>
+<li>随机从左到右翻转</li>
+</ul>
+<p>对于所有的实验, 针对策略优化使用随机梯度下降(SGD), 动量设置为0.9, 学习率和mini-batch的大小和原始的ResNet设置成一样的, 决策模块的学习率设置成0.05, 在训练数据下通过内部交叉验证在每两步之间应用一个0.9的因子.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/图像处理/" rel="tag"># 图像处理</a>
+          
+            <a href="/tags/ResNet/" rel="tag"># ResNet</a>
+          
+            <a href="/tags/分类器/" rel="tag"># 分类器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/07/数值分析读书笔记(2) 求解线性代数方程组的直接方法/" rel="next" title="数值分析读书笔记（2）求解线性代数方程组的直接方法">
+                <i class="fa fa-chevron-left"></i> 数值分析读书笔记（2）求解线性代数方程组的直接方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Mezereon" />
+            
+              <p class="site-author-name" itemprop="name">Mezereon</p>
+              <p class="site-description motion-element" itemprop="description">With Saber</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/MezereonXP" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/202fe3605b6d" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-globe"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_34206952" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Energy-efficient-Amortized-Inference-with-Cascaded-Deep-Classifiers论文笔记"><span class="nav-number">1.</span> <span class="nav-text">Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-概述"><span class="nav-number">1.0.1.</span> <span class="nav-text">0. 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-介绍"><span class="nav-number">1.0.2.</span> <span class="nav-text">1. 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-相关工作"><span class="nav-number">1.0.3.</span> <span class="nav-text">2. 相关工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-方法"><span class="nav-number">1.0.4.</span> <span class="nav-text">3. 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-级联分类器的能量约束推理"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">3.1 级联分类器的能量约束推理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-通过优化停止进行能量效率推断"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">3.2 通过优化停止进行能量效率推断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-利用强化学习"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">3.3 利用强化学习</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#整理一下当前的内容"><span class="nav-number">1.0.4.3.1.</span> <span class="nav-text">整理一下当前的内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于Williams的强化学习算法"><span class="nav-number">1.0.4.3.2.</span> <span class="nav-text">关于Williams的强化学习算法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-利用ResNet来构造级联分类器"><span class="nav-number">1.0.4.4.</span> <span class="nav-text">3.4 利用ResNet来构造级联分类器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-实现和实验设置"><span class="nav-number">1.0.5.</span> <span class="nav-text">4 实现和实验设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-数据集"><span class="nav-number">1.0.5.1.</span> <span class="nav-text">4.1 数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-神经分类器的说明"><span class="nav-number">1.0.5.2.</span> <span class="nav-text">4.2 神经分类器的说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-策略模块说明"><span class="nav-number">1.0.5.3.</span> <span class="nav-text">4.3 策略模块说明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-其他的训练细节"><span class="nav-number">1.0.5.4.</span> <span class="nav-text">4.4 其他的训练细节</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Mezereon</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("dBGW7g6I47p3kP2bh1HocqRW-gzGzoHsz", "BLFnOC5ACH6AyFJqIUBBOtUv");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
