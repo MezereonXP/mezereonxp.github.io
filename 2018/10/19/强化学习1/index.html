@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="图像处理," />
+  <meta name="keywords" content="笔记,机器学习,神经网络,强化学习," />
 
 
 
@@ -79,31 +79,20 @@
 
 
 
-<meta name="description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为$I$ 则其中每一个像素点的灰度值为$I(x,y)$ 我们利用简单的线性变换可以得到： $I(x,y)^{*}=k\times I(x,y)+b$ 取$k=1,b=16$可以得到    这里给出关键代码 123456original = imread(strcat(strcat(&apos;resource\&apos;">
-<meta name="keywords" content="图像处理">
+<meta name="description" content="来源于Simple statistical gradient-following algorithms for connectionist reinforcement learning 0. 概述该文章提出了一个关于联合强化学习算法的广泛的类别, 针对包含随机单元的有连接的网络, 这些算法, 称之为强化算法, 看上去像是沿着某个方向对权重进行调整, 依赖于期望强化的梯度, 比如在即时强化的任务中和">
+<meta name="keywords" content="笔记,机器学习,神经网络,强化学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="图像增强的几个方法以及Matlab代码">
-<meta property="og:url" content="https://mezereonxp.github.io/2018/07/06/原-图像增强的几个方法以及Matlab代码/index.html">
+<meta property="og:title" content="强化学习1">
+<meta property="og:url" content="https://mezereonxp.github.io/2018/10/19/强化学习1/index.html">
 <meta property="og:site_name" content="MyBlog">
-<meta property="og:description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为$I$ 则其中每一个像素点的灰度值为$I(x,y)$ 我们利用简单的线性变换可以得到： $I(x,y)^{*}=k\times I(x,y)+b$ 取$k=1,b=16$可以得到    这里给出关键代码 123456original = imread(strcat(strcat(&apos;resource\&apos;">
+<meta property="og:description" content="来源于Simple statistical gradient-following algorithms for connectionist reinforcement learning 0. 概述该文章提出了一个关于联合强化学习算法的广泛的类别, 针对包含随机单元的有连接的网络, 这些算法, 称之为强化算法, 看上去像是沿着某个方向对权重进行调整, 依赖于期望强化的梯度, 比如在即时强化的任务中和">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/qkbqr6vm63.png">
-<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/o05khpgona.png">
-<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/kt8u4o1kx3.png">
-<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/5nohrkq1zn.png">
-<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/48pxz2e18h.png">
-<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/8dm2dfnvag.png">
-<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/cvrwgg1qi8.png">
-<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/2flvtmp5q5.png">
-<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/av5ms0fcu6.png">
-<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/i23j6xa959.png">
-<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/me1a45r0z7.png">
-<meta property="og:image" content="https://ask.qcloudimg.com/http-save/2616258/f2fua1o891.png">
-<meta property="og:updated_time" content="2018-10-05T13:43:08.487Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2601951-a9921e0fdbf54237.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-19T08:52:20.195Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="图像增强的几个方法以及Matlab代码">
-<meta name="twitter:description" content="1. 灰度线性变换灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作 假设图像为$I$ 则其中每一个像素点的灰度值为$I(x,y)$ 我们利用简单的线性变换可以得到： $I(x,y)^{*}=k\times I(x,y)+b$ 取$k=1,b=16$可以得到    这里给出关键代码 123456original = imread(strcat(strcat(&apos;resource\&apos;">
-<meta name="twitter:image" content="https://ask.qcloudimg.com/http-save/2616258/qkbqr6vm63.png">
+<meta name="twitter:title" content="强化学习1">
+<meta name="twitter:description" content="来源于Simple statistical gradient-following algorithms for connectionist reinforcement learning 0. 概述该文章提出了一个关于联合强化学习算法的广泛的类别, 针对包含随机单元的有连接的网络, 这些算法, 称之为强化算法, 看上去像是沿着某个方向对权重进行调整, 依赖于期望强化的梯度, 比如在即时强化的任务中和">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/2601951-a9921e0fdbf54237.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -133,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://mezereonxp.github.io/2018/07/06/原-图像增强的几个方法以及Matlab代码/"/>
+  <link rel="canonical" href="https://mezereonxp.github.io/2018/10/19/强化学习1/"/>
 
 
 
 
 
-  <title>图像增强的几个方法以及Matlab代码 | MyBlog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>强化学习1 | MyBlog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -276,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mezereonxp.github.io/2018/07/06/原-图像增强的几个方法以及Matlab代码/">
+    <link itemprop="mainEntityOfPage" href="https://mezereonxp.github.io/2018/10/19/强化学习1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mezereon">
@@ -293,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">图像增强的几个方法以及Matlab代码</h1>
+          <h1 class="post-title" itemprop="name headline">强化学习1</h1>
         
 
         <div class="post-meta">
@@ -305,8 +294,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-06T12:49:29+08:00">
-                2018-07-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-19T16:51:10+08:00">
+                2018-10-19
               </time>
             
 
@@ -328,8 +317,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/强化学习/" itemprop="url" rel="index">
+                    <span itemprop="name">强化学习</span>
                   </a>
                 </span>
 
@@ -345,7 +334,7 @@
 
           
           
-             <span id="/2018/07/06/原-图像增强的几个方法以及Matlab代码/" class="leancloud_visitors" data-flag-title="图像增强的几个方法以及Matlab代码">
+             <span id="/2018/10/19/强化学习1/" class="leancloud_visitors" data-flag-title="强化学习1">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -375,7 +364,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.5k
+                  2.8k
                 </span>
               
 
@@ -400,67 +389,65 @@
       
 
       
-        <h3 id="1-灰度线性变换"><a href="#1-灰度线性变换" class="headerlink" title="1. 灰度线性变换"></a>1. 灰度线性变换</h3><p>灰度线性变换， 是一种空域的方法， 直接对每一个像素的灰度值进行操作</p>
-<p>假设图像为$I$</p>
-<p>则其中每一个像素点的灰度值为$I(x,y)$</p>
-<p>我们利用简单的线性变换可以得到：</p>
-<p>$I(x,y)^{*}=k\times I(x,y)+b$</p>
-<p>取$k=1,b=16$可以得到</p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/qkbqr6vm63.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/o05khpgona.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/kt8u4o1kx3.png" alt="Alt text"></p>
-<p>这里给出关键代码</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">original = imread(strcat(strcat(<span class="string">'resource\',name),'</span>.bmp'));</span><br><span class="line">transformed = LinearFunction(original, <span class="number">1</span>, <span class="number">16</span>);</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">imshow(transformed)</span><br><span class="line">title(<span class="string">'线性变换后的图像'</span>)</span><br><span class="line">imwrite(transformed,strcat(strcat(<span class="string">'result\',name),'</span>(linear).jpg'))</span><br></pre></td></tr></table></figure>
-<h3 id="2-直方图均衡变换"><a href="#2-直方图均衡变换" class="headerlink" title="2. 直方图均衡变换"></a>2. 直方图均衡变换</h3><p>这种方法通常用来增加许多图像的全局对比度，尤其是当图像的有用数据的对比度相当接近的时候。通过这种方法，亮度可以更好地在直方图上分布。这样就可以用于增强局部的对比度而不影响整体的对比度，直方图均衡化通过有效地扩展常用的亮度来实现这种功能。</p>
-<p>这种方法对于背景和前景都太亮或者太暗的图像非常有用，这种方法尤其是可以带来X光图像中更好的骨骼结构显示以及曝光过度或者曝光不足照片中更好的细节。这种方法的一个主要优势是它是一个相当直观的技术并且是可逆操作，如果已知均衡化函数，那么就可以恢复原始的直方图，并且计算量也不大。这种方法的一个缺点是它对处理的数据不加选择，它可能会增加背景噪声的对比度并且降低有用信号的对比度。</p>
-<p>考虑一个离散的灰度图像$\{x\}$</p>
-<p>让$n _i$表示灰度$i$出现的次数， 这样图像中灰度为$i$的像素出现的概率为：</p>
-<p>$p _x(i)=p(x=i)=\frac{n _i}{n}， 0\leq i&lt;L$</p>
-<p>$L$是图像中所有的灰度数（通常是255）</p>
-<p>把对应于$p _x$的累积分布函数，定义为：</p>
-<p>$cdf _x(i)=\sum _{j=0}^i{p _x(j)}$</p>
-<p>是图像的累计归一化直方图</p>
-<p>我们创建一个形式为$y=T(x)$的变换， 对于原始图像的每一个值它就产生一个$y$， 这样$y$的累计概率函数就可以在所有值范围内线性化， 转换公式定义为：</p>
-<p>$cdf _y(i)=iK$</p>
-<p>对于常数K， $CDF$的性质允许我们做这样的变换， 定义为：</p>
-<p>$cdf _y(y’)=cdf _y(T(k))=cdf _x(k)$</p>
-<p>其中$k\in [0,L)$， 注意$T$将不同的灰度级映射到$(0,1)$， 为了将这些值映射到最初的域， 需要在结果上应用下面的简单变换：</p>
-<p>$y’ = y*(max\{x\}-min\{x\})+min\{x\}$</p>
-<p>给出部分结果：</p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/5nohrkq1zn.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/48pxz2e18h.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/8dm2dfnvag.png" alt="Alt text"></p>
-<p>给出关键代码:</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">m = <span class="number">255</span>;</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">H = histeq(I,m);</span><br><span class="line">imshow(H,[]);</span><br><span class="line">title(<span class="string">'直方图均衡后的图像'</span>);</span><br></pre></td></tr></table></figure>
-<p>类似地， 我们可以对rgb图像进行直方图均衡, 这里直接给出结果</p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/cvrwgg1qi8.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/2flvtmp5q5.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/av5ms0fcu6.png" alt="Alt text"></p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[M,N,G]=<span class="built_in">size</span>(I1);</span><br><span class="line">result=<span class="built_in">zeros</span>(M,N,<span class="number">3</span>);</span><br><span class="line"><span class="comment">%获得每一层每一个点的RGB值，并判断其值等于多少</span></span><br><span class="line"><span class="keyword">for</span> g=<span class="number">1</span>:<span class="number">3</span></span><br><span class="line">    A=<span class="built_in">zeros</span>(<span class="number">1</span>,<span class="number">256</span>);</span><br><span class="line">    <span class="comment">%每处理完一层，参数要重新初始化为0</span></span><br><span class="line">    average=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> k=<span class="number">1</span>:<span class="number">256</span></span><br><span class="line">        count=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:M</span><br><span class="line">            <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:N</span><br><span class="line">                value=I1(<span class="built_in">i</span>,<span class="built_in">j</span>,g);</span><br><span class="line">                <span class="keyword">if</span> value==k</span><br><span class="line">                    count=count+<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">        count=count/(M*N*<span class="number">1.0</span>);</span><br><span class="line">        average=average+count;</span><br><span class="line">        A(k)=average;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    A=uint8(<span class="number">255.</span>*A+<span class="number">0.5</span>);</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:M</span><br><span class="line">        <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:N</span><br><span class="line">            I1(<span class="built_in">i</span>,<span class="built_in">j</span>,g)=A(I1(<span class="built_in">i</span>,<span class="built_in">j</span>,g)+<span class="number">0.5</span>);</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span>  </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%展示处理效果</span></span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>);</span><br><span class="line">imshow(I1);</span><br></pre></td></tr></table></figure>
-<h3 id="3-同态滤波"><a href="#3-同态滤波" class="headerlink" title="3. 同态滤波"></a>3. 同态滤波</h3><p>同态滤波利用去除<strong>乘性噪声</strong>(multiplicative noise)，可以同时增加对比度以及标准化亮度，借此达到图像增强的目的。</p>
-<p>一副图像可以表示为其<strong>照度</strong>(illumination)分量和<strong>反射</strong>(reflectance)分量的乘积，虽然在时域上这两者是不可分离的，但是经由傅立叶转换两者在频域中可以线性分离。由于照度可视为环境中的照明，相对变化很小，可以看作是图像的低频成分；而反射率相对变化较大，则可视为高频成分。通过分别处理照度和反射率对像元灰度值的影响，通常是借由<strong>高通滤波器</strong>(high-pass filter)，让图像的照明更加均匀，达到增强阴影区细节特征的目的。</p>
-<p>做法是：</p>
-<p>对于一幅图像， 可以表示成照射分量和反射分量的乘积， 也就是：</p>
-<p>$m(x,y)=i(x,y)\cdot r(x,y)$</p>
-<p>其中， $m$是图像， $i$是为照度分量， $r$是反射分量</p>
-<p>为了在频域中使用高通滤波器， 我们必须进行傅里叶变换， 但是由于上式是一个乘积式， 不能直接对照度分量和反射分量进行操作， 因此对上式取对数</p>
-<p>$ln(m(x,y))=ln(i(x,y))+ln(r(x,y))$</p>
-<p>然后对上式进行傅里叶转换</p>
-<p>$\mathcal{F}\{ln(m(x,y))\}=\mathcal{F} \{ ln(i(x,y))\}+ \mathcal{F}\{ln(r(x,y))\}$</p>
-<p>我们将$\mathcal{F}\{ln(m(x,y))\}$定义为$M(u,v)$</p>
-<p>接下来对图像进行高通滤波， 如此可以使图像的照明更均匀， 高频分量增加且低频分量减少</p>
-<p>$N(u,v)=H(u,v)\cdot M(u,v)$</p>
-<p>其中$H$是高通滤波器</p>
-<p>为了将图像从频域转回时域，我们对$N$做傅立叶逆转换</p>
-<p>$n(x,y)=\mathcal{F}^{-1}\{N(x,y)\}$</p>
-<p>最后使用指数函数来复原我们一开始取的对数</p>
-<p>$m’(x,y)=exp\{n(x,y)\}$</p>
-<p>给出处理结果</p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/i23j6xa959.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/me1a45r0z7.png" alt="Alt text"></p>
-<p><img src="https://ask.qcloudimg.com/http-save/2616258/f2fua1o891.png" alt="Alt text"></p>
-<p>给出部分关键代码</p>
-<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">I=double(I);</span><br><span class="line">[M,N]=<span class="built_in">size</span>(I);</span><br><span class="line">rL=<span class="number">0.5</span>;</span><br><span class="line">rH=<span class="number">4.7</span>;<span class="comment">%可根据需要效果调整参数</span></span><br><span class="line">c=<span class="number">2</span>;</span><br><span class="line">d0=<span class="number">10</span>;</span><br><span class="line">I1=<span class="built_in">log</span>(I+<span class="number">1</span>);<span class="comment">%取对数</span></span><br><span class="line">FI=fft2(I1);<span class="comment">%傅里叶变换</span></span><br><span class="line">n1=<span class="built_in">floor</span>(M/<span class="number">2</span>);</span><br><span class="line">n2=<span class="built_in">floor</span>(N/<span class="number">2</span>);</span><br><span class="line">H = <span class="built_in">ones</span>(M, N);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=<span class="number">1</span>:M</span><br><span class="line">    <span class="keyword">for</span> <span class="built_in">j</span>=<span class="number">1</span>:N</span><br><span class="line">        D(<span class="built_in">i</span>,<span class="built_in">j</span>)=((<span class="built_in">i</span>-n1).^<span class="number">2</span>+(<span class="built_in">j</span>-n2).^<span class="number">2</span>);</span><br><span class="line">        H(<span class="built_in">i</span>,<span class="built_in">j</span>)=(rH-rL).*(<span class="built_in">exp</span>(c*(-D(<span class="built_in">i</span>,<span class="built_in">j</span>)./(d0^<span class="number">2</span>))))+rL;<span class="comment">%高斯同态滤波</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">I2=ifft2(H.*FI);<span class="comment">%傅里叶逆变换</span></span><br><span class="line">I3=<span class="built_in">real</span>(<span class="built_in">exp</span>(I2));</span><br><span class="line">subplot(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>),imshow(I3,[]);title(<span class="string">'同态滤波增强后'</span>);</span><br></pre></td></tr></table></figure>
+        <p>来源于Simple statistical gradient-following algorithms for connectionist reinforcement learning</p>
+<h3 id="0-概述"><a href="#0-概述" class="headerlink" title="0. 概述"></a>0. 概述</h3><p>该文章提出了一个关于联合强化学习算法的广泛的类别, 针对包含随机单元的有连接的网络, 这些算法, 称之为<strong>强化算法</strong>, 看上去像是沿着某个方向对权重进行调整, 依赖于期望强化的梯度, 比如在<strong>即时强化</strong>的任务中和确定受限的<strong>延迟强化</strong>形式的任务中,  不用显式地计算梯度估计甚至存储这些计算这种估计的信息. 会给出这种算法的具体例子, 有一些和现存的确定的算法有很近的联系, 有些是新颖的但是却可能由于其正确性比较有趣. 当然也给出了一些展现怎样一个算法能够被自然地和<strong>反向传播</strong>(Back propagation)集成的结果. 文章以一个由关于这个算法的使用的一系列额外问题组成的简短的讨论而结束, 包括那些是已知的关于受限制的特性以及更远的可能可以用来帮助开发相似的但是潜在更强的强化学习算法的考虑.</p>
+<h3 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h3><p>强化学习的一个通用的框架包含许多问题来自许多在一个极端去学习控制其他的函数优化, 在这些独立的领域的研究趋向于去分析不同的独立的问题集合, 这就像是对于自动化agent在现实环境下的操作的一个有效的强化学习技术将不得不联合解决所有的这些问题. 然而仍然存在有用的关注于强化学习问题的受限的形式的研究策略来简化使得问题易于处理. 重要的是对于大多数有挑战的问题的结果将会可能需要集成许多可应用的技术.</p>
+<p>在这篇文章中,  我们提出了对于确定的相关任务的算法的分析性结果, 意味着学习者只需要表现输入输出映射, 并且, 有一个额外的限制性, 即, 包含即时的强化, 也就是被提供给学习者的强化只通过大多数输入输出对来进行确定.</p>
+<p>当然, 延迟性的强化也是很重要的, 之后受到了应有的关注, 一个广泛使用的来开发应对这样的任务的算法的方法, 即将一个即时强化学习者和一个自适应预测者或者基于Sutton提出来的时间差分法的<strong>批评者(critic)</strong>, 这个<strong>“actor-critic”</strong>算法, Barto, Sutton和Anderson都有研究, Sutton将其格式变得清晰, 比如Watkins的<strong>Q-learning算法</strong></p>
+<p>一个更远的假设是学习者的搜索行为, 通常是一个对于任意形式的强化学习算法来说必要的部分, 通过学习者随机性的输入和输出来提供. 这里有一个通用的方法来实现期望的搜索行为, 值得注意的是其他的策略有时候在特定的案例里面有效, 包括<strong>系统化搜索(systematic search)</strong>或者明显的最优选择的<strong>连续选择(consistent selection)</strong>. 后面的策略当选择动作的女神由估计那些是过度乐观以及哪些在连续的经验下变得更加现实起作用, 比如Nilsson的A*搜索.</p>
+<p>另外, 所有的结果将会通过有连接的网络被再次制定, 主要关注点为跟从或者估计相关梯度的算法. 当然这样的算法我们知道通常会有一些限制, 这也是它们的研究是有用的原因. 首先, 作为反向传播的经验, 这个梯度看上去对于生成算法来说提供了一个有力的和富有启发性基础, 并且是易于实现的和在某些情况下效果很好. 其次, 当需要更为复杂的算法的时候, 梯度计算通常作为这样的算法的核心. 当然, 对于已有的确定算法的范围类似产生这样一个梯度分析的算法, 我们对于他们的理解可能增强了.</p>
+<p>另一个这里所提出的算法的有区别的特征是, 它们能够被概略地描述为统计意义上的攀爬一个合适的梯度, 它们设法不用显式地计算一个梯度估计或者存储这些能够被直接计算的信息. 这就是为什么它们被称之为simple的原因. 可能一个更具信息化的形容词为<strong>无模型基础的(non-model-based)</strong>, 则会在文章后期进行讨论.</p>
+<h3 id="2-连接形网络的强化学习"><a href="#2-连接形网络的强化学习" class="headerlink" title="2. 连接形网络的强化学习"></a>2. 连接形网络的强化学习</h3><p>这里给出部分符号的解释</p>
+<ul>
+<li>$r$: 增强信号</li>
+<li>$x^i$: 是一个输入向量, $x^i=(x^i_1, x^i_2, …, x^i_n)$</li>
+<li>$y_i$: 是一个值, 代表第$i$个输出单元的值</li>
+<li>$W$: 权值矩阵, 类似NN里面的边的权值</li>
+<li>$w^i$: 权值向量, 即$w^i=(w_{i1}, w_{i2}, …, w_{in})$</li>
+</ul>
+<p>对于每一个$i$, 我们定义$g_i(\xi, x^i, w^i)=Pr(y_i = \xi | x^i, w^i)$, $g_i$是一个概率质量函数, 所谓概率质量函数即离散的概率密度函数.</p>
+<blockquote>
+<p> 质量函数的数学定义为, 假设$X$是一个定义在可数样本空间$S$上的离散随机变量 $S ⊆ R$，则其概率质量函数 $f_X(x)$ 为</p>
+<script type="math/tex; mode=display">\begin{equation} f_X(x)=\left\{ \begin{array}{rcl} Pr(X=x) & & {x \in S}\\ 0 & & {x \in \mathbb{R} \backslash S} \end{array} \right. \end{equation}</script></blockquote>
+<p>当$y_i$连续自然就变成概率密度函数, $w^i$包含所有的跟第$i$个单元的相关的输入输出行为的参数, 一个更为准确的定义为</p>
+<script type="math/tex; mode=display">g_i(\xi, w^i,x^i )=Pr(y_i=\xi|W, x^i)</script><p>我们知道一来一回类似神经网络的BP训练, 那么强化学习之中, 在新的输入之前, 前一步的输入之后, 称一个时间步, 我们主要关注每个时间步的细节.</p>
+<p>我们定义一个<strong>随机半线性单元</strong>, 即输出是$y_i$, 由给定的概率分布得到, 其概率质量函数为</p>
+<script type="math/tex; mode=display">p_i=f_i(s_i)</script><p>其中$f_i$是<strong>可微的压缩映射</strong>, 并且有:</p>
+<script type="math/tex; mode=display">s_i=(w^i)^Tx^i=\sum_j{w_{ij}x_j}</script><p>一个特殊的随机半线性单元是一个<strong>伯努利半线性单元</strong>, 即$y_i$是一个随机的伯努利变量, 参数是$p_i$, 输出要么是0, 要么是1. 即$Pr(y_i=0|w^i, x^i)=1-p_i$以及$Pr(y_i=1|w^i, x^i)=p_i$, 因此给出该单元的形式</p>
+<script type="math/tex; mode=display">\begin{equation} g_i(\xi, w^i, x^i)=\left\{ \begin{array}{rcl} 1-p_i & & {\xi = 0}\\ p_i & & {\xi = 1} \end{array} \right. \end{equation}</script><p><strong>玻尔兹曼机</strong>就是用的上述类型的单元</p>
+<p>关于压缩映射, 可以使用我们熟悉的logistics函数</p>
+<script type="math/tex; mode=display">f_i(s_i)=\frac{1}{1+e^{-s_i}}</script><p>与上述单元结合起来, 称之为<strong>伯努利-逻辑斯蒂单元</strong></p>
+<p>特别地, 假设一个单元这样来计算它的输出:</p>
+<script type="math/tex; mode=display">\begin{equation} y_i=\left\{ \begin{array}{rcl} 1 & & {if \sum_j{w_{ij}x_j}+\eta > 0}\\ 0 & & {otherwise} \end{array} \right. \end{equation}</script><p>其中$\eta$是依据给定的分布$\Psi$随机产生<br>利用伯努利半线性单元的定义, 我们发现<br><img src="http://upload-images.jianshu.io/upload_images/2601951-a9921e0fdbf54237.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"><br>如果$\Psi$可微, 则其压缩映射可以为<script type="math/tex">f_i(s_i)=1-\Psi(-s_i)</script></p>
+<h3 id="3-期望的强化性能标准"><a href="#3-期望的强化性能标准" class="headerlink" title="3. 期望的强化性能标准"></a>3. 期望的强化性能标准</h3><p>这里给出了一些衡量强化的指标, 对于一个强化学习网络来说, 我们的性能测量为$E(r|W)$, 其中$E$是期望, $r$是强化信号, $W$是网络的权值矩阵.</p>
+<p>我们需要使用期望值是因为潜在的随机性:</p>
+<ul>
+<li>对于网络来说, 输入的环境的选择</li>
+<li>输出的网络的选择对应任意特定的输入</li>
+<li>环境的强化值的选择, 对于特定的输入输出对</li>
+</ul>
+<p>注意到, $E(r|W)$独立于时间的才有意义, 我们的目标就是找到$W$, 使得$E(r|W)$最大化.</p>
+<h3 id="4-强化算法"><a href="#4-强化算法" class="headerlink" title="4. 强化算法"></a>4. 强化算法</h3><p>我们定义权值在强化学习里面的改变如下所示:</p>
+<script type="math/tex; mode=display">\Delta w_{ij}=\alpha_{ij}(r-b_{ij})e_{ij}</script><p>其中$\alpha_{ij}$是<strong>学习率因子</strong>, $b_{ij}$是<strong>强化的基准(baseline)</strong>, 并且有<script type="math/tex">e_{ij}=\frac{\partial ln g_i}{\partial w_{ij}}</script></p>
+<p>假设$b_{ij}$条件独立于$y_i, W, x^i$以及非负的$\alpha_{ij}$, 主要依赖于$w^i$和$t$, 任何具有上述形式的算法都称之为一个<strong>强化算法(REINFORCE Algorithm)</strong></p>
+<p>其实这个名字是缩写, 即<strong>“REward Increment = Nonnegative Factor times Offset Reinforcement times Characteristic Eligibility”</strong></p>
+<h4 id="定理1"><a href="#定理1" class="headerlink" title="定理1"></a>定理1</h4><p>对于任意的REINFORCE算法, $E\{\Delta W|W\}$和$\nabla_WE\{r|W\}$的内积是非负的, 更进一步, 如果$\alpha_{ij}&gt;0$, 那么当仅当$\nabla_WE\{r|W\}=0$, 内积才为0, 如果$\alpha_{ij}$是和$i,j$独立的话, 有$E\{\Delta W|W\}=\alpha\nabla_WE\{r|W\}$,</p>
+<p>我们上面所提及的$\nabla_WE\{r|W\}$是性能度量在权值空间上的梯度, $E\{\Delta W|W\}$为权值空间的平均更新向量, 对于任意的REINFORCE算法来说.</p>
+<p>特别地, 这意味着对于任意的这样的算法, 在权值空间上的平均更新向量在这个性能指标增长的方向上, 该定理的最后一句, 等价于对于每一个权值$w_{ij}$, 有<script type="math/tex">\frac{(r-b_{ij})\partial ln g_i}{\partial w_{ij}}</script><br>这个是对$\partial E\{r|W\}/\partial w_{ij}$的无偏估计</p>
+<p>我们利用伯努利单元来试着计算, 对于伯努利单元呢, 参数只有$p_i=Pr(y_i=1)$, 我们可以算出</p>
+<script type="math/tex; mode=display">\begin{equation} g_i(y_i,p_i)=\left\{ \begin{array}{rcl} 1-p_i & & {if y_i = 0}\\ p_i & & {if y_i=1} \end{array} \right. \end{equation}</script><p> 进而得到</p>
+<script type="math/tex; mode=display">\begin{equation} e_i=\frac{\partial lng_i}{\partial p
+  _i}=\left\{ \begin{array}{rcl} -\frac{-1}{1-p_i} & & {if y_i = 0}\\ \frac{1}{p_i} & & { if y_i=1 } \end{array} \right. \end{equation}=\frac{y_i-p_i}{p_i(1-p_i)}</script><p>我们取$b_i=1, \alpha_i=\rho_ip_i(1-p_i)$<br>得到<script type="math/tex">\Delta p_i=\rho_ir(y_i-p_i)</script></p>
+<p>伯努利单元十分简单, 现在我们考虑伯努利半线性单元<br>利用链式法则, 可以得到</p>
+<script type="math/tex; mode=display">\frac{\partial lng_i(y_i, w^i, x^i)}{\partial w_{ij}}=\frac{\partial lng_i(y_i, w^i, x^i)}{\partial p_i}\frac{\partial p_i}{\partial s_{i}}\frac{\partial s_i}{\partial w_{ij}}=\frac{y_i-p_i}{p_i(1-p_i)}f'_i(s_i)x_j</script><p>如果是logistic函数, 注意到其性质:</p>
+<script type="math/tex; mode=display">f'_i(s_i)=f_i(s_i)(1-f_i(s_i))=p_i(1-p_i)</script><p>故上式可以转化为</p>
+<script type="math/tex; mode=display">\frac{\partial lng_i(y_i, w^i, x^i)}{\partial w_{ij}}=(y_i-p_i)x_j</script><p>取$\alpha_{ij}=\alpha, b_{ij}=0$可以得到</p>
+<script type="math/tex; mode=display">\Delta w_{ij}=\alpha r(y_i-p_i)x_j</script><p>我们可以和<strong>关联反馈-处罚算法(associative reward-penalty)</strong>比较一下, 这里给出他们的格式</p>
+<script type="math/tex; mode=display">\Delta w_{ij}=\alpha [r(y_i-p_i)+\lambda(1-r)(1-y_i-p_i)]x_j</script><p>其中$0&lt;\lambda&lt;1$, 如果$\lambda = 0$, 则变为<strong>关联反馈迟钝算法(associative reward-inaction)</strong></p>
+<p>Sutton提出了另一种策略</p>
+<script type="math/tex; mode=display">\Delta w_{ij}=\alpha (r-\bar{r})(y_i-p_i)x_j</script><p>其中</p>
+<script type="math/tex; mode=display">\bar{r}(t)=\gamma r(t-1)+(1-\gamma)\bar{r}(t-1)</script><p>类似指数平滑的策略</p>
+
       
     </div>
     
@@ -477,7 +464,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/图像处理/" rel="tag"># 图像处理</a>
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/神经网络/" rel="tag"># 神经网络</a>
+          
+            <a href="/tags/强化学习/" rel="tag"># 强化学习</a>
           
         </div>
       
@@ -490,15 +483,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/10/16/1/" rel="next" title="Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记">
+                <i class="fa fa-chevron-left"></i> Energy-efficient Amortized Inference with Cascaded Deep Classifiers论文笔记
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/05/软件测试方法课程笔记(1)/" rel="prev" title="软件测试方法课程笔记(1)">
-                软件测试方法课程笔记(1) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -656,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-灰度线性变换"><span class="nav-number">1.</span> <span class="nav-text">1. 灰度线性变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-直方图均衡变换"><span class="nav-number">2.</span> <span class="nav-text">2. 直方图均衡变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-同态滤波"><span class="nav-number">3.</span> <span class="nav-text">3. 同态滤波</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-概述"><span class="nav-number">1.</span> <span class="nav-text">0. 概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-介绍"><span class="nav-number">2.</span> <span class="nav-text">1. 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-连接形网络的强化学习"><span class="nav-number">3.</span> <span class="nav-text">2. 连接形网络的强化学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-期望的强化性能标准"><span class="nav-number">4.</span> <span class="nav-text">3. 期望的强化性能标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-强化算法"><span class="nav-number">5.</span> <span class="nav-text">4. 强化算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定理1"><span class="nav-number">5.1.</span> <span class="nav-text">定理1</span></a></li></ol></li></ol></div>
             
 
           </div>
