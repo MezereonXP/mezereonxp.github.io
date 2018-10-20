@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="笔记,数值分析," />
+  <meta name="keywords" content="机器学习,神经网络,强化学习,笔记," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="数值分析读书笔记（1）导论1.数学问题与数值计算问题一般来说，解决实际问题的第一步是将实际问题转换为数学问题，接着建立数学模型来解决这个数学问题，而理论解或者解析解通常难以求得，于是数值计算的方法应运而生 首先我们要将一个数学问题转化成数值问题  数值问题是指输入数据与输出数据之间函数关系的一个确定而无歧义的描述  按照建立数值问题的基本形式，数学问题可以分为两大类  包含非有理函数或未知函数 主">
-<meta name="keywords" content="笔记,数值分析">
+<meta name="description" content="来源于Simple statistical gradient-following algorithms for connectionist reinforcement learning 5. 段落式(Episodic)的REINFORCE算法该部分主要是将我们已有的算法进行扩展, 扩展到拥有temporal credit-assignment component的问题上. 特别地, 我们假设一个网">
+<meta name="keywords" content="机器学习,神经网络,强化学习,笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数值分析读书笔记（1）导论">
-<meta property="og:url" content="https://mezereonxp.github.io/2018/10/06/数值分析读书笔记(1)/index.html">
+<meta property="og:title" content="强化学习笔记(2)">
+<meta property="og:url" content="https://mezereonxp.github.io/2018/10/20/reinforce2/index.html">
 <meta property="og:site_name" content="MyBlog">
-<meta property="og:description" content="数值分析读书笔记（1）导论1.数学问题与数值计算问题一般来说，解决实际问题的第一步是将实际问题转换为数学问题，接着建立数学模型来解决这个数学问题，而理论解或者解析解通常难以求得，于是数值计算的方法应运而生 首先我们要将一个数学问题转化成数值问题  数值问题是指输入数据与输出数据之间函数关系的一个确定而无歧义的描述  按照建立数值问题的基本形式，数学问题可以分为两大类  包含非有理函数或未知函数 主">
+<meta property="og:description" content="来源于Simple statistical gradient-following algorithms for connectionist reinforcement learning 5. 段落式(Episodic)的REINFORCE算法该部分主要是将我们已有的算法进行扩展, 扩展到拥有temporal credit-assignment component的问题上. 特别地, 我们假设一个网">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-05T17:01:44.343Z">
+<meta property="og:updated_time" content="2018-10-20T15:37:09.254Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数值分析读书笔记（1）导论">
-<meta name="twitter:description" content="数值分析读书笔记（1）导论1.数学问题与数值计算问题一般来说，解决实际问题的第一步是将实际问题转换为数学问题，接着建立数学模型来解决这个数学问题，而理论解或者解析解通常难以求得，于是数值计算的方法应运而生 首先我们要将一个数学问题转化成数值问题  数值问题是指输入数据与输出数据之间函数关系的一个确定而无歧义的描述  按照建立数值问题的基本形式，数学问题可以分为两大类  包含非有理函数或未知函数 主">
+<meta name="twitter:title" content="强化学习笔记(2)">
+<meta name="twitter:description" content="来源于Simple statistical gradient-following algorithms for connectionist reinforcement learning 5. 段落式(Episodic)的REINFORCE算法该部分主要是将我们已有的算法进行扩展, 扩展到拥有temporal credit-assignment component的问题上. 特别地, 我们假设一个网">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://mezereonxp.github.io/2018/10/06/数值分析读书笔记(1)/"/>
+  <link rel="canonical" href="https://mezereonxp.github.io/2018/10/20/reinforce2/"/>
 
 
 
 
 
-  <title>数值分析读书笔记（1）导论 | MyBlog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>强化学习笔记(2) | MyBlog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://mezereonxp.github.io/2018/10/06/数值分析读书笔记(1)/">
+    <link itemprop="mainEntityOfPage" href="https://mezereonxp.github.io/2018/10/20/reinforce2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Mezereon">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数值分析读书笔记（1）导论</h1>
+          <h1 class="post-title" itemprop="name headline">强化学习笔记(2)</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-06T00:57:18+08:00">
-                2018-10-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-20T23:25:08+08:00">
+                2018-10-20
               </time>
             
 
@@ -315,8 +315,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数值分析/" itemprop="url" rel="index">
-                    <span itemprop="name">数值分析</span>
+                  <a href="/categories/强化学习/" itemprop="url" rel="index">
+                    <span itemprop="name">强化学习</span>
                   </a>
                 </span>
 
@@ -332,7 +332,7 @@
 
           
           
-             <span id="/2018/10/06/数值分析读书笔记(1)/" class="leancloud_visitors" data-flag-title="数值分析读书笔记（1）导论">
+             <span id="/2018/10/20/reinforce2/" class="leancloud_visitors" data-flag-title="强化学习笔记(2)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -387,148 +387,42 @@
       
 
       
-        <h1 id="数值分析读书笔记（1）导论"><a href="#数值分析读书笔记（1）导论" class="headerlink" title="数值分析读书笔记（1）导论"></a>数值分析读书笔记（1）导论</h1><h2 id="1-数学问题与数值计算问题"><a href="#1-数学问题与数值计算问题" class="headerlink" title="1.数学问题与数值计算问题"></a>1.数学问题与数值计算问题</h2><p>一般来说，解决实际问题的第一步是将实际问题转换为数学问题，接着建立数学模型来解决这个数学问题，而理论解或者解析解通常难以求得，于是数值计算的方法应运而生</p>
-<p>首先我们要将一个数学问题转化成数值问题</p>
-<blockquote>
-<p><strong>数值问题是指输入数据与输出数据之间函数关系的一个确定而无歧义的描述</strong></p>
-</blockquote>
-<p>按照建立数值问题的基本形式，数学问题可以分为两大类</p>
-<ul>
-<li>包含非有理函数或未知函数</li>
-<li>主要是代数问题</li>
-</ul>
-<p>这一本书面向数值计算的三大类计算任务</p>
-<ul>
-<li>求值（计算机实现计算过程中遇到的问题）</li>
-<li>方程求解<ul>
-<li>数值方程<ul>
-<li>代数方程</li>
-<li>超越方程</li>
-<li>差分方程（组）</li>
-</ul>
-</li>
-<li>函数方程</li>
-</ul>
-</li>
-<li>函数逼近<blockquote>
-<p>数学与科学，工程中的大量问题，最后归结为数值线性代数问题，这一大类问题通常和矩阵有关，故又称为矩阵计算<br>数值线性代数包括</p>
-<ul>
-<li>规范线性方程组问题</li>
-<li>非规范线性方程组问题</li>
-<li>矩阵的特征值问题(包括广义特征值)</li>
-<li>矩阵的奇异值问题</li>
-</ul>
-</blockquote>
-</li>
-</ul>
-<h2 id="2-数值计算的基本数学思想与方法"><a href="#2-数值计算的基本数学思想与方法" class="headerlink" title="2.数值计算的基本数学思想与方法"></a>2.数值计算的基本数学思想与方法</h2><blockquote>
-<p><strong>构造数值计算方法的基本途径是近似</strong></p>
-</blockquote>
-<p>由于是导论，故不深入探讨，这里列出几种思想</p>
-<ul>
-<li>等价变换思想（相似变换处理矩阵）</li>
-<li>逐次逼近思想（不动点迭代）</li>
-<li>逐步逼近思想</li>
-<li>以直代曲思想</li>
-<li>转换问题类型思想</li>
-<li>外推思想（<em>Richardson</em> 外推法）</li>
-</ul>
-<p>数值计算的几种方法</p>
-<ul>
-<li>直接法（不考虑舍入误差的情况下，有限步得到精确解）</li>
-<li>间接法（迭代过程，让近似解逼近精确解）</li>
-</ul>
-<p>数值方法的评价标准</p>
-<ul>
-<li>计算效果（精度或者误差）</li>
-<li>计算效率（算法复杂度或者收敛率）</li>
-</ul>
-<h2 id="3-计算误差的基本概念以及误差分析"><a href="#3-计算误差的基本概念以及误差分析" class="headerlink" title="3.计算误差的基本概念以及误差分析"></a>3.计算误差的基本概念以及误差分析</h2><blockquote>
-<p><strong>数值计算的误差是指数学模型的真解和由数值方法得到的近似解之间的偏差</strong></p>
-</blockquote>
-<p>误差按来源可以这样分类</p>
-<ul>
-<li>模型误差</li>
-<li>观测误差</li>
-<li>截断误差</li>
-<li>舍入误差</li>
-</ul>
-<p>这里引入绝对误差，相对误差和有效数字的概念</p>
-<p>首先是<strong>绝对误差</strong>  $ e(x)=x-\tilde x$ ,其中$\tilde x$为$x$的近似值,我们可以得到<strong>绝对误差界</strong></p>
-<script type="math/tex; mode=display">\begin{vmatrix} e(x) \end{vmatrix} =\begin{vmatrix} x-\tilde x \end{vmatrix} \le \Delta (x) =\Delta</script><p>然而绝对误差并不能很好的表现数的近似程度，引出<strong>相对误差</strong></p>
-<script type="math/tex; mode=display">\epsilon ^ *=\epsilon ^ * (x) = \frac{e(x)}{x} =\frac{x-\tilde x}{x}</script><p>自然也有<strong>相对误差界</strong></p>
-<script type="math/tex; mode=display">\begin{vmatrix} \epsilon ^ * \end{vmatrix} = \begin{vmatrix} \epsilon ^ * (x) \end{vmatrix} = \begin{vmatrix}  \frac{e(x)}{x}  \end{vmatrix}=\begin{vmatrix}\frac{x-\tilde x}{x}\end{vmatrix} \le \delta ^*(x)=\delta^*</script><p>注意到分母为$x$,而实际当中我们经常用$\tilde x$来代替分母，即</p>
-<script type="math/tex; mode=display">\begin{vmatrix}\epsilon\end{vmatrix}=  \begin{vmatrix} \epsilon (x) \end{vmatrix}= \begin{vmatrix} \frac{e(x)}{\tilde x} \end{vmatrix}=\begin{vmatrix} \frac{x-\tilde x}{\tilde x} \end{vmatrix} \le \delta(x)=\delta</script><p>接下来给出有效数字的定义<br><strong>如果近似值$\tilde x$的误差界是某一位的半个单位，且该位到$\tilde x$的第一位有n个非零数，那么$\tilde x$就有n位有效数字</strong></p>
-<blockquote>
-<p>使用四舍五入法可以使绝对误差最小，并且利用四舍五入法来计算近似值，每一位数值都是有效可靠的</p>
-</blockquote>
-<p>可进一步探寻近似值和相对误差之间的某种联系,记</p>
-<script type="math/tex; mode=display">\tilde x = \pm 0.a_1a_2\cdots a_n \times 10^m = \pm a_1a_2\cdots a_n \times 10^{m-1}</script><p>通过简单的放缩可得</p>
-<script type="math/tex; mode=display">a_1 \times 10^{m-1} \le \tilde x \le (a_1+1) \times 10^{m-1}</script><p>那么当$\tilde x$的有效数字为$n$时，相对误差的上界为</p>
-<script type="math/tex; mode=display">\begin{vmatrix} \epsilon (x) \end{vmatrix}= \begin{vmatrix} \frac{e(x)}{\tilde x} \end{vmatrix}=\begin{vmatrix} \frac{x-\tilde x}{\tilde x} \end{vmatrix} \le \frac{0.5 \times 10^{m-n}}{a_1 \times 10^{m-1} }=\frac{1}{2a_1}\times 10^{1-n}</script><p>由此可以引申出一个定理</p>
-<script type="math/tex; mode=display">如果x的有效数字位数为n，则有 \delta \le \frac{1}{2a_1}\times 10^{1-n}</script><script type="math/tex; mode=display">反之，如果\delta \ge \frac{1}{2(a_1+1)}\times 10^{1-n},则有效数字位数至少有n</script><p>讨论一下函数的误差<br>其中绝对误差为</p>
-<script type="math/tex; mode=display">e(y)=f(x)-f(\tilde x)\approx f^`(\tilde x)(x-\tilde x)=f^`(\tilde x)e(x)</script><p>相对误差为</p>
-<script type="math/tex; mode=display">\epsilon(y)=\frac{e(y)}{\tilde y}=\frac{f^`(\tilde x)e(x)}{\tilde y} =\frac{\tilde xf^`(\tilde x)e(x)}{\tilde y \tilde x}=\frac{\tilde x f^`(\tilde x)}{\tilde y}\epsilon (x)</script><p>相对误差界为</p>
-<script type="math/tex; mode=display">\begin{vmatrix}\epsilon(y)\end{vmatrix}\le\frac{\begin{vmatrix}\tilde x \end{vmatrix}\begin{vmatrix}f^`(\tilde x)\end{vmatrix}}{\begin{vmatrix}\tilde y\end{vmatrix}}\delta(x)</script><p>从而</p>
-<script type="math/tex; mode=display">Def : \delta(y)=\frac{\begin{vmatrix}\tilde x \end{vmatrix}\begin{vmatrix}f^`(\tilde x)\end{vmatrix}}{\begin{vmatrix}\tilde y\end{vmatrix}}\delta(x) = A_{f}\delta(x)</script><p>$A_{f}$即函数的相对误差界放大系数</p>
-<script type="math/tex; mode=display">A_{f}=\frac{\begin{vmatrix}\tilde x \end{vmatrix}\begin{vmatrix}f^`(\tilde x)\end{vmatrix}}{\begin{vmatrix}\tilde y\end{vmatrix}}</script><p>进一步推广至多元函数<br>利用Tayor展开可知其中绝对误差为</p>
-<script type="math/tex; mode=display">\begin{align}
-e(y)& =f(x_1,x_2,\ldots,x_n)-f(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)\\
-    &\approx \sum_{i=1}^n \frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)}{\partial \tilde x_i}(x_i-\tilde x_i)+R\\
-    其中R&=\frac{1}{2!}\left(\sum_{i=1}^n(x_i-\tilde{x}_i)\frac{\partial}{\partial x_n}\right)^2f(\xi_1,\xi_2,\ldots,\xi_n)
-    \end{align}</script><p>给出绝对误差界</p>
-<script type="math/tex; mode=display">\begin{align}
-\begin{vmatrix}e(y) \end{vmatrix}& =\begin{vmatrix}f(x_1,x_2,\ldots,x_n)-f(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)\end{vmatrix}\\
-        &\le\sum_{i=1}^n \begin{vmatrix}\frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)}{\partial \tilde x_i}\end{vmatrix}\bullet e(x_i)\\
-    &\le\sum_{i=1}^n \begin{vmatrix}\frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)}{\partial \tilde x_i}\end{vmatrix}\bullet\Delta(x_i)=\Delta(y)\\
-    \end{align}</script><p>得相对误差界</p>
-<script type="math/tex; mode=display">\begin{align}
-    \begin{vmatrix}\epsilon(y)\end{vmatrix}&=\frac{\begin{vmatrix}e(y)\end{vmatrix}}{\begin{vmatrix}\tilde y\end{vmatrix}}\le\sum_{i=1}^n \begin{vmatrix}\frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)m}{\partial \tilde x_i}\end{vmatrix}\bullet \frac{\begin{vmatrix}e(x_i)\end{vmatrix}}{\begin{vmatrix}\tilde{y}\end{vmatrix}}\\
-    &=\sum_{i=1}^n \begin{vmatrix}\frac{\tilde{x_i}}{\tilde{y}}\end{vmatrix}\begin{vmatrix}\frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)}{\partial \tilde x_i}\end{vmatrix}\bullet \frac{\begin{vmatrix}e(x_i)\end{vmatrix}}{\begin{vmatrix}\tilde{x_i}\end{vmatrix}}\\
-    &\le\sum_{i=1}^n \begin{vmatrix}\frac{\tilde{x_i}}{\tilde{y}}\end{vmatrix}\begin{vmatrix}\frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)}{\partial \tilde x_i}\end{vmatrix}\bullet \delta(x_i)\\
-    &=\sum_{i=1}^n A_{fi}\delta(x_i)=\delta(y)
-    \end{align}</script><p>$A_{fi}$即多元函数的相对误差界放大系数</p>
-<script type="math/tex; mode=display">A_{fi}=\begin{vmatrix}\frac{\tilde{x_i}}{\tilde{y}}\end{vmatrix}\begin{vmatrix}\frac{\partial f^`(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)}{\partial \tilde x_i}\end{vmatrix}，i=1,2,\ldots,n</script><p>接下来介绍减少误差的计算法则</p>
-<ul>
-<li>避免两相近数做减法</li>
-<li>避免大数吃掉小数</li>
-<li>避免除数过小</li>
-<li>简化运算，避免重复运算</li>
-</ul>
-<p><strong>关于数值稳定的定义</strong></p>
-<blockquote>
-<p>如果一个算法经过多次计算，将初始的误差变大了，陈该算法为数值不稳定的，反之为数值稳定的</p>
-</blockquote>
-<p><strong>关于病态问题的定义</strong></p>
-<blockquote>
-<p>如果一个数值问题，对输入做出轻微的扰动会对输出产生较大的影响，称该问题为病态的</p>
-</blockquote>
-<h2 id="4-算法性态分析概述"><a href="#4-算法性态分析概述" class="headerlink" title="4.算法性态分析概述"></a>4.算法性态分析概述</h2><p>一个算法的复杂度有两种，分别为</p>
-<ul>
-<li>时间复杂度（指需要的计算机的时间资源）</li>
-<li>空间复杂度（指需要的计算机的储存器资源）</li>
-</ul>
-<blockquote>
-<p>计算复杂度取决于被求解问题的规模大小，输入数据和算法本身，<strong>计算复杂度用算法的基本运算次数与基本操作量来测量</strong></p>
-</blockquote>
-<p>数学上用时间复杂度为问题规模的<strong>多项式函数</strong>或者<strong>指数函数</strong>来作为区分算法好与坏的分水岭，如果时间复杂度为问题规模的多项式函数那么这个算法是好的，而如果是指数函数则被称为不好的算法</p>
-<blockquote>
-<p>由于输入数据的不同，时间复杂度也不同，我们引入复杂度的期望作为<strong>平均时间复杂度</strong></p>
-</blockquote>
-<p>我们利用算法复杂度来度量那些使用直接法的算法，对于迭代的算法我们使用<strong>收敛率</strong>来评价</p>
-<p>由于这里没有对向量，矩阵等给出其大小的“测度”，故先讨论下迭代法产生的实数的序列<script type="math/tex">\lbrace x_k\rbrace_{k=0}^\infty</script><br>收敛率的高低使用<strong>收敛阶</strong>的大小衡量</p>
-<script type="math/tex; mode=display">Def:如果上述实数序列\lbrace x_k\rbrace_{k=0}^\infty收敛于x，即\lim_{k\to \infty}x_k=x，假定存在某个正数r\in [1,\infty),使得极限\\
-\lim_{k\to \infty}\frac{e_{k+1}}{e_k^r}=\lim_{k\to \infty}\frac{\begin{vmatrix} x_{k+1}-x\end{vmatrix}}{\begin{vmatrix} x_{k}-x\end{vmatrix}^r}=c_r>0
-存在，称该迭代法是r阶收敛</script><ul>
-<li>r=1时为线性收敛</li>
-<li>r&gt;1时为超线性收敛<ul>
-<li>r=2，平方收敛</li>
-<li>r=3，立方收敛</li>
-</ul>
-</li>
-</ul>
-<p>需要注意的是，若有</p>
-<script type="math/tex; mode=display">\lim_{k\to \infty}\frac{\begin{vmatrix} x_{k+1}-x\end{vmatrix}}{\begin{vmatrix} x_{k}-x\end{vmatrix}}=c_r=0</script><p>也称为超线性收敛<br>收敛阶如果比较小，则需要加速，这是数值计算的重要研究课题</p>
+        <p>来源于Simple statistical gradient-following algorithms for connectionist reinforcement learning</p>
+<h3 id="5-段落式-Episodic-的REINFORCE算法"><a href="#5-段落式-Episodic-的REINFORCE算法" class="headerlink" title="5. 段落式(Episodic)的REINFORCE算法"></a>5. 段落式(Episodic)的REINFORCE算法</h3><p>该部分主要是将我们已有的算法进行扩展, 扩展到拥有<strong>temporal credit-assignment component</strong>的问题上.</p>
+<p>特别地, 我们假设一个网络$N$, 基于一段一段这样来训练, 每一段都包含$k$个时间步, 每一个时间步, 许多单元会重新计算它们的输出, 整个环境可能会改变其非强化的输入, 在每一段的结束的时候, 一个强化值$r$将会被传递到网络$N$.</p>
+<p>该算法的引出是基于使用<strong>按时间展开(unfolding-in-time)</strong>进行映射, 即当任意的一个网络$N$在一个时间周期中进行操作, 另一个网络$N^<em>$没有周期但是展现对应的行为. 展开的网络$N^</em>$通过在每一个时间步对$N$进行复制来获得.</p>
+<p>形式化来说, 这相当于和每一个在$N$中的时间依赖的变量$v$联系起来, 对应的$N^<em>$以时间为索引的集合$\{v^t\}$, 其中$N^</em>$中的变量并不依赖于时间, 在$N$中的$w_{ij}$就对应$N^*$中的$\{w_{ij}^t\}$.</p>
+<p>给出参数$w_{ij}$的增量形式:</p>
+<script type="math/tex; mode=display">\Delta w_{ij}=\alpha_{ij}(r-b_{ij})\sum_{t=1}^k{e_{ij}(t)}</script><p>上述形式和我们之前给的形式有点类似, 唯一出现改动的地方就是$e_{ij}$变为$\sum_{t=1}^k{e_{ij}(t)}$<br>这个对应于非周期的网络$N^*$, 即$e_{ij}(t)=e_{ij}^t$</p>
+<p>我们举个例子吧, 一个内部全连接的<strong>递归神经网络</strong>(Recurrent Neural Network), 使用伯努利-逻辑斯蒂单元, 有</p>
+<script type="math/tex; mode=display">e_{ij}(t)=(y_i(t)-p_i(t))x_j(t-1)</script><p>需要注意的是baseline是独立于其他变量和输出的, 我们称具有以上格式的算法为<strong>段落式的REINFORCE算法</strong><br>给出完整的权值修改公式:</p>
+<script type="math/tex; mode=display">\Delta w_{ij}=\alpha_{ij}(r-b_{ij})\sum_{t=1}^k{(y_i(t)-p_i(t))x_j(t-1)}</script><h4 id="定理2"><a href="#定理2" class="headerlink" title="定理2:"></a>定理2:</h4><p>对于任意的段落式REINFORCE算法, $E\{\Delta W| W\}$和$\nabla_W E\{r|W\}$的内积是非负的, 更进一步, 如果$\alpha_{ij}&gt;0$, 那么当仅当$\nabla_WE\{r|W\}=0$, 内积才为0, 如果$\alpha_{ij}$是和$i,j$独立的话, 有$E\{\Delta W|W\}=\alpha\nabla_WE\{r|W\}$,</p>
+<p>在段落式的REINFORCE算法中, 性能度量应该改为$E\{\sum_{t=1}^{k}{r(t)|W}\}$</p>
+<h3 id="6-多参数分布的REINFORCE"><a href="#6-多参数分布的REINFORCE" class="headerlink" title="6. 多参数分布的REINFORCE"></a>6. 多参数分布的REINFORCE</h3><p>REINFORCE框架的一个有趣的应用就是对于单元的学习算法的发展决定了它们的随机标量输出, 输出来自于多参数分布而不是使用半线性随机单元的单参数分布. 举个例子, 试想一个这样的单元, 首先得到确定性的计算结果, 基于权值和输入, 来获得所有参数来控制的随机数值生成过程的值, 接着将符合一个合适的分布的输出随机输出. 特别地, 正态分布具有两个参数,  均值$\mu$和标准差$\sigma$, 一个单元根据这样的一个分布来进行输出, 那么将要首先计算出$\mu$和$\sigma$的值, 然后根据该正态分布随机进行输出, 保证均值和标准差.</p>
+<p>一种<strong>高斯单元(Gaussian Unit)</strong>的可能的有用特征是它输出的均值和变化是单独地可控的, 只要分离的权值(或者可能是输入)被用来确定这两个参数, 有趣的点是控制标准差$\sigma$就相当于控制单元的搜索行为. 通俗来讲, 使用多参数分布的随机单元就有可能控制探索行为的等级, 并且和在哪里进行探索无关, 这就与使用单参数分布的单元不一样.</p>
+<p>这里我们注意到对于任意单元的REINFORCE算法是易于推导出来, 我们用高斯单元来作为一个例子. 为了保证确定这种单元输出的均值和标准差的特定方法, 而不是它的输入和它的权重, 我们将会简单地将单元的均值和标准差它们看作是单元的自适应的参数. 在实际的自适应参数和输入上这些参数的任何更多的通用的函数依赖需要链式法则, Gullapalli提出来一个计算这些参数的方法是, 使用通过输入行的共同集合的分离的权值的和(并且使用一些不同的学习规则), 为了简化这种方法, 我们关注于单一的单元并且自始至终忽略单元索引的下标.</p>
+<p>给出这样的密度函数$g$:</p>
+<script type="math/tex; mode=display">g(y, \mu, \sigma)=\frac{1}{(2\pi)^{\frac{1}{2}}\sigma}{e^{-\frac{(y-\mu)^2}{2\sigma}}}</script><p>进而</p>
+<script type="math/tex; mode=display">e_\mu = \frac{\partial ln g}{\partial \mu}=[e^{\frac{(y-\mu)^2}{2\sigma}}]\frac{1}{(2\pi)^{\frac{1}{2}}\sigma}\frac{\partial}{\partial \mu}(e^{-\frac{(y-\mu)^2}{2\sigma}})=\frac{y-\mu}{\sigma^2}</script><script type="math/tex; mode=display">e_\sigma=\frac{\partial ln g}{\partial \sigma}=-\frac{\partial ln(\sqrt{(2\pi)}\sigma)}{\partial \sigma}-\frac{\partial (\frac{(y-\mu)^2}{2\sigma})}{\partial \sigma}=\frac{(y-\mu)^2-\sigma^2}{\sigma^3}</script><p>我们可以得到一个更新的表达式</p>
+<script type="math/tex; mode=display">\Delta \mu = \alpha_\mu(r-b_\mu)\frac{y-\mu}{\sigma^2}</script><script type="math/tex; mode=display">\Delta \sigma = \alpha_\sigma(r-b_{\sigma})\frac{(y-\mu)^2-\sigma^2}{\sigma^3}</script><p>我们令$\alpha_\mu=\alpha_\sigma=\alpha \sigma^2, b_\mu=b_\sigma$可以得到简化的版本</p>
+<p>推广到指数分布簇上</p>
+<script type="math/tex; mode=display">g(y,\mu, \theta_2,...,\theta_k)=exp[Q(\mu, \theta_2,...,\theta_k)y+D(\mu, \theta_2,...,\theta_k)+S(y)]</script><p>对于均值, 仍然有</p>
+<script type="math/tex; mode=display">e_\mu = \frac{\partial ln g}{\partial \mu}=\frac{y-\mu}{\sigma^2}</script><h3 id="7-和反向传播的兼容性"><a href="#7-和反向传播的兼容性" class="headerlink" title="7. 和反向传播的兼容性"></a>7. 和反向传播的兼容性</h3><p>当我们使用强化算法的时候, 会忽略掉所有单元之间连接的信息, 作为有监督学习的算法, 反向传播就完全利用了这样的信息, 注意到我们的强化学习是针对目标函数和环境的, 所以不像有监督的学习那样, 但是我们可以将反向传播和我们的强化学习结合起来.</p>
+<h4 id="7-1-使用确定性的隐藏单元的网络"><a href="#7-1-使用确定性的隐藏单元的网络" class="headerlink" title="7.1 使用确定性的隐藏单元的网络"></a>7.1 使用确定性的隐藏单元的网络</h4><p>考虑一个前馈的网络, 拥有确定的隐藏单元, 使用随机的输出单元, 使用这样的一个网络对于强化学习系统是有意义的, 因为对于输出单元有随机性的限制使得发生必要的探索.</p>
+<p>记$x$是网络的输入向量, $y$是输出向量, 我们可以定义$g(\xi, W, x)=Pr(y=\xi|W, x)$为概率质量函数, 描述了网络的输入和输出.<br>只不过整个网络的输出是一个向量而不是标量, 对于网络里面的任意一个权值$w_{ij}$, 有$\partial E\{r|W\}/ \partial w_{ij}$的无偏估计是$(r-b_{ij})\partial lng/\partial w_{ij}$</p>
+<p>记$O$是输出单元的索引集合, 因为所有的随机性都在输出单元上, 并且输出单元的随机性是独立的. 我们有</p>
+<script type="math/tex; mode=display">Pr(y=\xi|W, x)=\prod_{k\in O}{Pr(y_k=\xi_k|W,x)}=\prod_{k\in O}{Pr(y_k=\xi_k|w^k,x^k)}</script><p>$x_k$是由于将模式$x$呈现给网络而出现在第$k$个单元的输入处的模式<br> 有</p>
+<script type="math/tex; mode=display">lng(\xi, W, x)=ln\prod_{k\in O}{g_k(\xi_k, w^k, x^k)}=\sum_{k\in O}{lng_k(\xi_k, w^k, x^k)}</script><p> 故, 可以得到</p>
+<script type="math/tex; mode=display">\frac{\partial lng(\xi, W, x)}{\partial w_{ij}}=\sum_{k\in O}{\frac{\partial g_k(\xi_k, w^k, x^k)}{\partial w_{ij}}}</script><p> 以上的求和可能可以使用反向传播来计算出来, 特别地, 如果是伯努利非线性单元, 我们可以直接使用参数$p_k$作为中间变量, 故有:</p>
+<script type="math/tex; mode=display">\frac{\partial ln g}{\partial w_{ij}}=\sum_{k\in O}{\frac{\partial lng_k}{\partial p_k}\frac{\partial p_k}{\partial w_{ij} }}</script><p> 我们可以直接计算得到</p>
+<script type="math/tex; mode=display">\frac{\partial ln g_k}{\partial p_k}=\frac{y_k-p_k}{p_k(1-p_k)}</script><p>我们只需要将无偏估计进行反向传播即可</p>
+<h4 id="7-2-通过随机数字生成器的反向传播"><a href="#7-2-通过随机数字生成器的反向传播" class="headerlink" title="7.2 通过随机数字生成器的反向传播"></a>7.2 通过随机数字生成器的反向传播</h4><p>考虑一个随机的半线性单元, 并且假设有这么一个函数$J$, $J$对输出$y_i$有一定的确定性的依赖, 这种条件下, 我们假设这个单元是输出单元并且$J=E\{r|W\}$, 我们可以利用$\frac{\partial J}{\partial y_i}$来计算$\frac{\partial J}{\partial p_i}$</p>
+<p>我们还可以推出$E\{\partial J/\partial y_i|p_i\}$决定了$\partial E\{J|p_i\}/\partial p_i$</p>
+<p>不幸的是, 这种性质并不是通用的. 如果$J$是$y_i$的非线性函数的话. 然而, 如果输出是一个随机数生成器, 可以被写成一个参数可微的函数, 那么我们就可以利用确定性的计算.</p>
+<p>考虑一个正态随机数生成器, 比如高斯单元, 输出$y$根据$\mu$和$\sigma$随机生成</p>
+<script type="math/tex; mode=display">y=\mu+\sigma z</script><p>其中$z$是<strong>标准正态离差(standard normal deviate)</strong>, 注意到</p>
+<script type="math/tex; mode=display">\frac{\partial y}{\partial \mu}=1</script><p>以及</p>
+<script type="math/tex; mode=display">\frac{\partial y}{\partial \sigma}=z=\frac{y-\mu}{\sigma}</script><p>因此, 我们可以将高斯隐藏单元和REINFORCE结合起来</p>
 
       
     </div>
@@ -546,9 +440,13 @@ e(y)& =f(x_1,x_2,\ldots,x_n)-f(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)\\
       
         <div class="post-tags">
           
-            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
           
-            <a href="/tags/数值分析/" rel="tag"># 数值分析</a>
+            <a href="/tags/神经网络/" rel="tag"># 神经网络</a>
+          
+            <a href="/tags/强化学习/" rel="tag"># 强化学习</a>
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
           
         </div>
       
@@ -561,8 +459,8 @@ e(y)& =f(x_1,x_2,\ldots,x_n)-f(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)\\
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/06/指数平滑方法/" rel="next" title="时序数据异常检测(2)指数平滑方法">
-                <i class="fa fa-chevron-left"></i> 时序数据异常检测(2)指数平滑方法
+              <a href="/2018/10/19/强化学习1/" rel="next" title="强化学习笔记(1)">
+                <i class="fa fa-chevron-left"></i> 强化学习笔记(1)
               </a>
             
           </div>
@@ -570,10 +468,6 @@ e(y)& =f(x_1,x_2,\ldots,x_n)-f(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)\\
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/07/数值分析读书笔记(2) 求解线性代数方程组的直接方法/" rel="prev" title="数值分析读书笔记（2）求解线性代数方程组的直接方法">
-                数值分析读书笔记（2）求解线性代数方程组的直接方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -731,7 +625,7 @@ e(y)& =f(x_1,x_2,\ldots,x_n)-f(\tilde x_1,\tilde x_2,\ldots ,\tilde x_n)\\
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数值分析读书笔记（1）导论"><span class="nav-number">1.</span> <span class="nav-text">数值分析读书笔记（1）导论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-数学问题与数值计算问题"><span class="nav-number">1.1.</span> <span class="nav-text">1.数学问题与数值计算问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-数值计算的基本数学思想与方法"><span class="nav-number">1.2.</span> <span class="nav-text">2.数值计算的基本数学思想与方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-计算误差的基本概念以及误差分析"><span class="nav-number">1.3.</span> <span class="nav-text">3.计算误差的基本概念以及误差分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-算法性态分析概述"><span class="nav-number">1.4.</span> <span class="nav-text">4.算法性态分析概述</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-段落式-Episodic-的REINFORCE算法"><span class="nav-number">1.</span> <span class="nav-text">5. 段落式(Episodic)的REINFORCE算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定理2"><span class="nav-number">1.1.</span> <span class="nav-text">定理2:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-多参数分布的REINFORCE"><span class="nav-number">2.</span> <span class="nav-text">6. 多参数分布的REINFORCE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-和反向传播的兼容性"><span class="nav-number">3.</span> <span class="nav-text">7. 和反向传播的兼容性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-使用确定性的隐藏单元的网络"><span class="nav-number">3.1.</span> <span class="nav-text">7.1 使用确定性的隐藏单元的网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-通过随机数字生成器的反向传播"><span class="nav-number">3.2.</span> <span class="nav-text">7.2 通过随机数字生成器的反向传播</span></a></li></ol></li></ol></div>
             
 
           </div>
